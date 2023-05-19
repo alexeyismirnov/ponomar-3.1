@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html_svg/flutter_html_svg.dart';
+
 import 'package:html/dom.dart' as dom;
 
 import 'book_model.dart';
@@ -75,6 +77,9 @@ class BookCellHTML extends StatelessWidget {
 
     return Html(
         data: css + text,
+        extensions: const [
+          SvgHtmlExtension(),
+        ],
         onLinkTap: (String? url, Map<String, String> attributes, dom.Element? element) async {
           final match = RegExp(r'comment://(\d+)').firstMatch(url!)?.group(1);
           if (match != null) {
