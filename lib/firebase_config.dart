@@ -71,7 +71,7 @@ class FirebaseConfig {
   }
 
   static schedule(DateTime date, String title, String body) async {
-    // final d = DateTime.now() + 1.minutes;
+    // final d = date + 1.minutes;
 
     final d = date - 1.days;
     final scheduledDate = tz.TZDateTime.from(DateTime(d.year, d.month, d.day, 17, 00), location);
@@ -88,7 +88,7 @@ class FirebaseConfig {
           channelDescription: channel.description,
           icon: 'cross',
         )),
-        androidAllowWhileIdle: true,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
   }
 
