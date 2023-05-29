@@ -7,6 +7,8 @@ import 'calendar_appbar.dart';
 import 'book_model.dart';
 import 'globals.dart';
 import 'book_page_multiple.dart';
+import 'bookmarks_model.dart';
+import 'bible_model.dart';
 
 class _ChaptersView extends StatefulWidget {
   final BookPosition pos;
@@ -68,7 +70,25 @@ class _BookTOCState extends State<BookTOC> {
 
   Widget getContent() => NotificationListener<Notification>(
       onNotification: (n) {
-        if (n is BookPositionNotification) BookPageMultiple(n.pos).push(context);
+        if (n is BookPositionNotification) {
+          BookPosition? pos = n.pos;
+          final model = pos.model!;
+
+          if (model is BookmarksModel) {
+            pos = model.resolveBookmarkAt(pos.index!.index);
+            if (pos == null) return true;
+
+            if (pos.model is BibleModel) {
+              // this is needed to initialize numChaptersCache in BibleModel
+              pos.model!
+                  .getNumChapters(pos.index!)
+                  .then((value) => BookPageMultiple(pos!).push(context));
+              return true;
+            }
+          }
+
+          BookPageMultiple(pos).push(context);
+        }
         return true;
       },
       child: GroupListView(
@@ -96,7 +116,8 @@ class _BookTOCState extends State<BookTOC> {
         },
         groupHeaderBuilder: (BuildContext context, int section) => sections[section].isNotEmpty
             ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(sections[section].toUpperCase(), style: Theme.of(context).textTheme.button),
+                Text(sections[section].toUpperCase(),
+                    style: Theme.of(context).textTheme.labelLarge),
                 const Divider(thickness: 1)
               ])
             : Container(),

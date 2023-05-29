@@ -44,5 +44,6 @@
   "donate_thanks": "Благодарим за пожертвование!",
   "network_error": "Ошибка сети",
   "from_till": "С %s по %s — %s",
-  "memory_of": "%s"
+  "memory_of": "%s",
+  "bookmarks": "Закладки"
 }

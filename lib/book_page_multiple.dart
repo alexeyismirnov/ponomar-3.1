@@ -87,12 +87,15 @@ class _BookPageMultipleState extends State<BookPageMultiple> with SingleTickerPr
 
                           if (model.contentType == BookContentType.html) {
                             return BookPageSingle(title,
+                                bookmark: model.getBookmark(bookPos[id]),
                                 builder: () => BookCellHTML(text, model),
                                 padding: 5,
                                 safeBottom: totalChapters == 1);
                           } else {
                             return BookPageSingle(title,
-                                builder: () => BookCellText(text), safeBottom: totalChapters == 1);
+                                bookmark: model.getBookmark(bookPos[id]),
+                                builder: () => BookCellText(text),
+                                safeBottom: totalChapters == 1);
                           }
                         }
                       })).toList())),

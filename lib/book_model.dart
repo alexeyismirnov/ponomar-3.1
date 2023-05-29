@@ -42,32 +42,15 @@ abstract class BookModel {
 
   List<String> getSections();
   List<String> getItems(int section);
+  Future<int> getNumChapters(IndexPath index) => Future<int>.value(0);
 
-  Future<int> getNumChapters(IndexPath index);
-
-  Future<String> getTitle(BookPosition pos) {
-    return Future<String>.value("");
-  }
-
-  Future<String?> getComment(int commentId) {
-    return Future<String?>.value(null);
-  }
-
+  Future<String> getTitle(BookPosition pos) => Future<String>.value("");
   Future<dynamic> getContent(BookPosition pos);
+  Future<String?> getComment(int commentId) => Future<String?>.value(null);
 
-  BookPosition? getNextSection(BookPosition pos) {
-    return null;
-  }
+  BookPosition? getNextSection(BookPosition pos) => null;
+  BookPosition? getPrevSection(BookPosition pos) => null;
 
-  BookPosition? getPrevSection(BookPosition pos) {
-    return null;
-  }
-
-  String? getBookmark(BookPosition pos) {
-    return null;
-  }
-
-  String getBookmarkName(String bookmark) {
-    return "";
-  }
+  String? getBookmark(BookPosition pos) => null;
+  String getBookmarkName(String bookmark) => "";
 }

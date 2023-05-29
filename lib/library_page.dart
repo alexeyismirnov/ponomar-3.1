@@ -11,6 +11,7 @@ import 'book_model.dart';
 import 'globals.dart';
 import 'book_toc.dart';
 import 'ebook_model.dart';
+import 'bookmarks_model.dart';
 
 class LibraryPage extends StatefulWidget {
   @override
@@ -31,9 +32,10 @@ class _LibraryPageState extends State<LibraryPage> {
 
     final lang = context.countryCode;
 
-    sections = ["Bible"];
+    sections = ["library""", "Bible"];
 
     books = [
+      [BookmarksModel()],
       [OldTestamentModel(lang), NewTestamentModel(lang)]
     ];
 
@@ -59,6 +61,8 @@ class _LibraryPageState extends State<LibraryPage> {
         EbookModel("zvezdinsky.sqlite"),
       ]);
     }
+
+    BookmarksModel.books = books.expand((b) => b).toList();
 
     var futures = <Future>[];
     for (final model in books.expand((e) => e)) {
@@ -100,6 +104,6 @@ class _LibraryPageState extends State<LibraryPage> {
   Widget build(BuildContext context) => SafeArea(
       child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
-              [CalendarAppbar(title: "library", showActions: false)],
+              [CalendarAppbar(title: "", showActions: false)],
           body: Padding(padding: const EdgeInsets.all(15), child: getContent())));
 }

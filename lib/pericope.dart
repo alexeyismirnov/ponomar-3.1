@@ -51,8 +51,10 @@ class _BibleChapterViewState extends State<BibleChapterView> {
       ready ? RichText(text: TextSpan(children: content.getTextSpan(context))) : Container();
 
   @override
-  Widget build(BuildContext context) =>
-      BookPageSingle(title, builder: () => getContent(), safeBottom: widget.safeBottom);
+  Widget build(BuildContext context) => BookPageSingle(title,
+      bookmark: pos.model!.getBookmark(pos),
+      builder: () => getContent(),
+      safeBottom: widget.safeBottom);
 }
 
 class PericopeView extends StatefulWidget {

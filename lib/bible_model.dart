@@ -56,7 +56,7 @@ class BibleUtil {
           text: verseId,
           style: Theme.of(context)
               .textTheme
-              .bodyText1!
+              .bodyLarge!
               .copyWith(color: Colors.red, fontSize: fontSize)));
 
       if (isPsalm) {
@@ -66,16 +66,16 @@ class BibleUtil {
             text: "${line.text.substring(0, idx)}\n",
             style: Theme.of(context)
                 .textTheme
-                .bodyText1!
+                .bodyLarge!
                 .copyWith(color: Colors.red, fontSize: fontSize)));
 
         result.add(TextSpan(
             text: "${line.text.substring(idx + 2)}\n",
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: fontSize)));
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: fontSize)));
       } else {
         result.add(TextSpan(
             text: "${line.text}\n",
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: fontSize)));
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: fontSize)));
       }
     }
 
@@ -98,7 +98,7 @@ mixin BibleModel on BookModel {
   @override
   Future<int> getNumChapters(IndexPath index) async {
     final bookName = filenames[index.section][index.index];
-    var db = await DB.open(bookName + "_$lang.sqlite");
+    var db = await DB.open("${bookName}_$lang.sqlite");
 
     int result =
         Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(DISTINCT chapter) FROM scripture'))!;
@@ -163,6 +163,29 @@ mixin BibleModel on BookModel {
 
     return (chapter > 0) ? BookPosition.modelIndex(this, index, chapter: chapter - 1) : null;
   }
+
+  @override
+  String? getBookmark(BookPosition pos) {
+    final index = pos.index!;
+    final chapter = pos.chapter!;
+    return "${code}_${index.section}_${index.index}_$chapter";
+  }
+
+  @override
+  String getBookmarkName(String bookmark) {
+    final comp = bookmark.split("_");
+    if (comp[0] != code) return "";
+
+    final section = int.parse(comp[1]);
+    final row = int.parse(comp[2]);
+    final chapter = int.parse(comp[3]);
+
+    final header = (filenames[section][row] == "ps") ? "Kathisma %d".tr() : "Chapter %d".tr();
+    final chapterTitle = header.format([chapter + 1]);
+
+    return "$title - ${items[section][row].tr()}, $chapterTitle";
+  }
+
 }
 
 class OldTestamentModel extends BookModel with BibleModel {
