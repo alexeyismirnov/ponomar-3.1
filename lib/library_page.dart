@@ -29,14 +29,17 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    final lang = context.countryCode;
-
-    sections = ["library""", "Bible"];
+    
+    sections = ["library" "", "Bible"];
 
     books = [
       [BookmarksModel()],
-      [OldTestamentModel(lang), NewTestamentModel(lang)]
+      [
+        OldTestamentModel("ru"),
+        NewTestamentModel("ru"),
+        OldTestamentModel("cs"),
+        NewTestamentModel("cs")
+      ]
     ];
 
     if (context.languageCode == "ru") {
@@ -84,6 +87,7 @@ class _LibraryPageState extends State<LibraryPage> {
         return CustomListTile(
           padding: 10,
           reversed: true,
+          lang: books[index.section][index.index].lang,
           onTap: () => BookTOC(books[index.section][index.index]).push(context),
           title: books[index.section][index.index].title,
           subtitle: books[index.section][index.index].author ?? "",

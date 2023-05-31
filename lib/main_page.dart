@@ -34,8 +34,11 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   void postInit() async {
-    await OldTestamentModel(context.countryCode).prepare();
-    await NewTestamentModel(context.countryCode).prepare();
+    await OldTestamentModel("ru").prepare();
+    await NewTestamentModel("ru").prepare();
+
+    await OldTestamentModel("cs").prepare();
+    await NewTestamentModel("cs").prepare();
 
     await FirebaseConfig.requestPermissions();
 

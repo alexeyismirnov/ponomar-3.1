@@ -75,6 +75,11 @@ flutter_native_splash:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Ponomar
+      fonts:
+        - asset: assets/fonts/PonomarUnicode.ttf
+
   assets:
     - assets/images/
     - assets/calendar/

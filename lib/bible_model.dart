@@ -21,10 +21,11 @@ class BibleVerse {
 class BibleUtil {
   List<BibleVerse> content = [];
   String bookName = "";
+  late String lang;
 
   BibleUtil();
 
-  BibleUtil.fromMap(this.bookName, List<Map<String, Object?>> data) {
+  BibleUtil.fromMap(this.bookName, this.lang, List<Map<String, Object?>> data) {
     for (final Map<String, Object?> d in data) {
       content.add(BibleVerse(d["verse"] as int, d["text"] as String));
     }
@@ -36,7 +37,7 @@ class BibleUtil {
     List<Map<String, Object?>> result =
         await db.query("scripture", columns: ["verse", "text"], where: whereExpr, orderBy: "verse");
 
-    return BibleUtil.fromMap(bookName, result);
+    return BibleUtil.fromMap(bookName, lang, result);
   }
 
   String getText() {
@@ -45,7 +46,14 @@ class BibleUtil {
 
   List<TextSpan> getTextSpan(BuildContext context) {
     double fontSize = ConfigParam.fontSize.val();
+    String family =  Theme.of(context).textTheme.bodyLarge!.fontFamily!;
     List<TextSpan> result = [];
+
+    if (lang == "cs") {
+      fontSize += 3.0;
+      family = "Ponomar";
+    }
+
     final isPsalm =
         (bookName == "ps" && (context.languageCode == 'en' || context.languageCode == 'ru'));
 
@@ -57,7 +65,7 @@ class BibleUtil {
           style: Theme.of(context)
               .textTheme
               .bodyLarge!
-              .copyWith(color: Colors.red, fontSize: fontSize)));
+              .copyWith(color: Colors.red, fontSize: fontSize, fontFamily: family)));
 
       if (isPsalm) {
         int idx = line.text.indexOf(".");
@@ -67,15 +75,21 @@ class BibleUtil {
             style: Theme.of(context)
                 .textTheme
                 .bodyLarge!
-                .copyWith(color: Colors.red, fontSize: fontSize)));
+                .copyWith(color: Colors.red, fontSize: fontSize, fontFamily: family)));
 
         result.add(TextSpan(
             text: "${line.text.substring(idx + 2)}\n",
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: fontSize)));
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(fontSize: fontSize, fontFamily: family)));
       } else {
         result.add(TextSpan(
             text: "${line.text}\n",
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: fontSize)));
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(fontSize: fontSize, fontFamily: family)));
       }
     }
 
@@ -110,7 +124,7 @@ mixin BibleModel on BookModel {
 
   @override
   List<String> getItems(int section) {
-    return items[section].map((s) => s.tr()).toList();
+    return items[section].map((s) => s.tr(gender: lang)).toList();
   }
 
   @override
@@ -185,7 +199,6 @@ mixin BibleModel on BookModel {
 
     return "$title - ${items[section][row].tr()}, $chapterTitle";
   }
-
 }
 
 class OldTestamentModel extends BookModel with BibleModel {
@@ -199,13 +212,13 @@ class OldTestamentModel extends BookModel with BibleModel {
       .toList();
 
   @override
-  String get code => "OldTestament";
+  String get code => lang == "cs" ? "OldTestamentCS" : "OldTestament";
 
   @override
   BookContentType get contentType => BookContentType.text;
 
   @override
-  String get title => "Old Testament".tr();
+  String get title => "Old Testament".tr(gender: lang);
 
   @override
   String? author;
@@ -224,7 +237,7 @@ class OldTestamentModel extends BookModel with BibleModel {
   @override
   List<String> getSections() {
     return ["Five Books of Moses", "Historical books", "Wisdom books", "Prophets books"]
-        .map((s) => s.tr())
+        .map((s) => s.tr(gender: lang))
         .toList();
   }
 }
@@ -240,13 +253,13 @@ class NewTestamentModel extends BookModel with BibleModel {
       .toList();
 
   @override
-  String get code => "NewTestament";
+  String get code => lang == "cs" ? "NewTestamentCS" : "NewTestament";
 
   @override
   BookContentType get contentType => BookContentType.text;
 
   @override
-  String get title => "New Testament".tr();
+  String get title => "New Testament".tr(gender: lang);
 
   @override
   String? author;
@@ -265,7 +278,7 @@ class NewTestamentModel extends BookModel with BibleModel {
   @override
   List<String> getSections() {
     return ["Four Gospels and Acts", "Catholic Epistles", "Epistles of Paul", "Apocalypse"]
-        .map((s) => s.tr())
+        .map((s) => s.tr(gender: lang))
         .toList();
   }
 }

@@ -6,7 +6,6 @@ import 'package:launch_review/launch_review.dart';
 
 import 'globals.dart';
 import 'church_fasting.dart';
-import 'firebase_config.dart';
 
 class FastingLevelDialog extends StatelessWidget {
   final labels = ['laymen_fasting', 'monastic_fasting'];
@@ -32,8 +31,9 @@ class FastingLevelDialog extends StatelessWidget {
 class CalendarAppbar extends StatelessWidget {
   final bool showActions;
   final String title;
+  final String? lang;
 
-  CalendarAppbar({this.showActions = true, this.title = "title"});
+  CalendarAppbar({this.showActions = true, this.title = "title", this.lang});
 
   Widget _getActions(BuildContext context) {
     List<PopupMenuEntry> contextMenu = [
@@ -63,22 +63,29 @@ class CalendarAppbar extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => SliverAppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0.0,
-      toolbarHeight: 50.0,
-      pinned: false,
-      floating: true,
-      title:
-          Text(title.tr(), textAlign: TextAlign.left, style: Theme.of(context).textTheme.headline6),
-      centerTitle: false,
-      actions: showActions
-          ? [
-              IconButton(
-                  icon: const Icon(Icons.rate_review_outlined, size: 30.0),
-                  onPressed: () => LaunchReview.launch(
-                      androidAppId: "com.rlc.ponomar_ru", iOSAppId: "1095609748")),
-              _getActions(context)
-            ]
-          : []);
+  Widget build(BuildContext context) {
+    var font = Theme.of(context).textTheme.titleLarge!;
+
+    if (lang == "cs") {
+      font = font.copyWith(fontFamily: "Ponomar");
+    }
+
+    return SliverAppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        toolbarHeight: 50.0,
+        pinned: false,
+        floating: true,
+        title: Text(title.tr(), textAlign: TextAlign.left, style: font),
+        centerTitle: false,
+        actions: showActions
+            ? [
+                IconButton(
+                    icon: const Icon(Icons.rate_review_outlined, size: 30.0),
+                    onPressed: () => LaunchReview.launch(
+                        androidAppId: "com.rlc.ponomar_ru", iOSAppId: "1095609748")),
+                _getActions(context)
+              ]
+            : []);
+  }
 }

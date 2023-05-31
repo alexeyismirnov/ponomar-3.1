@@ -68,62 +68,74 @@ class _BookTOCState extends State<BookTOC> {
 
   List<String> get sections => model.getSections();
 
-  Widget getContent() => NotificationListener<Notification>(
-      onNotification: (n) {
-        if (n is BookPositionNotification) {
-          BookPosition? pos = n.pos;
-          final model = pos.model!;
+  Widget getContent() {
+    var fontTitle = Theme.of(context).textTheme.titleLarge!;
+    final fontTitleSize = fontTitle.fontSize!;
 
-          if (model is BookmarksModel) {
-            pos = model.resolveBookmarkAt(pos.index!.index);
-            if (pos == null) return true;
+    var fontLabel = Theme.of(context).textTheme.labelLarge!;
+    final fontLabelSize = fontLabel.fontSize!;
 
-            if (pos.model is BibleModel) {
-              // this is needed to initialize numChaptersCache in BibleModel
-              pos.model!
-                  .getNumChapters(pos.index!)
-                  .then((value) => BookPageMultiple(pos!).push(context));
-              return true;
+    if (widget.model.lang == "cs") {
+      fontTitle = fontTitle.copyWith(fontFamily: "Ponomar", fontSize: fontTitleSize + 3.0);
+      fontLabel = fontLabel.copyWith(fontFamily: "Ponomar", fontSize: fontLabelSize + 3.0);
+    }
+
+    return NotificationListener<Notification>(
+        onNotification: (n) {
+          if (n is BookPositionNotification) {
+            BookPosition? pos = n.pos;
+            final model = pos.model!;
+
+            if (model is BookmarksModel) {
+              pos = model.resolveBookmarkAt(pos.index!.index);
+              if (pos == null) return true;
+
+              if (pos.model is BibleModel) {
+                // this is needed to initialize numChaptersCache in BibleModel
+                pos.model!
+                    .getNumChapters(pos.index!)
+                    .then((value) => BookPageMultiple(pos!).push(context));
+                return true;
+              }
             }
+
+            BookPageMultiple(pos).push(context);
           }
-
-          BookPageMultiple(pos).push(context);
-        }
-        return true;
-      },
-      child: GroupListView(
-        shrinkWrap: true,
-        sectionsCount: sections.length,
-        countOfItemInSection: (int section) => model.getItems(section).length,
-        itemBuilder: (BuildContext context, IndexPath index) {
-          final item = model.getItems(index.section)[index.index];
-
-          return ListTileTheme(
-              contentPadding: const EdgeInsets.all(0),
-              dense: true,
-              child: model.hasChapters
-                  ? ExpansionTile(
-                      childrenPadding: const EdgeInsets.all(10),
-                      expandedAlignment: Alignment.topLeft,
-                      expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                      trailing: const Icon(null),
-                      title: Text(item, style: Theme.of(context).textTheme.titleLarge),
-                      children: [_ChaptersView(BookPosition.modelIndex(model, index))])
-                  : ListTile(
-                      title: Text(item, style: Theme.of(context).textTheme.titleLarge),
-                      onTap: () => BookPositionNotification(BookPosition.modelIndex(model, index))
-                          .dispatch(context)));
+          return true;
         },
-        groupHeaderBuilder: (BuildContext context, int section) => sections[section].isNotEmpty
-            ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(sections[section].toUpperCase(),
-                    style: Theme.of(context).textTheme.labelLarge),
-                const Divider(thickness: 1)
-              ])
-            : Container(),
-        separatorBuilder: (context, index) => const SizedBox(),
-        sectionSeparatorBuilder: (context, section) => const SizedBox(height: 15),
-      ));
+        child: GroupListView(
+          shrinkWrap: true,
+          sectionsCount: sections.length,
+          countOfItemInSection: (int section) => model.getItems(section).length,
+          itemBuilder: (BuildContext context, IndexPath index) {
+            final item = model.getItems(index.section)[index.index];
+
+            return ListTileTheme(
+                contentPadding: const EdgeInsets.all(0),
+                dense: true,
+                child: model.hasChapters
+                    ? ExpansionTile(
+                        childrenPadding: const EdgeInsets.all(10),
+                        expandedAlignment: Alignment.topLeft,
+                        expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                        trailing: const Icon(null),
+                        title: Text(item, style: fontTitle),
+                        children: [_ChaptersView(BookPosition.modelIndex(model, index))])
+                    : ListTile(
+                        title: Text(item, style: fontTitle),
+                        onTap: () => BookPositionNotification(BookPosition.modelIndex(model, index))
+                            .dispatch(context)));
+          },
+          groupHeaderBuilder: (BuildContext context, int section) => sections[section].isNotEmpty
+              ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(sections[section].toUpperCase(), style: fontLabel),
+                  const Divider(thickness: 1)
+                ])
+              : Container(),
+          separatorBuilder: (context, index) => const SizedBox(),
+          sectionSeparatorBuilder: (context, section) => const SizedBox(height: 15),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,8 +146,10 @@ class _BookTOCState extends State<BookTOC> {
                 AppTheme.bg_decor_2() ?? BoxDecoration(color: Theme.of(context).canvasColor),
             child: SafeArea(
                 child: NestedScrollView(
-                    headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
-                        [CalendarAppbar(title: model.title, showActions: false)],
+                    headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) => [
+                          CalendarAppbar(
+                              title: model.title, showActions: false, lang: widget.model.lang)
+                        ],
                     body: Padding(padding: const EdgeInsets.all(15), child: getContent())))));
   }
 }
