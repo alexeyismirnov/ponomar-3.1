@@ -9,7 +9,7 @@ import 'book_model.dart';
 import 'bible_model.dart';
 import 'book_page_single.dart';
 import 'book_cell.dart';
-import 'pericope.dart';
+import 'bible_view.dart';
 
 class BookPageMultiple extends StatefulWidget {
   final BookPosition pos;

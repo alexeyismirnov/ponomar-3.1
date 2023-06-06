@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:group_list_view/group_list_view.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'calendar_appbar.dart';
 import 'book_model.dart';
@@ -68,16 +69,16 @@ class _BookTOCState extends State<BookTOC> {
 
   List<String> get sections => model.getSections();
 
-  Widget getContent() {
-    var fontTitle = Theme.of(context).textTheme.titleLarge!;
-    final fontTitleSize = fontTitle.fontSize!;
+  TextStyle getFontCS(TextStyle font) =>
+      font.copyWith(fontFamily: "Ponomar", fontSize: font.fontSize! + 3.0);
 
-    var fontLabel = Theme.of(context).textTheme.labelLarge!;
-    final fontLabelSize = fontLabel.fontSize!;
+  Widget getContent() {
+    var fontTitleOrig = Theme.of(context).textTheme.titleLarge!;
+    var fontLabelOrig = Theme.of(context).textTheme.labelLarge!;
 
     if (widget.model.lang == "cs") {
-      fontTitle = fontTitle.copyWith(fontFamily: "Ponomar", fontSize: fontTitleSize + 3.0);
-      fontLabel = fontLabel.copyWith(fontFamily: "Ponomar", fontSize: fontLabelSize + 3.0);
+      fontTitleOrig = getFontCS(fontTitleOrig);
+      fontLabelOrig = getFontCS(fontLabelOrig);
     }
 
     return NotificationListener<Notification>(
@@ -103,38 +104,51 @@ class _BookTOCState extends State<BookTOC> {
           }
           return true;
         },
-        child: GroupListView(
-          shrinkWrap: true,
-          sectionsCount: sections.length,
-          countOfItemInSection: (int section) => model.getItems(section).length,
-          itemBuilder: (BuildContext context, IndexPath index) {
-            final item = model.getItems(index.section)[index.index];
+        child: sections.isEmpty
+            ? Center(
+                child: Text("no_bookmarks".tr(), style: Theme.of(context).textTheme.titleLarge))
+            : GroupListView(
+                shrinkWrap: true,
+                sectionsCount: sections.length,
+                countOfItemInSection: (int section) => model.getItems(section).length,
+                itemBuilder: (BuildContext context, IndexPath index) {
+                  final item = model.getItems(index.section)[index.index];
+                  var fontTitle = fontTitleOrig;
 
-            return ListTileTheme(
-                contentPadding: const EdgeInsets.all(0),
-                dense: true,
-                child: model.hasChapters
-                    ? ExpansionTile(
-                        childrenPadding: const EdgeInsets.all(10),
-                        expandedAlignment: Alignment.topLeft,
-                        expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                        trailing: const Icon(null),
-                        title: Text(item, style: fontTitle),
-                        children: [_ChaptersView(BookPosition.modelIndex(model, index))])
-                    : ListTile(
-                        title: Text(item, style: fontTitle),
-                        onTap: () => BookPositionNotification(BookPosition.modelIndex(model, index))
-                            .dispatch(context)));
-          },
-          groupHeaderBuilder: (BuildContext context, int section) => sections[section].isNotEmpty
-              ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(sections[section].toUpperCase(), style: fontLabel),
-                  const Divider(thickness: 1)
-                ])
-              : Container(),
-          separatorBuilder: (context, index) => const SizedBox(),
-          sectionSeparatorBuilder: (context, section) => const SizedBox(height: 15),
-        ));
+                  if (model is BookmarksModel) {
+                    final pos = (model as BookmarksModel).resolveBookmarkAt(index.index);
+                    if (pos != null && pos.model is BibleModel && pos.model!.lang == "cs") {
+                      fontTitle = getFontCS(fontTitle);
+                    }
+                  }
+
+                  return ListTileTheme(
+                      contentPadding: const EdgeInsets.all(0),
+                      dense: true,
+                      child: model.hasChapters
+                          ? ExpansionTile(
+                              childrenPadding: const EdgeInsets.all(10),
+                              expandedAlignment: Alignment.topLeft,
+                              expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                              trailing: const Icon(null),
+                              title: Text(item, style: fontTitle),
+                              children: [_ChaptersView(BookPosition.modelIndex(model, index))])
+                          : ListTile(
+                              title: Text(item, style: fontTitle),
+                              onTap: () =>
+                                  BookPositionNotification(BookPosition.modelIndex(model, index))
+                                      .dispatch(context)));
+                },
+                groupHeaderBuilder: (BuildContext context, int section) =>
+                    sections[section].isNotEmpty
+                        ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                            Text(sections[section].toUpperCase(), style: fontLabelOrig),
+                            const Divider(thickness: 1)
+                          ])
+                        : Container(),
+                separatorBuilder: (context, index) => const SizedBox(),
+                sectionSeparatorBuilder: (context, section) => const SizedBox(height: 15),
+              ));
   }
 
   @override

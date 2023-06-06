@@ -45,5 +45,6 @@
   "network_error": "Ошибка сети",
   "from_till": "С %s по %s — %s",
   "memory_of": "%s",
-  "bookmarks": "Закладки"
+  "bookmarks": "Закладки",
+  "no_bookmarks": "Нет закладок"
 }

@@ -46,7 +46,7 @@ class BibleUtil {
 
   List<TextSpan> getTextSpan(BuildContext context) {
     double fontSize = ConfigParam.fontSize.val();
-    String family =  Theme.of(context).textTheme.bodyLarge!.fontFamily!;
+    String family = Theme.of(context).textTheme.bodyLarge!.fontFamily!;
     List<TextSpan> result = [];
 
     if (lang == "cs") {
@@ -54,8 +54,7 @@ class BibleUtil {
       family = "Ponomar";
     }
 
-    final isPsalm =
-        (bookName == "ps" && (context.languageCode == 'en' || context.languageCode == 'ru'));
+    final isPsalm = (bookName == "ps" && (lang == 'en' || lang == 'ru'));
 
     for (var line in content) {
       var verseId = isPsalm ? "\n${line.verse}. " : "${line.verse} ";
@@ -197,7 +196,7 @@ mixin BibleModel on BookModel {
     final header = (filenames[section][row] == "ps") ? "Kathisma %d".tr() : "Chapter %d".tr();
     final chapterTitle = header.format([chapter + 1]);
 
-    return "$title - ${items[section][row].tr()}, $chapterTitle";
+    return "$title - ${items[section][row].tr(gender: lang)}, $chapterTitle";
   }
 }
 

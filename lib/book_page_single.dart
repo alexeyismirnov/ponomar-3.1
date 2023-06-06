@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 
 import 'globals.dart';
+import 'bible_view.dart';
 
 typedef WidgetCallback = Widget Function();
 
@@ -11,11 +12,13 @@ class BookPageSingle extends StatefulWidget {
   final double padding;
   final bool safeBottom;
   final bool showActions;
+  final bool? bibleFontButton;
   final String? bookmark;
 
   const BookPageSingle(this.title,
       {required this.builder,
       this.bookmark,
+      this.bibleFontButton,
       this.padding = 15,
       this.safeBottom = true,
       this.showActions = true});
@@ -51,16 +54,22 @@ class _BookPageSingleState extends State<BookPageSingle> {
 
   @override
   Widget build(BuildContext context) {
-    IconButton? bookmark_button;
+    IconButton? bookmarkButton, bibleFontButton;
 
     if (widget.bookmark != null) {
       if (ConfigParamExt.bookmarks.val().contains(widget.bookmark)) {
-        bookmark_button = IconButton(
+        bookmarkButton = IconButton(
             icon: const Icon(Icons.bookmark, size: 30.0), onPressed: () => removeBookmark());
       } else {
-        bookmark_button = IconButton(
+        bookmarkButton = IconButton(
             icon: const Icon(Icons.bookmark_outline, size: 30.0), onPressed: () => addBookmark());
       }
+    }
+
+    if (widget.bibleFontButton == true) {
+      bibleFontButton = IconButton(
+          icon: const Icon(Icons.font_download_outlined, size: 30.0),
+          onPressed: () => BibleLangDialog().show(context).then((value) => setState(() {})));
     }
 
     return Scaffold(
@@ -93,7 +102,8 @@ class _BookPageSingleState extends State<BookPageSingle> {
                                                 onPressed: () => FontSizeDialog()
                                                     .show(context)
                                                     .then((value) => setState(() {}))),
-                                            if (bookmark_button != null) ...[bookmark_button]
+                                            if (bookmarkButton != null) ...[bookmarkButton],
+                                            if (bibleFontButton != null) ...[bibleFontButton]
                                           ]
                                         : [],
                                     title: Text(widget.title,

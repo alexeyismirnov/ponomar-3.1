@@ -17,8 +17,8 @@ class Troparion {
   Troparion.fromMap(Map<String, Object?> data) {
     title = data["title"] as String;
     content = data["content"] as String;
-    glas = data["glas"] as String;
-    url = data["url"] as String;
+    glas = data["glas"] as String?;
+    url = data["url"] as String?;
   }
 }
 

@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_toolkit/config_param.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 
-import 'book_model.dart';
 import 'bible_model.dart';
 import 'book_page_single.dart';
 import 'globals.dart';
@@ -15,51 +14,9 @@ class Range {
   Range(this.chapter, this.verse);
 }
 
-class BibleChapterView extends StatefulWidget {
-  final BookPosition pos;
-  final bool safeBottom;
-  const BibleChapterView(this.pos, {required this.safeBottom});
-
-  @override
-  _BibleChapterViewState createState() => _BibleChapterViewState();
-}
-
-class _BibleChapterViewState extends State<BibleChapterView> {
-  BookPosition get pos => widget.pos;
-
-  bool ready = false;
-  String title = "";
-  late BibleUtil content;
-
-  @override
-  void initState() {
-    super.initState();
-
-    pos.model!.getTitle(pos).then((_title) {
-      title = _title;
-      return pos.model!.getContent(pos);
-    }).then((_result) {
-      content = _result;
-
-      setState(() {
-        ready = true;
-      });
-    });
-  }
-
-  Widget getContent() =>
-      ready ? RichText(text: TextSpan(children: content.getTextSpan(context))) : Container();
-
-  @override
-  Widget build(BuildContext context) => BookPageSingle(title,
-      bookmark: pos.model!.getBookmark(pos),
-      builder: () => getContent(),
-      safeBottom: widget.safeBottom);
-}
-
 class PericopeView extends StatefulWidget {
   final String str;
-  const PericopeView(this.str);
+  const PericopeView(this.str, {super.key});
 
   @override
   _PericopeViewState createState() => _PericopeViewState();
@@ -73,10 +30,16 @@ class _PericopeViewState extends State<PericopeView> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
 
-    double fontSize = ConfigParam.fontSize.val();
+    final lang = ConfigParamExt.bibleLang.val();
+    double fontSize = ConfigParam.fontSize.val() + 2;
+    String family = Theme.of(context).textTheme.bodyLarge!.fontFamily!;
+
+    if (lang == "cs") {
+      fontSize += 3.0;
+      family = "Ponomar";
+    }
 
     BibleUtil bu;
-    final lang = context.countryCode;
     final pericope = widget.str.trim().split(" ");
 
     final model1 = OldTestamentModel(lang);
@@ -90,7 +53,8 @@ class _PericopeViewState extends State<PericopeView> {
     for (final i in getRange(0, pericope.length, 2)) {
       var chapter = 0;
       var filename = pericope[i].toLowerCase();
-      var bookName = allItems[allFilenames.indexOf(filename)].tr() + " " + pericope[i + 1];
+      var bookName =
+          "${allItems[allFilenames.indexOf(filename)].tr(gender: ConfigParamExt.bibleLang.val())} ${pericope[i + 1]}";
 
       List<TextSpan> text = [];
 
@@ -101,11 +65,9 @@ class _PericopeViewState extends State<PericopeView> {
             Expanded(
                 child: RichText(
               text: TextSpan(
-                  text: bookName + "\n",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: fontSize + 2)),
+                  text: "$bookName\n",
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.bold, fontFamily: family, fontSize: fontSize)),
               textAlign: TextAlign.center,
             ))
           ]));
@@ -203,5 +165,8 @@ class _ReadingViewState extends State<ReadingView> {
           title: title,
           subtitle: subtitle,
           onTap: () => BookPageSingle("Gospel of the day".tr(),
-              builder: () => PericopeView(currentReading[0])).push(context)));
+              bibleFontButton: true,
+              builder: () => PericopeView(
+                  key: ValueKey(ConfigParamExt.bibleLang.val()),
+                  currentReading[0])).push(context)));
 }
