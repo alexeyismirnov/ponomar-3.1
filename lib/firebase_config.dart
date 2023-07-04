@@ -71,10 +71,14 @@ class FirebaseConfig {
   }
 
   static schedule(DateTime date, String title, String body) async {
-    // final d = date + 1.minutes;
+    //final d = DateTime.now() + 30.seconds;
+    //final scheduledDate = tz.TZDateTime.from(d, location);
 
+    final today = DateTime.now();
     final d = date - 1.days;
     final scheduledDate = tz.TZDateTime.from(DateTime(d.year, d.month, d.day, 17, 00), location);
+
+    if (scheduledDate.isBefore(today)) return;
 
     await FirebaseConfig.flutterLocalNotificationsPlugin.zonedSchedule(
         0,

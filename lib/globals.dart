@@ -90,6 +90,7 @@ extension ConfigParamExt on ConfigParam {
   static var notifications;
   static var bookmarks;
   static var bibleLang;
+  static var ver_1_3;
 }
 
 Iterable<int> getRange(int low, int high, [int step = 1]) sync* {

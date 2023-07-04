@@ -26,6 +26,12 @@ Future<void> main() async {
   ConfigParamExt.notifications = ConfigParam<List<String>>('notifications', initValue: []);
   ConfigParamExt.bookmarks = ConfigParam<List<String>>('bookmarks', initValue: []);
   ConfigParamExt.bibleLang = ConfigParam<String>('bibleLang', initValue: "cs");
+  ConfigParamExt.ver_1_3 = ConfigParam<bool>('ver_1_3', initValue: false);
+
+  if (!ConfigParamExt.ver_1_3.val()) {
+    await FirebaseConfig.flutterLocalNotificationsPlugin.cancelAll();
+    ConfigParamExt.notifications.set(<String>[]);
+  }
 
   await JSON.load();
 
@@ -56,9 +62,7 @@ Future<void> main() async {
   ]);
 
   runApp(EasyLocalization(
-      supportedLocales: const [
-        Locale('ru', '')
-      ],
+      supportedLocales: const [Locale('ru', '')],
       path: 'ui,cal,reading,library',
       assetLoader: DirectoryAssetLoader(basePath: "assets/translations"),
       fallbackLocale: const Locale('ru', ''),

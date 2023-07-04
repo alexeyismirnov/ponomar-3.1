@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:jiffy/jiffy.dart';
 
 import 'globals.dart';
@@ -47,6 +48,50 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       ConfigParamExt.notifications.set(["$year"]);
 
       FeastNotifications(date, context.languageCode).setup();
+    }
+
+    if (!ConfigParamExt.ver_1_3.val()) {
+      ConfigParamExt.ver_1_3.set(true);
+
+      final dialog = AlertDialog(
+          contentPadding: const EdgeInsets.all(10.0),
+          content: Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                              child: Text('Православный календарь+ v1.3',
+                                  style: Theme.of(context).textTheme.titleLarge))
+                        ]),
+                    const SizedBox(height: 20),
+                    Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                              child: Text('В новой версии приложения расширен раздел Библиотека.',
+                                  style: Theme.of(context).textTheme.bodyLarge))
+                        ]),
+                  ])),
+          actions: <Widget>[
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey.shade300, padding: const EdgeInsets.all(10.0)),
+              child: Text('ОК',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.black)),
+              onPressed: () {
+                Navigator.of(context).pop(null);
+              },
+            )
+          ]);
+      dialog.show(context);
     }
 
     await Jiffy.setLocale(context.languageCode);

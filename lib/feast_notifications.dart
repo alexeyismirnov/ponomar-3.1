@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:supercharged/supercharged.dart';
 
 import 'church_calendar.dart';
-import 'church_day.dart';
+//import 'church_day.dart';
 import 'globals.dart';
 import 'firebase_config.dart';
 
@@ -44,9 +44,6 @@ class FeastNotifications {
 
   setup() {
     // long fasts
-
-    FirebaseConfig.schedule(cal.d("beginningOfGreatLent"), "beginningOfGreatLent".tr(),
-        intervalStr(cal.greatLentStart, cal.greatLentStart + 47.days, "great_lent"));
 
     FirebaseConfig.schedule(
         cal.d("beginningOfApostlesFast"),
@@ -127,14 +124,20 @@ class FeastNotifications {
       "saturday4GreatLent"
     ].forEach((feast) => FirebaseConfig.schedule(cal.d(feast), dateStr(cal.d(feast)), feast.tr()));
 
+    // too many notifications, commented this out
+    /*
     if (lang == 'en' || lang == 'ru') {
       final vigilDays = cal.days.where((d) =>
           d.name.isEmpty &&
           (d.comment?.isNotEmpty ?? false) &&
           d.type.index >= FeastType.polyeleos.index);
 
-      vigilDays.forEach((d) => FirebaseConfig.schedule(
-          d.date!, dateStr(d.date!), "memory_of".tr().format([d.comment!.tr()])));
+      vigilDays.forEach((d) {
+        FirebaseConfig.schedule(
+            d.date!, dateStr(d.date!), "memory_of".tr().format([d.comment!.tr()]));
+      });
     }
+
+     */
   }
 }
