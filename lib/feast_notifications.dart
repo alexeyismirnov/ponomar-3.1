@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:supercharged/supercharged.dart';
 
 import 'church_calendar.dart';
-//import 'church_day.dart';
+import 'church_day.dart';
 import 'globals.dart';
 import 'firebase_config.dart';
 
@@ -123,9 +123,7 @@ class FeastNotifications {
       "saturday3GreatLent",
       "saturday4GreatLent"
     ].forEach((feast) => FirebaseConfig.schedule(cal.d(feast), dateStr(cal.d(feast)), feast.tr()));
-
-    // too many notifications, commented this out
-    /*
+    
     if (lang == 'en' || lang == 'ru') {
       final vigilDays = cal.days.where((d) =>
           d.name.isEmpty &&
@@ -137,7 +135,5 @@ class FeastNotifications {
             d.date!, dateStr(d.date!), "memory_of".tr().format([d.comment!.tr()]));
       });
     }
-
-     */
   }
 }

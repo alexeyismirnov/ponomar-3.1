@@ -5,26 +5,6 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:supercharged/supercharged.dart';
 
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:timezone/data/latest.dart';
-
-class TimeZone {
-  factory TimeZone() => _this ??= TimeZone._();
-
-  TimeZone._() {
-    initializeTimeZones();
-  }
-
-  static TimeZone? _this;
-
-  Future<String> getTimeZoneName() async => FlutterNativeTimezone.getLocalTimezone();
-
-  Future<tz.Location> getLocation(String? timeZoneName) async {
-    if (timeZoneName == null || timeZoneName.isEmpty) {
-      timeZoneName = await getTimeZoneName();
-    }
-    return tz.getLocation(timeZoneName);
-  }
-}
 
 class FirebaseConfig {
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -37,14 +17,13 @@ class FirebaseConfig {
   static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  static late tz.Location location;
+  static var count = 0;
 
   static setup() async {
     tz.initializeTimeZones();
 
-    final timeZone = TimeZone();
-    String timeZoneName = await timeZone.getTimeZoneName();
-    location = await timeZone.getLocation(timeZoneName);
+    String timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
 
     const InitializationSettings initializationSettings = InitializationSettings(
         android: AndroidInitializationSettings('cross'),
@@ -74,14 +53,15 @@ class FirebaseConfig {
     //final d = DateTime.now() + 30.seconds;
     //final scheduledDate = tz.TZDateTime.from(d, location);
 
-    final today = DateTime.now();
+    count++;
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     final d = date - 1.days;
-    final scheduledDate = tz.TZDateTime.from(DateTime(d.year, d.month, d.day, 17, 00), location);
+    final scheduledDate = tz.TZDateTime(tz.local, d.year, d.month, d.day, 17, 00);
 
-    if (scheduledDate.isBefore(today)) return;
+    if (scheduledDate.isBefore(now)) return;
 
     await FirebaseConfig.flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
+        count,
         title,
         body,
         scheduledDate,
@@ -90,9 +70,12 @@ class FirebaseConfig {
           channel.id,
           channel.name,
           channelDescription: channel.description,
+          importance: Importance.max,
+          priority: Priority.high,
           icon: 'cross',
         )),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        matchDateTimeComponents: DateTimeComponents.dateAndTime,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
   }
 
