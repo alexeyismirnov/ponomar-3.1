@@ -9,7 +9,7 @@ import 'book_page_single.dart';
 import 'globals.dart';
 
 class BibleLangDialog extends StatelessWidget {
-  final labels = ["Русский", "Церковнославянский"];
+  final labels = ["Русский", "Церк.-слав."];
   final values = ["ru", "cs"];
   final lang;
 
