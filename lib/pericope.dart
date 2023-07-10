@@ -45,7 +45,8 @@ class _PericopeViewState extends State<PericopeView> {
     final model1 = OldTestamentModel(lang);
     final model2 = NewTestamentModel(lang);
 
-    final allItems = model1.items.expand((e) => e).toList()..addAll(model2.items.expand((e) => e));
+    final allItems = model1.items.expand((e) => e).toList()
+      ..addAll(model2.items.expand((e) => e));
 
     final allFilenames = model1.filenames.expand((e) => e).toList()
       ..addAll(model2.filenames.expand((e) => e));
@@ -67,7 +68,9 @@ class _PericopeViewState extends State<PericopeView> {
               text: TextSpan(
                   text: "$bookName\n",
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold, fontFamily: family, fontSize: fontSize)),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: family,
+                      fontSize: fontSize)),
               textAlign: TextAlign.center,
             ))
           ]));
@@ -90,13 +93,13 @@ class _PericopeViewState extends State<PericopeView> {
         }
 
         if (range.length == 1) {
-          bu = await BibleUtil.fetch(
-              filename, lang, "chapter=${range[0].chapter} AND verse=${range[0].verse}");
+          bu = await BibleUtil.fetch(filename, lang,
+              "chapter=${range[0].chapter} AND verse=${range[0].verse}");
 
           text.addAll(bu.getTextSpan(context));
         } else if (range[0].chapter != range[1].chapter) {
-          bu = await BibleUtil.fetch(
-              filename, lang, "chapter=${range[0].chapter} AND verse>=${range[0].verse}");
+          bu = await BibleUtil.fetch(filename, lang,
+              "chapter=${range[0].chapter} AND verse>=${range[0].verse}");
 
           text.addAll(bu.getTextSpan(context));
 
@@ -105,8 +108,8 @@ class _PericopeViewState extends State<PericopeView> {
             text.addAll(bu.getTextSpan(context));
           }
 
-          bu = await BibleUtil.fetch(
-              filename, lang, "chapter=${range[1].chapter} AND verse<=${range[1].verse}");
+          bu = await BibleUtil.fetch(filename, lang,
+              "chapter=${range[1].chapter} AND verse<=${range[1].verse}");
 
           text.addAll(bu.getTextSpan(context));
         } else {
@@ -151,11 +154,8 @@ class _ReadingViewState extends State<ReadingView> {
     super.didChangeDependencies();
 
     currentReading = widget.r.split("#");
-    title = currentReading[0];
+    title = JSON.translateReading(currentReading[0], lang: context.countryCode);
     subtitle = currentReading.length > 1 ? currentReading[1].trim().tr() : null;
-
-    title = JSON.bibleTrans[context.countryCode]!.entries
-        .fold(title, (String prev, e) => prev.replaceAll(e.key, e.value));
   }
 
   @override

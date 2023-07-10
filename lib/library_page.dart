@@ -60,6 +60,7 @@ class _LibraryPageState extends State<LibraryPage> {
         EbookModel("synaxarion.sqlite"),
         EbookModel("old_testament_overview.sqlite"),
         EbookModel("new_testament_overview.sqlite"),
+        EbookModel("taushev.sqlite"),
         EbookModel("zerna.sqlite"),
         EbookModel("zvezdinsky.sqlite"),
       ]);

@@ -52,6 +52,7 @@ Future<void> main() async {
     "typika.sqlite",
     "zvezdinsky.sqlite",
     "zerna.sqlite",
+    "taushev.sqlite",
     "great_lent.db"
   ].forEach((f) async => await DB.prepare(basename: "assets/books", filename: f));
 
