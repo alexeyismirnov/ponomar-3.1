@@ -42,17 +42,11 @@ class _FeastWidget extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
                 child: Text(translate ? d.name.tr() : d.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(color: Colors.red)))
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.red)))
           ]));
     } else {
-      var textStyle = style ??
-          Theme.of(context)
-              .textTheme
-              .titleMedium!
-              .copyWith(fontWeight: FontWeight.w500);
+      var textStyle =
+          style ?? Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500);
 
       if (d.type.name != "none") {
         return Padding(
@@ -60,8 +54,7 @@ class _FeastWidget extends StatelessWidget {
             child: RichText(
                 text: TextSpan(children: [
               WidgetSpan(
-                  child: SvgPicture.asset(
-                      "assets/images/${d.type.name.toLowerCase()}.svg",
+                  child: SvgPicture.asset("assets/images/${d.type.name.toLowerCase()}.svg",
                       height: 15)),
               TextSpan(text: translate ? d.name.tr() : d.name, style: textStyle)
             ])));
@@ -117,8 +110,7 @@ class _DayViewState extends State<DayView> {
     const itemWidth = 100;
     const padding = 10;
 
-    pageSize =
-        (MediaQuery.of(context).size.width - 4 * padding) ~/ (itemWidth + 10);
+    pageSize = (MediaQuery.of(context).size.width - 4 * padding) ~/ (itemWidth + 10);
   }
 
   @override
@@ -184,10 +176,7 @@ class _DayViewState extends State<DayView> {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: (weekDescr.isNotEmpty
-                ? <Widget>[
-                    Text(weekDescr,
-                        style: Theme.of(context).textTheme.titleMedium)
-                  ]
+                ? <Widget>[Text(weekDescr, style: Theme.of(context).textTheme.titleMedium)]
                 : <Widget>[]) +
             feastWidgets);
   }
@@ -204,13 +193,11 @@ class _DayViewState extends State<DayView> {
                 style: Theme.of(context).textTheme.titleMedium)
           ];
 
-          String? comment =
-              JSON.fastingComments[context.countryCode]![fasting.description];
+          String? comment = JSON.fastingComments[context.countryCode]![fasting.description];
 
           if (comment != null) {
             spans.add(const WidgetSpan(
-              child:
-                  Icon(Icons.article_outlined, size: 25.0, color: Colors.red),
+              child: Icon(Icons.article_outlined, size: 25.0, color: Colors.red),
             ));
           }
 
@@ -220,8 +207,7 @@ class _DayViewState extends State<DayView> {
                 if (comment != null) PopupComment(comment).show(context);
               },
               child: Row(children: [
-                SvgPicture.asset("assets/images/${fasting.type.icon}",
-                    height: 30),
+                SvgPicture.asset("assets/images/${fasting.type.icon}", height: 30),
                 const SizedBox(width: 10),
                 Expanded(child: RichText(text: TextSpan(children: spans)))
               ]));
@@ -239,23 +225,20 @@ class _DayViewState extends State<DayView> {
           }
 
           Widget _iconPage(int page) {
-            final newItems = icons.sublist(
-                page * pageSize, min((page + 1) * pageSize, icons.length));
+            final newItems =
+                icons.sublist(page * pageSize, min((page + 1) * pageSize, icons.length));
 
-            final pageNotFull =
-                page > 0 && (page + 1) * pageSize > icons.length;
+            final pageNotFull = page > 0 && (page + 1) * pageSize > icons.length;
 
             return Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: pageNotFull
-                    ? MainAxisAlignment.start
-                    : MainAxisAlignment.spaceAround,
+                mainAxisAlignment:
+                    pageNotFull ? MainAxisAlignment.start : MainAxisAlignment.spaceAround,
                 children: [
                   if (!pageNotFull) ...[const Spacer()],
                   ...newItems
                       .map<Widget>((s) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 0),
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
                           child: GestureDetector(
                               behavior: HitTestBehavior.opaque,
                               onTap: () {
@@ -279,8 +262,7 @@ class _DayViewState extends State<DayView> {
               child: PageView.builder(
                   controller: _controller,
                   itemCount: (icons.length - 1) ~/ pageSize + 1,
-                  itemBuilder: (BuildContext context, int index) =>
-                      _iconPage(index)));
+                  itemBuilder: (BuildContext context, int index) => _iconPage(index)));
         } else {
           return Container();
         }
@@ -337,8 +319,7 @@ class _DayViewState extends State<DayView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: List<ChurchDay>.from(snapshot.data!)
                       .map((s) => _FeastWidget(s,
-                          style: Theme.of(context).textTheme.titleMedium,
-                          translate: false))
+                          style: Theme.of(context).textTheme.titleMedium, translate: false))
                       .toList()));
 
           // log(snapshot.data.toString());

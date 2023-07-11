@@ -11,6 +11,7 @@ import 'book_model.dart';
 import 'globals.dart';
 import 'book_toc.dart';
 import 'ebook_model.dart';
+import 'yungerov.dart';
 import 'bookmarks_model.dart';
 
 class LibraryPage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    
+
     sections = ["library" "", "Bible"];
 
     books = [
@@ -38,8 +39,9 @@ class _LibraryPageState extends State<LibraryPage> {
         OldTestamentModel("ru"),
         NewTestamentModel("ru"),
         OldTestamentModel("cs"),
-        NewTestamentModel("cs")
-      ]
+        NewTestamentModel("cs"),
+        if (context.languageCode == "ru") ...[YungerovModel()]
+      ],
     ];
 
     if (context.languageCode == "ru") {
@@ -96,7 +98,8 @@ class _LibraryPageState extends State<LibraryPage> {
       },
       groupHeaderBuilder: (BuildContext context, int section) {
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(sections[section].tr().toUpperCase(), style: Theme.of(context).textTheme.labelLarge),
+          Text(sections[section].tr().toUpperCase(),
+              style: Theme.of(context).textTheme.labelLarge),
           const Divider(thickness: 1)
         ]);
       },
@@ -108,7 +111,9 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   Widget build(BuildContext context) => SafeArea(
       child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
-              [CalendarAppbar(title: "", showActions: false)],
-          body: Padding(padding: const EdgeInsets.all(15), child: getContent())));
+          headerSliverBuilder:
+              (BuildContext context, bool innerBoxIsScrolled) =>
+                  [CalendarAppbar(title: "", showActions: false)],
+          body:
+              Padding(padding: const EdgeInsets.all(15), child: getContent())));
 }

@@ -14,8 +14,8 @@ class TaushevView extends StatelessWidget {
 
   TaushevView(this.r);
 
-  Future<List<Map<String, Object?>>> getData(String id) => model.db
-      .query("content", columns: ["subtitle", "text"], where: "id=\"$id\"");
+  Future<List<Map<String, Object?>>> getData(String id) =>
+      model.db.query("content", columns: ["subtitle", "text"], where: "id=\"$id\"");
 
   Future<Widget?> fetch(BuildContext context) async {
     await model.initFuture;
@@ -25,16 +25,14 @@ class TaushevView extends StatelessWidget {
 
     for (final i in getRange(0, p.length, 2)) {
       if (["John", "Luke", "Mark", "Matthew"].contains(p[i])) {
-        final id = JSON.translateReading("${p[i]} ${p[i + 1]}",
-            lang: context.countryCode);
+        final id = JSON.translateReading("${p[i]} ${p[i + 1]}", lang: context.countryCode);
 
         final data = (await getData(id))[0];
 
         return CustomListTile(
             title: data["subtitle"] as String,
             subtitle: author,
-            onTap: () => BookPageSingle(id,
-                    builder: () => BookCellText(data["text"] as String))
+            onTap: () => BookPageSingle(id, builder: () => BookCellText(data["text"] as String))
                 .push(context));
       }
     }
