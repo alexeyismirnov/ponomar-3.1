@@ -44,7 +44,7 @@ abstract class BookModel {
   List<String> getItems(int section);
   Future<int> getNumChapters(IndexPath index) => Future<int>.value(0);
 
-  Future<String> getTitle(BookPosition pos) => Future<String>.value("");
+  String getTitle(BookPosition pos) => "";
   Future<dynamic> getContent(BookPosition pos);
   Future<String?> getComment(int commentId) => Future<String?>.value(null);
 

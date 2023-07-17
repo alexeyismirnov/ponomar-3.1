@@ -95,12 +95,13 @@ class _BookTOCState extends State<BookTOC> {
                 // this is needed to initialize numChaptersCache in BibleModel
                 pos.model!
                     .getNumChapters(pos.index!)
-                    .then((value) => BookPageMultiple(pos!).push(context));
+                    .then((value) => BookPageMultiple(pos!).push(context))
+                    .then((_) => setState(() {}));
                 return true;
               }
             }
 
-            BookPageMultiple(pos).push(context);
+            BookPageMultiple(pos).push(context).then((_) => setState(() {}));
           }
           return true;
         },
@@ -164,6 +165,9 @@ class _BookTOCState extends State<BookTOC> {
                           CalendarAppbar(
                               title: model.title, showActions: false, lang: widget.model.lang)
                         ],
-                    body: Padding(padding: const EdgeInsets.all(15), child: getContent())))));
+                    body: Padding(
+                        key: UniqueKey(),
+                        padding: const EdgeInsets.all(15),
+                        child: getContent())))));
   }
 }

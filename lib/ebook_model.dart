@@ -75,11 +75,7 @@ class EbookModel extends BookModel {
   }
 
   @override
-  Future<String> getTitle(BookPosition pos) async =>
-      SqfliteExt.firstStringValue(await db.query("content",
-          columns: ["title"],
-          where: "section=? AND item=?",
-          whereArgs: [pos.index!.section, pos.index!.index]))!;
+  String getTitle(BookPosition pos) => items[pos.index!.section]![pos.index!.index];
 
   @override
   Future getContent(BookPosition pos) async => SqfliteExt.firstStringValue(await db.query("content",
@@ -130,5 +126,23 @@ class EbookModel extends BookModel {
       return BookPosition.modelIndex(
           this, IndexPath(section: index.section, index: index.index - 1));
     }
+  }
+
+  @override
+  String? getBookmark(BookPosition pos) {
+    final index = pos.index!;
+    return "${code}_${index.section}_${index.index}";
+  }
+
+  @override
+  String getBookmarkName(String bookmark) {
+    final comp = bookmark.split("_");
+    if (comp[0] != code) return "";
+
+    final section = int.parse(comp[1]);
+    final row = int.parse(comp[2]);
+
+    final item_title = items[section]![row];
+    return "$title — $item_title";
   }
 }

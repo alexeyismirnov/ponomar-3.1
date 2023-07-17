@@ -49,10 +49,9 @@ class _BibleChapterViewState extends State<BibleChapterView> {
   void initState() {
     super.initState();
 
-    pos.model!.getTitle(pos).then((_title) {
-      title = _title;
-      return pos.model!.getContent(pos);
-    }).then((_result) {
+    title = pos.model!.getTitle(pos);
+
+    pos.model!.getContent(pos).then((_result) {
       content = _result;
 
       setState(() {

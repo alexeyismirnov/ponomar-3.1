@@ -73,17 +73,16 @@ class _BookPageMultipleState extends State<BookPageMultiple> with SingleTickerPr
               controller: _tabController,
               children: List<Widget>.generate(
                   totalChapters,
-                  (id) => FutureBuilder(
-                      future:
-                          Future.wait([model.getTitle(bookPos[id]), model.getContent(bookPos[id])]),
-                      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                  (id) => FutureBuilder<dynamic>(
+                      future: model.getContent(bookPos[id]),
+                      builder: (context, AsyncSnapshot<dynamic> snapshot) {
                         if (!snapshot.hasData) return Container();
 
                         if (model is BibleModel) {
                           return BibleChapterView(bookPos[id], safeBottom: totalChapters == 1);
                         } else {
-                          String title = snapshot.data![0];
-                          var text = snapshot.data![1];
+                          String title = model.getTitle(bookPos[id]);
+                          var text = snapshot.data;
 
                           if (model.contentType == BookContentType.html) {
                             return BookPageSingle(title,
