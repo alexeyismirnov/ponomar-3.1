@@ -46,5 +46,6 @@
   "from_till": "С %s по %s — %s",
   "memory_of": "%s",
   "bookmarks": "Закладки",
-  "no_bookmarks": "Нет закладок"
+  "no_bookmarks": "Нет закладок",
+  "bible_language": "Язык Библии"
 }

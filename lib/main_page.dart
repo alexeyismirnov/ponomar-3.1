@@ -67,7 +67,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Expanded(
-                              child: Text('Православный календарь+ v1.3',
+                              child: Text('Православный календарь+ 1.3',
                                   style: Theme.of(context).textTheme.titleLarge))
                         ]),
                     const SizedBox(height: 20),
@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Expanded(
-                              child: Text('В новой версии приложения расширен раздел Библиотека.',
+                              child: Text('В новой версии приложения добавлены закладки и новые книги в Библиотеку.',
                                   style: Theme.of(context).textTheme.bodyLarge))
                         ]),
                   ])),
