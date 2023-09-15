@@ -44,5 +44,10 @@
   "donate_thanks": "多謝你的捐款！",
   "network_error": "網絡錯誤",
   "from_till": "從%s至%s — %s",
-  "memory_of": ""
+  "memory_of": "",
+  "bookmarks": "書籤",
+  "no_bookmarks": "沒有書籤",
+  "other": "其他",
+  "synaxarion_annotation": "大齋期集會書",
+  "liturgical_books": "禮儀"
 }

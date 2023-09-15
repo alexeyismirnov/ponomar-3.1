@@ -87,4 +87,8 @@ flutter:
     - assets/books/
     - assets/saints/
     - assets/icons/
+    - assets/translations/en/
     - assets/translations/ru/
+    - assets/translations/zh-CN/
+    - assets/translations/zh-HK/
+

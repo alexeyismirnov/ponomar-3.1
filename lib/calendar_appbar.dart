@@ -7,6 +7,7 @@ import 'package:launch_review/launch_review.dart';
 import 'globals.dart';
 import 'church_fasting.dart';
 import 'bible_view.dart';
+import 'firebase_config.dart';
 
 class FastingLevelDialog extends StatelessWidget {
   final labels = ['laymen_fasting', 'monastic_fasting'];
@@ -38,6 +39,23 @@ class CalendarAppbar extends StatelessWidget {
 
   Widget _getActions(BuildContext context) {
     List<PopupMenuEntry> contextMenu = [
+      if (context.countryCode != "ru") ...[
+        PopupMenuItem(
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+
+                  FirebaseConfig.flutterLocalNotificationsPlugin.cancelAll();
+                  ConfigParamExt.notifications.set(<String>[]);
+
+                  AppLangDialog(
+                    labels: const ["English", "简体中文", "繁體中文"],
+                  ).show(context, canDismiss: false);
+                },
+                child: ListTile(
+                    leading: const Icon(Icons.translate, size: 30.0),
+                    title: const Text('language').tr()))),
+      ],
       PopupMenuItem(
           child: GestureDetector(
               onTap: () {
@@ -56,15 +74,17 @@ class CalendarAppbar extends StatelessWidget {
               child: ListTile(
                   leading: const Icon(Icons.restaurant_menu_outlined, size: 30.0),
                   title: const Text('fasting_level').tr()))),
-      PopupMenuItem(
-          child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-                BibleLangDialog().show(context);
-              },
-              child: ListTile(
-                  leading: const Icon(Icons.font_download_outlined, size: 30.0),
-                  title: const Text('bible_language').tr()))),
+      if (context.countryCode == "ru") ...[
+        PopupMenuItem(
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  BibleLangDialog().show(context);
+                },
+                child: ListTile(
+                    leading: const Icon(Icons.font_download_outlined, size: 30.0),
+                    title: const Text('bible_language').tr()))),
+      ]
     ];
 
     return PopupMenuButton(

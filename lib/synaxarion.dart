@@ -60,7 +60,7 @@ class SynaxarionView extends StatelessWidget {
     if (index == -1) {
       return null;
     } else {
-      final model = EbookModel("synaxarion.sqlite");
+      final model = EbookModel("synaxarion_ru.sqlite");
       await model.initFuture;
 
       final pos = BookPosition.index(IndexPath(section: 0, index: index));

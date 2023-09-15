@@ -34,64 +34,37 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     Future.delayed(Duration.zero, () => postInit());
   }
 
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+
+    if (rateMyApp.shouldOpenDialog) {
+      rateMyApp.showRateDialog(context, title: "title".tr(), message: "please_rate".tr());
+    }
+  }
+
   void postInit() async {
-    await OldTestamentModel("ru").prepare();
-    await NewTestamentModel("ru").prepare();
+    if (!ConfigParam.langSelected.val()) {
+      ConfigParam.langSelected.set(true);
+      AppLangDialog(
+        labels: const ["English", "简体中文", "繁體中文"],
+      ).show(context, canDismiss: false);
+    } else {
+      await OldTestamentModel(context.countryCode).prepare();
+      await NewTestamentModel(context.countryCode).prepare();
 
-    await OldTestamentModel("cs").prepare();
-    await NewTestamentModel("cs").prepare();
+      await FirebaseConfig.requestPermissions();
 
-    await FirebaseConfig.requestPermissions();
+      final year = DateTime.now().year;
+      if (!ConfigParamExt.notifications.val().contains("$year")) {
+        ConfigParamExt.notifications.set(["$year"]);
 
-    final year = DateTime.now().year;
-    if (!ConfigParamExt.notifications.val().contains("$year")) {
-      ConfigParamExt.notifications.set(["$year"]);
-
-      FeastNotifications(date, context.languageCode).setup();
+        FeastNotifications(date, context.languageCode).setup();
+      }
     }
 
     if (!ConfigParamExt.ver_1_3.val()) {
       ConfigParamExt.ver_1_3.set(true);
-
-      final dialog = AlertDialog(
-          contentPadding: const EdgeInsets.all(10.0),
-          content: Container(
-              width: MediaQuery.of(context).size.width * 0.5,
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                              child: Text('Православный календарь+ 1.3',
-                                  style: Theme.of(context).textTheme.titleLarge))
-                        ]),
-                    const SizedBox(height: 20),
-                    Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                              child: Text('В новой версии приложения добавлены закладки и новые книги в Библиотеку.',
-                                  style: Theme.of(context).textTheme.bodyLarge))
-                        ]),
-                  ])),
-          actions: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey.shade300, padding: const EdgeInsets.all(10.0)),
-              child: Text('ОК',
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.black)),
-              onPressed: () {
-                Navigator.of(context).pop(null);
-              },
-            )
-          ]);
-      dialog.show(context);
     }
 
     await Jiffy.setLocale(context.languageCode);
@@ -122,9 +95,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   void setDate(DateTime d) {
-    if (rateMyApp.shouldOpenDialog) {
-      rateMyApp.showRateDialog(context, title: "title".tr(), message: "please_rate".tr());
-    }
 
     setState(() {
       date = DateTime.utc(d.year, d.month, d.day);
