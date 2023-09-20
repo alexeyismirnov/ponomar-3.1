@@ -75,6 +75,7 @@ Future<void> main() async {
     "typika_en.sqlite",
     "typika_cn.sqlite",
     "typika_hk.sqlite",
+    "augustin_en.sqlite",
   ].forEach((f) async => await DB.prepare(basename: "assets/books", filename: f));
 
   await IconModel.prepare();

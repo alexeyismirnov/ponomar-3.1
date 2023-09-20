@@ -50,6 +50,7 @@ dependencies:
       url: https://github.com/pinkfish/flutter_native_timezone.git
   flutter_html_svg: ^3.0.0-beta.1
   flutter_html: ^3.0.0-beta.1
+  vocsy_epub_viewer: ^2.0.0
 
 dev_dependencies:
   build_runner: ^2.4.4
@@ -85,6 +86,7 @@ flutter:
     - assets/calendar/
     - assets/bible/
     - assets/books/
+    - assets/epubs/
     - assets/saints/
     - assets/icons/
     - assets/translations/en/

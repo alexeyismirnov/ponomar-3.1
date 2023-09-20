@@ -83,7 +83,11 @@ class _LibraryPageState extends State<LibraryPage> {
       ]);
 
       sections.add("other".tr());
-      books.add([EbookModel("prayerbook_$lang.sqlite"), EbookModel("synaxarion_$lang.sqlite")]);
+      books.add([
+        EbookModel("prayerbook_$lang.sqlite"),
+        EbookModel("synaxarion_$lang.sqlite"),
+        EbookModel("augustin_$lang.sqlite")
+      ]);
     }
 
     BookmarksModel.books = books.expand((b) => b).toList();

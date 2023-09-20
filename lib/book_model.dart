@@ -1,7 +1,7 @@
 import 'package:group_list_view/group_list_view.dart';
 import 'package:quiver/core.dart';
 
-enum BookContentType { text, html }
+enum BookContentType { text, html, epub }
 
 class BookPosition {
   BookModel? model;
