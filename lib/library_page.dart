@@ -31,20 +31,20 @@ class _LibraryPageState extends State<LibraryPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    sections = ["library" "", "Bible"];
-
+    sections = ["library", "Bible"];
     books = [
       [BookmarksModel()],
-      [
+    ];
+
+    if (context.languageCode == "ru") {
+      books.add([
         OldTestamentModel("ru"),
         NewTestamentModel("ru"),
         OldTestamentModel("cs"),
         NewTestamentModel("cs"),
-        if (context.languageCode == "ru") ...[YungerovModel()]
-      ],
-    ];
+        YungerovModel()
+      ]);
 
-    if (context.languageCode == "ru") {
       sections.add("Молитвослов");
       books.add([
         EbookModel("prayerbook_ru.sqlite"),
@@ -111,9 +111,7 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   Widget build(BuildContext context) => SafeArea(
       child: NestedScrollView(
-          headerSliverBuilder:
-              (BuildContext context, bool innerBoxIsScrolled) =>
-                  [CalendarAppbar(title: "", showActions: false)],
-          body:
-              Padding(padding: const EdgeInsets.all(15), child: getContent())));
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
+              [CalendarAppbar(title: "", showActions: false)],
+          body: Padding(padding: const EdgeInsets.all(15), child: getContent())));
 }

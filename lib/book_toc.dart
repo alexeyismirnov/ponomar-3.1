@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:group_list_view/group_list_view.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:vocsy_epub_viewer/epub_viewer.dart';
 
 import 'calendar_appbar.dart';
 import 'book_model.dart';
@@ -97,11 +98,23 @@ class _BookTOCState extends State<BookTOC> {
                     .getNumChapters(pos.index!)
                     .then((value) => BookPageMultiple(pos!).push(context))
                     .then((_) => setState(() {}));
-                return true;
               }
+            } else if (model.contentType == BookContentType.epub) {
+              model.getContent(pos).then((filename) {
+                VocsyEpub.setConfig(
+                  themeColor: Theme.of(context).primaryColor,
+                  identifier: "myBook",
+                  scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
+                  enableTts: true,
+                );
+
+                VocsyEpub.openAsset('assets/epubs/$filename');
+              });
+
+            } else {
+              BookPageMultiple(pos).push(context).then((_) => setState(() {}));
             }
 
-            BookPageMultiple(pos).push(context).then((_) => setState(() {}));
           }
           return true;
         },
