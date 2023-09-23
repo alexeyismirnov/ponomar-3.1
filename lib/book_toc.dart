@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 import 'package:group_list_view/group_list_view.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
@@ -11,6 +12,7 @@ import 'globals.dart';
 import 'book_page_multiple.dart';
 import 'bookmarks_model.dart';
 import 'bible_model.dart';
+import 'church_day.dart';
 
 class _ChaptersView extends StatefulWidget {
   final BookPosition pos;
@@ -100,15 +102,9 @@ class _BookTOCState extends State<BookTOC> {
                     .then((_) => setState(() {}));
               }
             } else if (model.contentType == BookContentType.epub) {
-              model.getContent(pos).then((filename) {
-                VocsyEpub.setConfig(
-                  themeColor: Theme.of(context).primaryColor,
-                  identifier: "myBook",
-                  scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-                  enableTts: true,
-                );
-
-                VocsyEpub.openAsset('assets/epubs/$filename');
+              model.getContent(pos).then((json) {
+                final day = ChurchDay.fromJson(jsonDecode(json));
+                VocsyEpub.openAsset('assets/epubs/${day.reading}');
               });
 
             } else {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:vocsy_epub_viewer/epub_viewer.dart';
 
 import 'globals.dart';
 import 'calendar_appbar.dart';
@@ -64,6 +65,13 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     if (!ConfigParamExt.ver_1_4.val()) {
       ConfigParamExt.ver_1_4.set(true);
     }
+
+    VocsyEpub.setConfig(
+      themeColor: Theme.of(context).primaryColor,
+      identifier: "myBook",
+      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
+      enableTts: true,
+    );
 
     await Jiffy.setLocale(context.languageCode);
   }
