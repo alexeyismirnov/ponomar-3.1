@@ -24,6 +24,7 @@ import 'book_cell.dart';
 import 'great_lent_short.dart';
 import 'zerna.dart';
 import 'taushev.dart';
+import 'saints_lives.dart';
 
 class _FeastWidget extends StatelessWidget {
   final ChurchDay d;
@@ -297,6 +298,10 @@ class _DayViewState extends State<DayView> {
       content.add(SaintTroparion(date));
       content.add(TroparionOfDay(date));
       content.add(TroparionOfFeast(date));
+    }
+
+    if (context.languageCode == "en") {
+      content.add(SaintsLivesView(date));
     }
 
     return CardWithTitle(

@@ -50,8 +50,8 @@ class ChurchCalendar {
   }
 
   DateTime? dateParser(String? date) {
-    if (date != null) {
-      var dd = DateFormat("d MMMM", "en").parse(date);
+    if ((date?.length ?? 0) > 0) {
+      var dd = DateFormat("d MMMM", "en").parse(date!);
       return DateTime.utc(year, dd.month, dd.day);
     } else {
       return null;
