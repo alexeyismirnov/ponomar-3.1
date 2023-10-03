@@ -298,6 +298,8 @@ class _DayViewState extends State<DayView> {
       content.add(SaintTroparion(date));
       content.add(TroparionOfDay(date));
       content.add(TroparionOfFeast(date));
+    } else {
+      content.add(SynaxarionView(date));
     }
 
     if (context.languageCode == "en") {

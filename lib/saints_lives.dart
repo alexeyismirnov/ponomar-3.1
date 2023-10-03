@@ -38,7 +38,19 @@ class SaintsCalendar {
         query.map<ChurchDay>((e) => ChurchDay.fromJson(jsonDecode(e["text"] as String))).toList();
 
     final pascha = Cal.paschaDay(year);
-    day("pentecost").date = pascha + 49.days;
+    final pentecost = pascha + 49.days;
+
+    day("pentecost").date = pentecost;
+    day("sunday1AfterPentecost").date = pentecost + 7.days;
+    day("ascension").date = pascha + 39.days;
+    day("sunday7AfterPascha").date = pascha + 42.days;
+    day("holyFathersSixCouncils").date = Cal.nearestSunday(DateTime.utc(year, 7, 29));
+
+    day("greatMonday").date = pascha - 6.days;
+    day("greatTuesday").date = pascha - 5.days;
+    day("greatWednesday").date = pascha - 4.days;
+    day("greatSaturday").date = pascha - 1.days;
+
   }
 
   factory SaintsCalendar.fromDate(DateTime d, {required String lang}) {

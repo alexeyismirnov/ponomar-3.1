@@ -47,5 +47,8 @@
   "memory_of": "%s",
   "bookmarks": "Закладки",
   "no_bookmarks": "Нет закладок",
-  "bible_language": "Язык Библии"
+  "bible_language": "Язык Библии",
+  "other": "Разное",
+  "synaxarion_annotation": "",
+  "liturgical_books": "Богослужение"
 }

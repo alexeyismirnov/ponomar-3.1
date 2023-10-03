@@ -37,8 +37,9 @@ class EbookModel extends BookModel {
     initFuture = loadBook(filename);
   }
 
-  Future loadBook(String filename) async {
+  Future<dynamic> loadBook(String filename) async {
     db = await DB.open(filename);
+    List<Map<String, Object?>> queryItems = [];
 
     code = (await loadString("code"))!;
     title = (await loadString("title"))!;
@@ -53,12 +54,12 @@ class EbookModel extends BookModel {
 
     sections = querySections.map<String>((e) => e["title"] as String).toList();
 
-    sections.forEachIndexed((s, i) async {
-      List<Map<String, Object?>> queryItems = await db.query("content",
+    for (final (i, _) in sections.indexed) {
+      queryItems = await db.query("content",
           columns: ["title"], where: "section=?", whereArgs: [i], orderBy: "item");
 
       items[i] = queryItems.map<String>((e) => e["title"] as String).toList();
-    });
+    }
   }
 
   Future<String?> loadString(String key) async =>
