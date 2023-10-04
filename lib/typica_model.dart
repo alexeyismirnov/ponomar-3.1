@@ -91,7 +91,7 @@ class TypikaModel extends BookModel {
     title = (await loadString("title"))!;
 
     List<Map<String, Object?>> querySections =
-    await db.query("content", columns: ["title"], orderBy: "section");
+        await db.query("content", columns: ["title"], orderBy: "section");
 
     data = List<String>.from(querySections.map<String>((e) => e["title"] as String));
   }
@@ -101,12 +101,12 @@ class TypikaModel extends BookModel {
     tone = cal.getTone(date)!;
 
     List<Map<String, Object?>> queryFragments =
-    await db.query("fragments", columns: ["text"], where: "glas=$tone", orderBy: "id");
+        await db.query("fragments", columns: ["text"], where: "glas=$tone", orderBy: "id");
 
     fragments = List<String>.from(queryFragments.map<String>((e) => e["text"] as String));
 
     List<Map<String, Object?>> queryProkimen =
-    await db.query("prokimen", columns: ["text"], where: "glas=$tone", orderBy: "id");
+        await db.query("prokimen", columns: ["text"], where: "glas=$tone", orderBy: "id");
 
     prokimen = List<String>.from(queryProkimen.map<String>((e) => e["text"] as String));
 
@@ -135,24 +135,24 @@ class TypikaModel extends BookModel {
 
     content = content.replaceAll("GLAS", "$tone");
 
-    fragments.forEachIndexed((s, i) async {
+    for (final (i, s) in fragments.indexed) {
       content = content.replaceAll("FRAGMENT${i + 1}!", s);
-    });
+    }
 
-    prokimen.forEachIndexed((s, i) async {
+    for (final (i, s) in prokimen.indexed) {
       content = content.replaceAll("PROKIMEN${i + 1}", s);
-    });
+    }
 
     final pericope = PericopeModel(lang, reading);
     await pericope.initFuture;
 
-    pericope.title.forEachIndexed((s, i) async {
+    for (final (i, s) in pericope.title.indexed) {
       content = content.replaceAll("TITLE${i + 1}", s);
-    });
+    }
 
-    pericope.textContent.forEachIndexed((s, i) async {
+    for (final (i, s) in pericope.textContent.indexed) {
       content = content.replaceAll("READING${i + 1}", s);
-    });
+    }
 
     return content;
   }

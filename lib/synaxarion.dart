@@ -102,7 +102,6 @@ class SynaxarionViewState extends State<SynaxarionView> {
       return CustomListTile(
           title: title,
           subtitle: "synaxarion_annotation".tr(),
-          reversed: true,
           onTap: () => BookPageSingle(title, padding: 5, builder: () => content).push(context));
     }
   }

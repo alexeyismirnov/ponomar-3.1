@@ -1,4 +1,3 @@
-import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'dart:async';
 
 import 'book_model.dart';
@@ -20,13 +19,13 @@ class YungerovModel extends EbookModel {
     final verses_cs =
         await db.query("content_cs", columns: ["text"], where: "psalm=?", whereArgs: [ps]);
 
-    verses_yu.forEachIndexed((text, index) {
+    for (final (index, text) in verses_yu.indexed) {
       if (index > 0) {
         result += "<span class='rubric'>$index</span>&nbsp;";
       }
 
       result += "${text["text"]}<br/><span class='subtitle'>${verses_cs[index]["text"]}</span><p>";
-    });
+    }
 
     return result;
   }
