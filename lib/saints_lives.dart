@@ -39,6 +39,7 @@ class SaintsCalendar {
 
     final pascha = Cal.paschaDay(year);
     final pentecost = pascha + 49.days;
+    final greatLentStart = pascha - 48.days;
 
     day("pentecost").date = pentecost;
     day("sunday1AfterPentecost").date = pentecost + 7.days;
@@ -50,6 +51,7 @@ class SaintsCalendar {
     day("greatTuesday").date = pascha - 5.days;
     day("greatWednesday").date = pascha - 4.days;
     day("greatSaturday").date = pascha - 1.days;
+    day("sunday5GreatLent").date = greatLentStart + 34.days;
 
   }
 
