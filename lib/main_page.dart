@@ -40,7 +40,10 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     super.didChangeDependencies();
 
     if (rateMyApp.shouldOpenDialog) {
-      rateMyApp.showRateDialog(context, title: "title".tr(), message: "please_rate".tr());
+      Future.delayed(
+          Duration.zero,
+          () =>
+              rateMyApp.showRateDialog(context, title: "title".tr(), message: "please_rate".tr()));
     }
   }
 
@@ -103,7 +106,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   void setDate(DateTime d) {
-
     setState(() {
       date = DateTime.utc(d.year, d.month, d.day);
       if (_controller.hasClients) {

@@ -41,10 +41,6 @@ class SaintsCalendar {
     final pentecost = pascha + 49.days;
     final greatLentStart = pascha - 48.days;
 
-    day("pentecost").date = pentecost;
-    day("sunday1AfterPentecost").date = pentecost + 7.days;
-    day("ascension").date = pascha + 39.days;
-    day("sunday7AfterPascha").date = pascha + 42.days;
     day("holyFathersSixCouncils").date = Cal.nearestSunday(DateTime.utc(year, 7, 29));
 
     day("greatMonday").date = pascha - 6.days;
@@ -55,7 +51,12 @@ class SaintsCalendar {
     day("saturday1GreatLent").date = greatLentStart + 5.days;
     day("sunday5GreatLent").date = greatLentStart + 34.days;
 
+    day("ascension").date = pascha + 39.days;
+    day("pentecost").date = pentecost;
+    day("sunday1AfterPentecost").date = pentecost + 7.days;
+
     day("sunday3AfterPascha").date = pascha + 14.days;
+    day("sunday7AfterPascha").date = pascha + 42.days;
 
   }
 
