@@ -48,8 +48,12 @@ class SaintsCalendar {
     day("greatWednesday").date = pascha - 4.days;
     day("greatSaturday").date = pascha - 1.days;
 
+    day("beginningOfGreatLent").date = greatLentStart;
     day("saturday1GreatLent").date = greatLentStart + 5.days;
+    day("sunday1GreatLent").date = greatLentStart + 6.days;
+    day("sunday3GreatLent").date = greatLentStart + 20.days;
     day("sunday5GreatLent").date = greatLentStart + 34.days;
+    day("palmSunday").date = pascha - 7.days;
 
     day("ascension").date = pascha + 39.days;
     day("pentecost").date = pentecost;
@@ -57,6 +61,13 @@ class SaintsCalendar {
 
     day("sunday3AfterPascha").date = pascha + 14.days;
     day("sunday7AfterPascha").date = pascha + 42.days;
+
+    var nativity = DateTime.utc(year, 1, 7);
+    if (nativity.weekday == DateTime.sunday) {
+      day("josephBetrothed").date = nativity + 1.days;
+    } else {
+      day("josephBetrothed").date = Cal.nearestSundayAfter(nativity);
+    }
 
   }
 
