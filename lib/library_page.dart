@@ -31,6 +31,8 @@ class _LibraryPageState extends State<LibraryPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    if (ready) return;
+
     sections = ["library", "Bible"];
     books = [
       [BookmarksModel()],
