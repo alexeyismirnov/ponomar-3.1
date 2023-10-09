@@ -65,7 +65,7 @@ class _GreatLentShortViewState extends State<GreatLentShortView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (!isAvailable) return;
+    if (!isAvailable || initialized) return;
 
     df = DateFormat.MMMMd(context.languageCode);
     model = StoryModel("great_lent.db");

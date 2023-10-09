@@ -100,6 +100,8 @@ class _BookTOCState extends State<BookTOC> {
                     .getNumChapters(pos.index!)
                     .then((value) => BookPageMultiple(pos!).push(context))
                     .then((_) => setState(() {}));
+              } else {
+                BookPageMultiple(pos).push(context).then((_) => setState(() {}));
               }
             } else if (model.contentType == BookContentType.epub) {
               model.getContent(pos).then((json) {

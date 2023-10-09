@@ -44,6 +44,8 @@ class _GreatLentFullViewState extends State<GreatLentFullView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    if (initialized) return;
+
     cal = Cal.fromDate(DateTime.utc(widget.year, 1, 1));
     model = StoryModel("great_lent.db");
 

@@ -73,7 +73,7 @@ class _ReadingViewState extends State<ReadingView> {
           title: title,
           subtitle: subtitle,
           onTap: () => BookPageSingle("Gospel of the day".tr(),
-              bibleFontButton: true,
+              bibleFontButton: (context.languageCode == "ru"),
               builder: () => PericopeView(
                   key: ValueKey(ConfigParamExt.bibleLang.val()),
                   currentReading[0])).push(context)));

@@ -51,7 +51,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     if (!ConfigParam.langSelected.val()) {
       ConfigParam.langSelected.set(true);
       AppLangDialog(
-        labels: const ["English", "简体中文", "繁體中文"],
+        labels: const ["English", "Русский", "简体中文", "繁體中文"],
       ).show(context, canDismiss: false);
     } else {
       await OldTestamentModel(context.countryCode).prepare();
