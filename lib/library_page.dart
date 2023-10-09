@@ -33,8 +33,9 @@ class _LibraryPageState extends State<LibraryPage> {
     super.didChangeDependencies();
     final lang = context.countryCode;
 
-    sections = ["library", "Bible"];
+    if (ready) return;
 
+    sections = ["library", "Bible"];
     books = [
       [BookmarksModel()],
     ];
@@ -86,7 +87,7 @@ class _LibraryPageState extends State<LibraryPage> {
       books.add([
         EbookModel("prayerbook_$lang.sqlite"),
         EbookModel("synaxarion_$lang.sqlite"),
-        EbookModel("augustin_$lang.sqlite")
+        if (context.languageCode == "en") ...[EbookModel("augustin_en.sqlite")]
       ]);
     }
 

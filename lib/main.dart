@@ -35,27 +35,12 @@ Future<void> main() async {
 
   await JSON.load();
 
-  await SaintModel("ru").prepare();
   await SaintModel("en").prepare();
   await SaintModel("cn").prepare();
   await SaintModel("hk").prepare();
 
   await rateMyApp.init();
   [
-    "troparion.sqlite",
-    "feofan.sqlite",
-    "prayerbook_ru.sqlite",
-    "canons.sqlite",
-    "vigil_ru.sqlite",
-    "liturgy_ru.sqlite",
-    "new_testament_overview.sqlite",
-    "old_testament_overview.sqlite",
-    "synaxarion_ru.sqlite",
-    "typika_ru.sqlite",
-    "zvezdinsky.sqlite",
-    "zerna.sqlite",
-    "taushev.sqlite",
-    "yungerov.sqlite",
     "great_lent.db"
   ].forEach((f) async => await DB.prepare(basename: "assets/books", filename: f));
 
@@ -87,7 +72,6 @@ Future<void> main() async {
   runApp(EasyLocalization(
       supportedLocales: const [
         Locale('en', ''),
-        Locale('ru', ''),
         Locale('zh', 'CN'),
         Locale('zh', 'HK'),
       ],

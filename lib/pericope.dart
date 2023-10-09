@@ -24,6 +24,8 @@ class _PericopeViewState extends State<PericopeView> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
 
+    if (ready) return;
+
     String lang = context.countryCode;
     if (lang == "ru") lang = ConfigParamExt.bibleLang.val();
 
@@ -73,7 +75,7 @@ class _ReadingViewState extends State<ReadingView> {
           title: title,
           subtitle: subtitle,
           onTap: () => BookPageSingle("Gospel of the day".tr(),
-              bibleFontButton: true,
+              bibleFontButton: (context.languageCode == "ru"),
               builder: () => PericopeView(
                   key: ValueKey(ConfigParamExt.bibleLang.val()),
                   currentReading[0])).push(context)));

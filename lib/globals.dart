@@ -45,8 +45,6 @@ class JSON {
 
     bibleTrans['en'] = Map<String, String>.from(
         jsonDecode(await rootBundle.loadString("assets/translations/en/reading.json")));
-    bibleTrans['ru'] = Map<String, String>.from(
-        jsonDecode(await rootBundle.loadString("assets/translations/ru/reading.json")));
     bibleTrans['cn'] = Map<String, String>.from(
         jsonDecode(await rootBundle.loadString("assets/translations/zh-CN/reading.json")));
     bibleTrans['hk'] = Map<String, String>.from(
@@ -54,8 +52,6 @@ class JSON {
 
     fastingComments['en'] = Map<String, String>.from(
         jsonDecode(await rootBundle.loadString("assets/translations/en/fasting.json")));
-    fastingComments['ru'] = Map<String, String>.from(
-        jsonDecode(await rootBundle.loadString("assets/translations/ru/fasting.json")));
     fastingComments['cn'] = Map<String, String>.from(
         jsonDecode(await rootBundle.loadString("assets/translations/zh-CN/fasting.json")));
     fastingComments['hk'] = Map<String, String>.from(
