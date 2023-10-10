@@ -1,4 +1,4 @@
-package com.example.ponomar3
+package com.rlc.ponomar
 
 import io.flutter.embedding.android.FlutterActivity
 
