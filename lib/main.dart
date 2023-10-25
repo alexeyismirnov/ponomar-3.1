@@ -41,7 +41,8 @@ Future<void> main() async {
   await SaintModel("hk").prepare();
 
   await rateMyApp.init();
-  [
+  
+  final books = [
     "troparion.sqlite",
     "feofan.sqlite",
     "prayerbook_ru.sqlite",
@@ -56,10 +57,7 @@ Future<void> main() async {
     "zerna.sqlite",
     "taushev.sqlite",
     "yungerov.sqlite",
-    "great_lent.db"
-  ].forEach((f) async => await DB.prepare(basename: "assets/books", filename: f));
-
-  [
+    "great_lent.db",
     "prayerbook_en.sqlite",
     "prayerbook_cn.sqlite",
     "prayerbook_hk.sqlite",
@@ -76,7 +74,11 @@ Future<void> main() async {
     "typika_cn.sqlite",
     "typika_hk.sqlite",
     "augustin_en.sqlite",
-  ].forEach((f) async => await DB.prepare(basename: "assets/books", filename: f));
+  ];
+
+  for (final f in books) {
+    await DB.prepare(basename: "assets/books", filename: f);
+  }
 
   await IconModel.prepare();
 
