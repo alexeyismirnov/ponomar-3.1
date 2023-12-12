@@ -17,7 +17,7 @@ class IconModel {
   static late Database db;
 
   static Future prepare() async {
-    await DB.prepare(basename: "assets/icons", filename: "icons.sqlite");
+    await DB.prepare(path: "assets/icons/icons.sqlite");
     db = await DB.open("icons.sqlite");
   }
 
