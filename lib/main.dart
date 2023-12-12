@@ -41,7 +41,7 @@ Future<void> main() async {
   await SaintModel("hk").prepare();
 
   await rateMyApp.init();
-  
+
   final books = [
     "troparion.sqlite",
     "feofan.sqlite",
