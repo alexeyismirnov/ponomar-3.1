@@ -17,9 +17,9 @@ class SaintModel {
         .map((i) => "saints_%02d_$lang.sqlite".format([i]))
         .toList();
 
-    filenames.forEach((f) async {
-      await DB.prepare(basename: "assets/saints", filename: f);
-    });
+    for (final f in filenames) {
+      await DB.prepare(path: "assets/saints/$f");
+    }
   }
 
   Future<List<Saint>> fetch(DateTime d) async {

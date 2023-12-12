@@ -57,6 +57,11 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       await OldTestamentModel(context.countryCode).prepare();
       await NewTestamentModel(context.countryCode).prepare();
 
+      if (context.countryCode == "ru") {
+        await OldTestamentModel("cs").prepare();
+        await NewTestamentModel("cs").prepare();
+      }
+
       await FirebaseConfig.requestPermissions();
 
       final year = DateTime.now().year;
