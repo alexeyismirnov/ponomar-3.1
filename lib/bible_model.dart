@@ -103,9 +103,9 @@ mixin BibleModel on BookModel {
 
   @override
   Future prepare() async {
-    filenames.expand((e) => e).forEach((f) async {
-      await DB.prepare(basename: "assets/bible", filename: "${f}_$lang.sqlite");
-    });
+    for (final f in filenames.expand((e) => e)) {
+      await DB.prepare(path: "assets/bible/${f}_$lang.sqlite");
+    }
   }
 
   @override

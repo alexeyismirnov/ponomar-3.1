@@ -39,23 +39,12 @@ Future<void> main() async {
 
   await rateMyApp.init();
 
-  [
-    "troparion.sqlite",
-    "feofan.sqlite",
-    "prayerbook.sqlite",
-    "canons.sqlite",
-    "vigil.sqlite",
-    "liturgy.sqlite",
-    "new_testament_overview.sqlite",
-    "old_testament_overview.sqlite",
-    "synaxarion.sqlite",
-    "typika.sqlite",
-    "zvezdinsky.sqlite",
-    "zerna.sqlite",
-    "taushev.sqlite",
-    "yungerov.sqlite",
-    "great_lent.db"
-  ].forEach((f) async => await DB.prepare(basename: "assets/books", filename: f));
+  final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+  final books = assetManifest.listAssets().where((string) => string.startsWith("assets/books/")).toList();
+
+  for (final f in books) {
+    await DB.prepare(path: f);
+  }
 
   await IconModel.prepare();
 
