@@ -3,6 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:supercharged/supercharged.dart';
+import 'dart:io';
 
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
@@ -40,21 +41,31 @@ class FirebaseConfig {
   }
 
   static requestPermissions() async {
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+    if (Platform.isIOS) {
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+    } else if (Platform.isAndroid) {
+      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+          flutterLocalNotificationsPlugin
+              .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
+
+      await androidImplementation?.requestNotificationsPermission();
+      await androidImplementation?.requestExactAlarmsPermission();
+    }
   }
 
   static schedule(DateTime date, String title, String body) async {
-    //final d = DateTime.now() + 30.seconds;
-    //final scheduledDate = tz.TZDateTime.from(d, location);
-
     count++;
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+
+    // final d = DateTime.now() + 4.minutes;
+    // final scheduledDate = tz.TZDateTime(tz.local, d.year, d.month, d.day, d.hour, d.minute);
+
     final d = date - 1.days;
     final scheduledDate = tz.TZDateTime(tz.local, d.year, d.month, d.day, 17, 00);
 
@@ -74,7 +85,7 @@ class FirebaseConfig {
           priority: Priority.high,
           icon: 'cross',
         )),
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        androidScheduleMode: AndroidScheduleMode.alarmClock,
         matchDateTimeComponents: DateTimeComponents.dateAndTime,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
   }
