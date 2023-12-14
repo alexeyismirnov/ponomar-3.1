@@ -61,8 +61,8 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       FeastNotifications(date, context.languageCode).setup();
     }
 
-    if (!ConfigParamExt.ver_1_3.val()) {
-      ConfigParamExt.ver_1_3.set(true);
+    if (!ConfigParamExt.ver_1_4.val()) {
+      ConfigParamExt.ver_1_4.set(true);
     }
 
     await Jiffy.setLocale(context.languageCode);
