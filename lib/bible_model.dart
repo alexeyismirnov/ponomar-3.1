@@ -11,6 +11,11 @@ import 'dart:convert';
 import 'book_model.dart';
 import 'globals.dart';
 
+class Range {
+  final int chapter, verse;
+  Range(this.chapter, this.verse);
+}
+
 class BibleVerse {
   final int verse;
   final String text;

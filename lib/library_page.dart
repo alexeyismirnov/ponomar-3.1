@@ -47,19 +47,19 @@ class _LibraryPageState extends State<LibraryPage> {
     if (context.languageCode == "ru") {
       sections.add("Молитвослов");
       books.add([
-        EbookModel("prayerbook.sqlite"),
+        EbookModel("prayerbook_ru.sqlite"),
         EbookModel("canons.sqlite"),
       ]);
 
       sections.add("Богослужение");
       books.add([
-        EbookModel("vigil.sqlite"),
-        EbookModel("liturgy.sqlite"),
+        EbookModel("vigil_ru.sqlite"),
+        EbookModel("liturgy_ru.sqlite"),
       ]);
 
       sections.add("Разное");
       books.add([
-        EbookModel("synaxarion.sqlite"),
+        EbookModel("synaxarion_ru.sqlite"),
         EbookModel("old_testament_overview.sqlite"),
         EbookModel("new_testament_overview.sqlite"),
         EbookModel("taushev.sqlite"),
