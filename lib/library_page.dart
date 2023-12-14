@@ -65,6 +65,7 @@ class _LibraryPageState extends State<LibraryPage> {
         EbookModel("taushev.sqlite"),
         EbookModel("zerna.sqlite"),
         EbookModel("zvezdinsky.sqlite"),
+        // EbookModel("augustin_en.sqlite"),
       ]);
     }
 

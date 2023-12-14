@@ -32,7 +32,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "com.example.ponomar3"
+    namespace "com.rlc.ponomar_ru"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
