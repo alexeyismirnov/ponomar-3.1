@@ -167,8 +167,14 @@ class ChurchCalendar {
   }
 
   void initMisc() {
-    var demetrius = DateTime.utc(year, 11, 8);
-    day("demetriusSaturday").date = nearestSaturdayBefore(demetrius);
+    final demetrius = DateTime.utc(year, 11, 8);
+    var demetriusSat = nearestSaturdayBefore(demetrius);
+
+    if (demetriusSat == DateTime.utc(year, 11, 4)) {
+      demetriusSat += 7.days;
+    }
+
+    day("demetriusSaturday").date = demetriusSat;
 
     day("newMartyrsConfessorsOfRussia").date = nearestSunday(DateTime.utc(year, 2, 7));
     day("holyFathersSixCouncils").date = nearestSunday(DateTime.utc(year, 7, 29));
