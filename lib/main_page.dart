@@ -72,8 +72,8 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       }
     }
 
-    if (!ConfigParamExt.ver_1_3.val()) {
-      ConfigParamExt.ver_1_3.set(true);
+    if (!ConfigParamExt.ver_1_2.val()) {
+      ConfigParamExt.ver_1_2.set(true);
     }
 
     VocsyEpub.setConfig(

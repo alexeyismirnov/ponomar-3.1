@@ -26,9 +26,9 @@ Future<void> main() async {
   ConfigParamExt.notifications = ConfigParam<List<String>>('notifications', initValue: []);
   ConfigParamExt.bookmarks = ConfigParam<List<String>>('bookmarks', initValue: []);
   ConfigParamExt.bibleLang = ConfigParam<String>('bibleLang', initValue: "cs");
-  ConfigParamExt.ver_1_3 = ConfigParam<bool>('ver_1_3', initValue: false);
+  ConfigParamExt.ver_1_2 = ConfigParam<bool>('ver_1_3', initValue: false);
 
-  if (!ConfigParamExt.ver_1_3.val()) {
+  if (!ConfigParamExt.ver_1_2.val()) {
     await FirebaseConfig.flutterLocalNotificationsPlugin.cancelAll();
     ConfigParamExt.notifications.set(<String>[]);
   }
