@@ -64,7 +64,7 @@ class FeofanView extends StatelessWidget {
       return [getListTile(context, (await getFeofan("34"))!)];
     } else if (date == cal.pascha - 3.days || date == cal.pascha - 2.days) {
       return [];
-    } else if (date == cal.d("sundayOfForefathers")) {
+    } else if (date == cal.d("sundayBeforeNativity1") || date == cal.d("sundayBeforeNativity2")) {
       return [getListTile(context, (await getFeofan("346"))!)];
     } else if (date.isBetween(cal.greatLentStart, cal.pascha - 1.days)) {
       final num = (cal.greatLentStart >> date) + 39;

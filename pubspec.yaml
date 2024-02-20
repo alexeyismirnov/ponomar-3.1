@@ -3,7 +3,7 @@ description: Orthodox Church Calendar
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.4.0+14
+version: 1.4.5+15
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
