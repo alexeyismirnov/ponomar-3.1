@@ -164,15 +164,9 @@ class _DayViewState extends State<DayView> {
     var list = [cal.getWeekDescription(date), cal.getToneDescription(date)];
     var weekDescr = list.whereType<String>().join('; ');
     var dayDescr = cal.getDayDescription(date);
-    var greatFeasts = Cal.getGreatFeast(date);
+    // var greatFeasts = Cal.getGreatFeast(date);
 
-    List<Widget> feastWidgets = [];
-
-    if (greatFeasts.isNotEmpty) {
-      feastWidgets = greatFeasts.map((d) => _FeastWidget(d)).toList();
-    } else {
-      feastWidgets = dayDescr.map((d) => _FeastWidget(d)).toList();
-    }
+    List<Widget> feastWidgets = dayDescr.map((d) => _FeastWidget(d)).toList();
 
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,

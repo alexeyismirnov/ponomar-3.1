@@ -171,7 +171,29 @@ class ChurchReading {
         continue;
       }
 
-      if (feast.type == FeastType.great) {
+      if (feast.type == FeastType.vigil ||
+          feast.type == FeastType.great &&
+              (feast.name == "veilOfTheotokos" ||
+                  feast.name == "nativityOfJohn" ||
+                  feast.name == "beheadingOfJohn" ||
+                  feast.name == "peterAndPaul" ||
+                  feast.name == "dormition" ||
+                  feast.name == "nativityOfTheotokos" ||
+                  feast.name == "annunciation" ||
+                  feast.name == "entryIntoTemple")) {
+        final newDate = transferVigil(date);
+        final oldReading = rr[date]!;
+
+        if (oldReading.isNotEmpty && newDate != date) {
+          final comment = "# %s Reading".format([formatter.format(date)]);
+
+          for (final r in oldReading) {
+            rr[newDate]!.add("%s %s".format([r, comment]));
+          }
+
+          rr[date] = [];
+        }
+      } else if (feast.type == FeastType.great) {
         final newDate = transferGreatFeast(date);
 
         final oldReading = rr[date]!;
@@ -185,19 +207,6 @@ class ChurchReading {
         }
 
         rr[date] = [];
-      } else if (feast.type == FeastType.vigil) {
-        final newDate = transferVigil(date);
-        final oldReading = rr[date]!;
-
-        if (oldReading.isNotEmpty && newDate != date) {
-          final comment = "# %s Reading".format([formatter.format(date)]);
-
-          for (final r in oldReading) {
-            rr[newDate]!.add("%s %s".format([r, comment]));
-          }
-
-          rr[date] = [];
-        }
       }
     }
   }
@@ -252,7 +261,11 @@ class ChurchReading {
     final feasts = cal.getDayReadings(date);
 
     if (feasts.isNotEmpty) {
-      if (feasts.first.type == FeastType.great) {
+      // for these two feasts, there can be additional "special days", e.g. Sunday before Theophany or Sunday before Elevation of Cross
+      if (date.weekday == DateTime.sunday && feasts[0].name == "circumcision" ||
+          feasts[0].name == "nativityOfTheotokos") {
+        return feasts.map((f) => f.reading!).toList();
+      } else if (feasts.first.type == FeastType.great) {
         return List.from(rr[date] ?? [])
           ..addAll(feasts.filter((f) => f.type == FeastType.great).map((f) => f.reading!));
       } else {
