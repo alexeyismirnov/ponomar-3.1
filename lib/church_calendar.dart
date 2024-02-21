@@ -179,6 +179,7 @@ class ChurchCalendar {
     day("newMartyrsConfessorsOfRussia").date = nearestSunday(DateTime.utc(year, 2, 7));
     day("holyFathersSixCouncils").date = nearestSunday(DateTime.utc(year, 7, 29));
     day("holyFathersSeventhCouncil").date = nearestSunday(DateTime.utc(year, 10, 24));
+    day("findingOfHead").date = isLeapYear ? DateTime.utc(year, 3, 8) : DateTime.utc(year, 3, 9);
 
     // SYNAXIS
     days.add(ChurchDay("synaxisKievCavesSaints", FeastType.none, date: greatLentStart + 13.days));
@@ -313,7 +314,8 @@ class ChurchCalendar {
     final a = (19 * (year % 19) + 15) % 30;
     final b = (2 * (year % 4) + 4 * (year % 7) + 6 * a + 6) % 7;
 
-    return ((a + b > 10) ? DateTime.utc(year, 4, a + b - 9) : DateTime.utc(year, 3, 22 + a + b)) + 13.days;
+    return ((a + b > 10) ? DateTime.utc(year, 4, a + b - 9) : DateTime.utc(year, 3, 22 + a + b)) +
+        13.days;
   }
 
   static DateTime nearestSundayBefore(DateTime d) => d - d.weekday.days;
@@ -350,7 +352,17 @@ class ChurchCalendar {
 extension ChurchCalendarFunc on ChurchCalendar {
   ChurchDay day(String name) => days.where((e) => e.name == name).first;
 
-  DateTime d(String name) => day(name).date!;
+  DateTime d(String name) {
+    if (name == "sundayBeforeNativity1") {
+      final results = days.where((e) => e.name == "sundayBeforeNativity");
+      return results.firstOrNull?.date! ?? DateTime.utc(1980, 1, 1);
+    } else if (name == "sundayBeforeNativity2") {
+      final results = days.where((e) => e.name == "sundayBeforeNativity");
+      return results.lastOrNull?.date! ?? DateTime.utc(1980, 1, 1);
+    } else {
+      return day(name).date!;
+    }
+  }
 
   List<ChurchDay> getDayDescription(DateTime d) =>
       (days.where((e) => e.date == d && e.name.isNotEmpty).toList()
