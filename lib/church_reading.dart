@@ -18,9 +18,8 @@ class LukeSpringParams {
     pentecostPrevYear = Cal.paschaDay(cal.year - 1) + 50.days;
 
     var exaltationPrevYear = DateTime.utc(cal.year - 1, 9, 27);
-    var exaltationPrevYearWeekday = exaltationPrevYear.weekday;
+    sundayAfterExaltationPrevYear = ChurchCalendar.nearestSundayAfter(exaltationPrevYear);
 
-    sundayAfterExaltationPrevYear = exaltationPrevYear + (8 - exaltationPrevYearWeekday).days;
     var endOfLukeReadings = sundayAfterExaltationPrevYear + 112.days;
     totalOffset = endOfLukeReadings >> PAPSunday;
   }
