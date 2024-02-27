@@ -11,25 +11,38 @@ import 'globals.dart';
 import 'church_reading.dart';
 import 'book_cell.dart';
 
-class FeofanView extends StatelessWidget {
-  static Database? db;
-
+class FeofanView extends StatefulWidget {
   final DateTime date;
   final Cal cal;
   final double fontSize;
+
+  FeofanView(this.date, {Key? key})
+      : cal = Cal.fromDate(date),
+        fontSize = ConfigParam.fontSize.val(),
+        super(key: key);
+
+  @override
+  FeofanViewState createState() => FeofanViewState();
+}
+
+class FeofanViewState extends State<FeofanView> {
+  static Database? db;
   late String savedContent;
 
-  FeofanView(this.date)
-      : cal = Cal.fromDate(date),
-        fontSize = ConfigParam.fontSize.val();
+  DateTime get date => widget.date;
+  Cal get cal => widget.cal;
+  double get fontSize => widget.fontSize;
 
-  CustomListTile getListTile(BuildContext context, String content,
+  Widget getListTile(BuildContext context, String content,
       {String? subtitle, String title = "Мысли на каждый день"}) {
     savedContent = content;
-    return CustomListTile(
-        title: title,
-        subtitle: subtitle,
-        onTap: () => BookPageSingle(title, builder: () => BookCellText(content)).push(context));
+    return Padding(
+        padding: const EdgeInsets.only(bottom: 5),
+        child: CustomListTile(
+            title: title,
+            subtitle: subtitle,
+            onTap: () =>
+                BookPageSingle(title, builder: () => BookCellText(content)).push(context)));
   }
 
   Future<String?> getFeofan(String id) async {
@@ -46,7 +59,7 @@ class FeofanView extends StatelessWidget {
       JSON.bibleTrans["ru"]!.entries.fold(str, (String prev, e) => prev.replaceAll(e.key, e.value));
 
   Future<List<Widget>> fetch(BuildContext context) async {
-    List<CustomListTile> result = [];
+    List<Widget> result = [];
 
     db ??= await DB.open("feofan.sqlite");
 
@@ -58,6 +71,8 @@ class FeofanView extends StatelessWidget {
       return [getListTile(context, (await getFeofan("325"))!)];
     } else if (date == DateTime.utc(cal.year, 8, 19)) {
       return [getListTile(context, (await getFeofan("218"))!)];
+    } else if (date == DateTime.utc(cal.year, 8, 28)) {
+      return [getListTile(context, (await getFeofan("227"))!)];
     } else if (date == cal.greatLentStart - 3.days) {
       return [getListTile(context, (await getFeofan("36"))!)];
     } else if (date == cal.greatLentStart - 5.days) {
@@ -68,38 +83,38 @@ class FeofanView extends StatelessWidget {
       return [getListTile(context, (await getFeofan("346"))!)];
     } else if (date.isBetween(cal.greatLentStart, cal.pascha - 1.days)) {
       final num = (cal.greatLentStart >> date) + 39;
-      return [getListTile(context, (await getFeofan("$num"))!)];
-    } else {
-      final readings = ChurchReading.forDate(date);
+      result = [getListTile(context, (await getFeofan("$num"))!)];
+    }
 
+    final readings = ChurchReading.forDate(date);
+
+    for (final r in readings) {
+      final pericope = readingTranslate(r.split("#")[0]);
+      final id = pericope.replaceAll(" ", "");
+
+      var f = await getFeofan(id);
+      if (f != null) result.add(getListTile(context, f, subtitle: pericope));
+    }
+
+    if (result.isEmpty) {
       for (final r in readings) {
-        final pericope = readingTranslate(r.split("#")[0]);
-        final id = pericope.replaceAll(" ", "");
+        final str = r.split("#")[0];
+        final p = str.split(" ");
 
-        var f = await getFeofan(id);
-        if (f != null) result.add(getListTile(context, f, subtitle: pericope));
-      }
+        for (final i in getRange(0, p.length, 2)) {
+          if (["John", "Luke", "Mark", "Matthew"].contains(p[i])) {
+            final pericope = readingTranslate(p[i] + " " + p[i + 1]);
+            final id = pericope.replaceAll(" ", "");
 
-      if (result.isEmpty) {
-        for (final r in readings) {
-          final str = r.split("#")[0];
-          final p = str.split(" ");
-
-          for (final i in getRange(0, p.length, 2)) {
-            if (["John", "Luke", "Mark", "Matthew"].contains(p[i])) {
-              final pericope = readingTranslate(p[i] + " " + p[i + 1]);
-              final id = pericope.replaceAll(" ", "");
-
-              var f = await getFeofanGospel(id);
-              if (f != null) result.add(getListTile(context, f, subtitle: pericope));
-            }
+            var f = await getFeofanGospel(id);
+            if (f != null) result.add(getListTile(context, f, subtitle: pericope));
           }
         }
       }
+    }
 
-      if (result.length == 1) {
-        return [getListTile(context, savedContent)];
-      }
+    if (result.length == 1) {
+      return [getListTile(context, savedContent)];
     }
 
     return result;
@@ -113,7 +128,7 @@ class FeofanView extends StatelessWidget {
           final result = List<Widget>.from(snapshot.data!);
 
           if (result.isNotEmpty) {
-            return Column(children: result + <Widget>[const SizedBox(height: 5)]);
+            return Column(children: result);
           }
         }
 
