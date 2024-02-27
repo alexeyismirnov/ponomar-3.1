@@ -288,20 +288,22 @@ class _DayViewState extends State<DayView> {
         content.add(ZernaView(date));
       }
 
-      content.add(const SizedBox(height: 10));
+      content.add(const SizedBox(height: 5));
       content.add(SaintTroparion(date));
       content.add(TroparionOfDay(date));
       content.add(TroparionOfFeast(date));
+
     } else {
       content.add(SynaxarionView(date));
     }
 
     if (context.languageCode == "en") {
+      content.add(FeofanView(date));
       content.add(SaintsLivesView(date));
     }
 
     return CardWithTitle(
-        title: "Gospel of the day",
+        title: "Reading of the day",
         content: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
