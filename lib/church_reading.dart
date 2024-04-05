@@ -270,7 +270,7 @@ class ChurchReading {
       } else {
         List<String> result = [];
 
-        if (date.isBetween(cal.greatLentStart, cal.d("sunday1GreatLent") - 1.days)) {
+        if (date.isBetween(cal.greatLentStart, cal.d("saturday1GreatLent") - 1.days)) {
           // only Lent reading during 1st week of Great Lent
           return rr[date] ?? [];
         } else if (date == cal.d("sundayOfZacchaeus") ||
