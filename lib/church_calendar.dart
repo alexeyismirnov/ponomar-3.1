@@ -191,6 +191,8 @@ class ChurchCalendar {
     days.add(ChurchDay("synaxisNizhnyNovgorodSaints", FeastType.none,
         date: nearestSundayAfter(DateTime.utc(year, 9, 7))));
 
+    days.add(ChurchDay("synaxisPskovCavesSaints", FeastType.none, date: pentecost + 28.days));
+
     var synaxisTheotokos = DateTime.utc(year, 1, 8);
 
     if (synaxisTheotokos.weekday == DateTime.monday) {
@@ -216,6 +218,7 @@ class ChurchCalendar {
     days.add(ChurchDay("tupichevskTheotokos", FeastType.none, date: pentecost + 1.days));
     days.add(ChurchDay("koretsTheotokos", FeastType.none, date: pentecost + 4.days));
     days.add(ChurchDay("softenerTheotokos", FeastType.none, date: pentecost + 7.days));
+    days.add(ChurchDay("kurskTheotokos", FeastType.none, date: pentecost + 12.days));
   }
 
   void generateBeforeAfter(
