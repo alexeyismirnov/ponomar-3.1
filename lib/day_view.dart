@@ -288,14 +288,12 @@ class _DayViewState extends State<DayView> {
         content.add(ZernaView(date));
       }
 
+      content.add(SaintsLivesView(date));
+
       content.add(const SizedBox(height: 5));
       content.add(SaintTroparion(date));
       content.add(TroparionOfDay(date));
       content.add(TroparionOfFeast(date));
-    }
-
-    if (context.languageCode == "en") {
-      content.add(SaintsLivesView(date));
     }
 
     return CardWithTitle(
