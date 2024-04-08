@@ -216,6 +216,7 @@ class ChurchCalendar {
     days.add(ChurchDay("tupichevskTheotokos", FeastType.none, date: pentecost + 1.days));
     days.add(ChurchDay("koretsTheotokos", FeastType.none, date: pentecost + 4.days));
     days.add(ChurchDay("softenerTheotokos", FeastType.none, date: pentecost + 7.days));
+    days.add(ChurchDay("kurskTheotokos", FeastType.none, date: pentecost + 12.days));
   }
 
   void generateBeforeAfter(

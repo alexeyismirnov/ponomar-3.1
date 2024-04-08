@@ -41,6 +41,7 @@ class IconModel {
       ChurchDay("100106", FeastType.none,
           date: cal.pascha + 56.days, comment: "theotokosSevenArrows"),
       ChurchDay("100108", FeastType.none, date: cal.pascha + 61.days, comment: "theotokosTabynsk"),
+      ChurchDay("100114", FeastType.none, date: cal.pascha + 61.days, comment: "theotokosKursk"),
     ];
 
     final codes = movable.where((e) => e.date == d).toList();
