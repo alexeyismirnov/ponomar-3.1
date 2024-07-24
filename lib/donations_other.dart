@@ -30,8 +30,8 @@ class DonationsOtherView extends StatelessWidget {
                       fontSize: 16.0);
                   Clipboard.setData(ClipboardData(text: subtitle));
                 }),
-            title: Text(title.tr(), style: Theme.of(context).textTheme.headline6),
-            subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodyText2)),
+            title: Text(title.tr(), style: Theme.of(context).textTheme.bodyMedium),
+            subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodySmall)),
         const Divider(thickness: 2)
       ]);
 

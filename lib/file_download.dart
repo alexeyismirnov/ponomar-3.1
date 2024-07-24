@@ -19,7 +19,9 @@ class BookButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
-          elevation: 8.0, primary: Colors.grey.shade300, padding: const EdgeInsets.all(10.0)),
+          elevation: 8.0,
+          backgroundColor: Colors.grey.shade300,
+          padding: const EdgeInsets.all(10.0)),
       icon: icon,
       label: SizedBox(
           height: 40,
@@ -27,7 +29,7 @@ class BookButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(title, style: Theme.of(context).textTheme.headline6!.copyWith(color: color))
+                Text(title, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: color))
               ])),
       onPressed: onTap);
 }
@@ -113,7 +115,7 @@ class _FileDownloadState extends State<FileDownload> {
               children: <Widget>[
                 Container(
                     padding: const EdgeInsets.only(bottom: 20.0, top: 10.0),
-                    child: Text(title, style: Theme.of(context).textTheme.button)),
+                    child: Text(title, style: Theme.of(context).textTheme.titleMedium)),
                 if (_total == 0)
                   const Center(child: CircularProgressIndicator())
                 else
