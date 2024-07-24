@@ -31,8 +31,7 @@ class YearMonthViewState extends State<YearMonthView> {
     Color textColor =
         config.sharing ? Colors.black : Theme.of(context).textTheme.headlineMedium!.color!;
 
-    return FittedBox(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+    final content = Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
       Text(DateFormat("LLLL").format(date).capitalize(),
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: textColor)),
       const SizedBox(height: 10),
@@ -45,14 +44,19 @@ class YearMonthViewState extends State<YearMonthView> {
           child: Align(
               alignment: Alignment.topCenter,
               child: MonthView(date, cellBuilder: (date) => MonthViewCell(date))))
-    ]));
+    ]);
+
+    return config.sharing
+        ? SizedBox(width: 400, height: 400, child: content)
+        : FittedBox(child: content);
   }
 
   @override
   Widget build(BuildContext context) {
     final config = MonthViewConfig.of(context)!;
 
-    Color textColor = config.sharing ? Colors.black : Theme.of(context).textTheme.titleMedium!.color!;
+    Color textColor =
+        config.sharing ? Colors.black : Theme.of(context).textTheme.titleMedium!.color!;
 
     return SingleChildScrollView(
         child: Padding(
@@ -134,6 +138,28 @@ class _YearContainerState extends State<YearContainer> {
     });
   }
 
+  Widget getScreenshot() {
+    return EasyLocalization(
+        supportedLocales: const [
+          Locale('ru', ''),
+        ],
+        path: 'ui,cal,reading,library',
+        assetLoader: DirectoryAssetLoader(basePath: "assets/translations"),
+        fallbackLocale: const Locale('ru', ''),
+        startLocale: const Locale('ru', ''),
+        child: MonthViewConfig(
+            lang: context.languageCode,
+            sharing: true,
+            shortLabels: true,
+            highlightToday: false,
+            child: Container(
+                color: Colors.white,
+                child: SizedBox(
+                    width: 1500,
+                    height: 2500,
+                    child: YearMonthView(currentPage - initialPage + initialYear)))));
+  }
+
   Widget getAppbar() => SliverAppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -147,27 +173,20 @@ class _YearContainerState extends State<YearContainer> {
                 var path = p.join(GlobalPath.documents, 'screenshot.png');
                 print(path);
 
-                Uint8List pngBytes = (await screenshotController.captureFromWidget(EasyLocalization(
-                    supportedLocales: const [
-                      Locale('ru', ''),
-                    ],
-                    path: 'ui,cal,reading,library',
-                    assetLoader: DirectoryAssetLoader(basePath: "assets/translations"),
-                    fallbackLocale: const Locale('ru', ''),
-                    startLocale: const Locale('ru', ''),
-                    child: MonthViewConfig(
-                        lang: context.languageCode,
-                        sharing: true,
-                        shortLabels: true,
-                        highlightToday: false,
-                        child: Container(
-                            color: Colors.white,
-                            child: YearMonthView(currentPage - initialPage + initialYear))))));
+                Uint8List pngBytes = (await screenshotController.captureFromLongWidget(
+                    InheritedTheme.captureAll(
+                      context,
+                      Material(
+                        child: getScreenshot(),
+                      ),
+                    ),
+                    delay: const Duration(milliseconds: 100),
+                    context: context));
 
                 final file = File(path);
                 await file.writeAsBytes(pngBytes, flush: true);
 
-                await Share.shareFiles([path]);
+                await Share.shareXFiles([XFile(path)]);
               }),
         ],
         title: AutoSizeText(title,
