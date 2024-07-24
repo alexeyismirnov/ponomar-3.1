@@ -105,19 +105,19 @@ class _ChurchPageState extends State<ChurchPage> {
                           },
                           child: Text("donate_button".tr(args: [product.price]),
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.headline6)))))));
+                              style: Theme.of(context).textTheme.labelLarge)))))));
 
   List<Widget> getContent() {
     return [
       Row(mainAxisSize: MainAxisSize.max, children: [
         Expanded(
             child: Text("church_hk".tr(),
-                textAlign: TextAlign.center, style: Theme.of(context).textTheme.headline6)),
+                textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleMedium)),
       ]),
       const SizedBox(height: 20),
-      Text("church_info".tr(), style: Theme.of(context).textTheme.subtitle1),
+      Text("church_info".tr(), style: Theme.of(context).textTheme.bodyMedium),
       const SizedBox(height: 10),
-      Text("app_info".tr(), style: Theme.of(context).textTheme.subtitle1),
+      Text("app_info".tr(), style: Theme.of(context).textTheme.bodyMedium),
       const SizedBox(height: 10),
       SimpleCard(
           title: "install_church_app".tr(),
@@ -125,7 +125,7 @@ class _ChurchPageState extends State<ChurchPage> {
           onTap: () =>
               StoreRedirect.redirect(androidAppId: "com.rlc.church", iOSAppId: "1566259967")),
       const SizedBox(height: 20),
-      Text("please_make_donation".tr(), style: Theme.of(context).textTheme.subtitle1),
+      Text("please_make_donation".tr(), style: Theme.of(context).textTheme.bodyMedium),
       if (isLoading) ...[
         Container(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -156,7 +156,7 @@ class _ChurchPageState extends State<ChurchPage> {
                           onTap: () => DonationsOtherView().push(context),
                           child: Text("other_donations".tr(),
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.headline6))))))
+                              style: Theme.of(context).textTheme.bodyMedium))))))
     ];
   }
 

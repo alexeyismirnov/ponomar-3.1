@@ -21,11 +21,10 @@ class YearMonthView extends StatefulWidget {
   const YearMonthView(this.year);
 
   @override
-  _YearMonthViewState createState() => _YearMonthViewState();
+  YearMonthViewState createState() => YearMonthViewState();
 }
 
-class _YearMonthViewState extends State<YearMonthView> {
-  @override
+class YearMonthViewState extends State<YearMonthView> {
   Widget buildMonth(BuildContext context, DateTime date) {
     final config = MonthViewConfig.of(context)!;
 
@@ -53,7 +52,7 @@ class _YearMonthViewState extends State<YearMonthView> {
   Widget build(BuildContext context) {
     final config = MonthViewConfig.of(context)!;
 
-    Color textColor = config.sharing ? Colors.black : Theme.of(context).textTheme.subtitle1!.color!;
+    Color textColor = config.sharing ? Colors.black : Theme.of(context).textTheme.titleMedium!.color!;
 
     return SingleChildScrollView(
         child: Padding(
@@ -92,7 +91,7 @@ class _YearMonthViewState extends State<YearMonthView> {
                               minFontSize: 5,
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1!
+                                  .titleMedium!
                                   .copyWith(color: textColor)))
                     ]);
                   })
@@ -150,12 +149,12 @@ class _YearContainerState extends State<YearContainer> {
 
                 Uint8List pngBytes = (await screenshotController.captureFromWidget(EasyLocalization(
                     supportedLocales: const [
-                      Locale('en', ''),
+                      Locale('ru', ''),
                     ],
                     path: 'ui,cal,reading,library',
                     assetLoader: DirectoryAssetLoader(basePath: "assets/translations"),
-                    fallbackLocale: const Locale('en', ''),
-                    startLocale: const Locale('en', ''),
+                    fallbackLocale: const Locale('ru', ''),
+                    startLocale: const Locale('ru', ''),
                     child: MonthViewConfig(
                         lang: context.languageCode,
                         sharing: true,
@@ -175,7 +174,7 @@ class _YearContainerState extends State<YearContainer> {
             maxLines: 1,
             minFontSize: 5,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline6),
+            style: Theme.of(context).textTheme.titleMedium),
       );
 
   @override

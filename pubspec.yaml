@@ -34,7 +34,7 @@ dependencies:
   html: ^0.15.0
   html2md: ^1.2.6
   store_redirect: ^2.0.0
-  screenshot: ^2.1.0
+  screenshot: ^3.0.0
   in_app_purchase: ^2.0.1
   rate_my_app: ^2.0.0
   launch_review: ^3.0.1

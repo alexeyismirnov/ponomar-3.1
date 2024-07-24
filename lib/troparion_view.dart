@@ -13,10 +13,10 @@ class TroparionView extends StatefulWidget {
   const TroparionView(this.troparia, {this.showActions = true});
 
   @override
-  _TroparionViewState createState() => _TroparionViewState();
+  TroparionViewState createState() => TroparionViewState();
 }
 
-class _TroparionViewState extends State<TroparionView> {
+class TroparionViewState extends State<TroparionView> {
   String title = "Тропари и кондаки";
 
   Widget buildTroparion(Troparion t) {
@@ -34,7 +34,7 @@ class _TroparionViewState extends State<TroparionView> {
           text: title,
           style: Theme.of(context)
               .textTheme
-              .bodyText1!
+              .titleMedium!
               .copyWith(fontWeight: FontWeight.bold, fontSize: fontSize + 2)),
       textAlign: TextAlign.center,
     ));
@@ -51,7 +51,7 @@ class _TroparionViewState extends State<TroparionView> {
         text: TextSpan(children: [
       TextSpan(
           text: "${t.content}\n",
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: fontSize))
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: fontSize))
     ])));
     content.add(const SizedBox(height: 10));
 
