@@ -141,12 +141,12 @@ class _YearContainerState extends State<YearContainer> {
   Widget getScreenshot() {
     return EasyLocalization(
         supportedLocales: const [
-          Locale('ru', ''),
+          Locale('en', ''),
         ],
         path: 'ui,cal,reading,library',
         assetLoader: DirectoryAssetLoader(basePath: "assets/translations"),
-        fallbackLocale: const Locale('ru', ''),
-        startLocale: const Locale('ru', ''),
+        fallbackLocale: const Locale('en', ''),
+        startLocale: const Locale('en', ''),
         child: MonthViewConfig(
             lang: context.languageCode,
             sharing: true,
