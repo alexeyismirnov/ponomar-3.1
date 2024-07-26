@@ -48,6 +48,7 @@ class SaintsCalendar {
     day("greatWednesday").date = pascha - 4.days;
     day("greatSaturday").date = pascha - 1.days;
 
+    day("saturdayOfFathers").date = greatLentStart - 2.days;
     day("beginningOfGreatLent").date = greatLentStart;
     day("saturday1GreatLent").date = greatLentStart + 5.days;
     day("sunday1GreatLent").date = greatLentStart + 6.days;
