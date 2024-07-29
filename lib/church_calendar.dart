@@ -40,7 +40,7 @@ class ChurchCalendar {
 
     leapStart = DateTime.utc(year, 2, 29);
     leapEnd = DateTime.utc(year, 3, 13);
-    isLeapYear = (year % 400) == 0 || ((year % 4 == 0) && (year % 100 != 0));
+    isLeapYear = isLeap(year: year);
 
     initDays();
     initGreatLent();
@@ -310,6 +310,9 @@ class ChurchCalendar {
       days.add(ChurchDay("apodosis_meetingOfLord", FeastType.doxology, date: lastDay));
     }
   }
+
+  static bool isLeap({required int year}) =>
+      (year % 400) == 0 || ((year % 4 == 0) && (year % 100 != 0));
 
   static DateTime paschaDay(int year) {
     final a = (19 * (year % 19) + 15) % 30;

@@ -40,7 +40,9 @@ class SaintsCalendar {
     final pascha = Cal.paschaDay(year);
     final pentecost = pascha + 49.days;
     final greatLentStart = pascha - 48.days;
+    final isLeapYear = Cal.isLeap(year: year);
 
+    day("findingOfHead").date = isLeapYear ? DateTime.utc(year, 3, 8) : DateTime.utc(year, 3, 9);
     day("holyFathersSixCouncils").date = Cal.nearestSunday(DateTime.utc(year, 7, 29));
 
     day("greatMonday").date = pascha - 6.days;
@@ -69,7 +71,6 @@ class SaintsCalendar {
     } else {
       day("josephBetrothed").date = Cal.nearestSundayAfter(nativity);
     }
-
   }
 
   factory SaintsCalendar.fromDate(DateTime d, {required String lang}) {
