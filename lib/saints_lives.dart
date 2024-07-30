@@ -55,6 +55,7 @@ class SaintsCalendar {
     day("saturday1GreatLent").date = greatLentStart + 5.days;
     day("sunday1GreatLent").date = greatLentStart + 6.days;
     day("sunday3GreatLent").date = greatLentStart + 20.days;
+    day("sunday4GreatLent").date = greatLentStart + 27.days;
     day("sunday5GreatLent").date = greatLentStart + 34.days;
     day("palmSunday").date = pascha - 7.days;
 
