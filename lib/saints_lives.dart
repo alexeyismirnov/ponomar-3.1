@@ -64,6 +64,7 @@ class SaintsCalendar {
     day("sunday1AfterPentecost").date = pentecost + 7.days;
 
     day("sunday3AfterPascha").date = pascha + 14.days;
+    day("sunday4AfterPascha").date = pascha + 21.days;
     day("sunday7AfterPascha").date = pascha + 42.days;
 
     var nativity = DateTime.utc(year, 1, 7);
