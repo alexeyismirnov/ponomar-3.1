@@ -40,7 +40,7 @@ class ChurchCalendar {
 
     leapStart = DateTime.utc(year, 2, 29);
     leapEnd = DateTime.utc(year, 3, 13);
-    isLeapYear = (year % 400) == 0 || ((year % 4 == 0) && (year % 100 != 0));
+    isLeapYear = isLeap(year: year);
 
     initDays();
     initGreatLent();
@@ -320,6 +320,9 @@ class ChurchCalendar {
     return ((a + b > 10) ? DateTime.utc(year, 4, a + b - 9) : DateTime.utc(year, 3, 22 + a + b)) +
         13.days;
   }
+
+  static bool isLeap({required int year}) =>
+      (year % 400) == 0 || ((year % 4 == 0) && (year % 100 != 0));
 
   static DateTime nearestSundayBefore(DateTime d) => d - d.weekday.days;
   static DateTime nearestSaturdayBefore(DateTime d) =>
