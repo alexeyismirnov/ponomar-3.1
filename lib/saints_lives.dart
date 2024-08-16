@@ -46,9 +46,10 @@ class SaintsCalendar {
     final greatLentStart = pascha - 48.days;
     final isLeapYear = Cal.isLeap(year: year);
 
-    //  day("findingOfHead").date = isLeapYear ? DateTime.utc(year, 3, 8) : DateTime.utc(year, 3, 9);
+    day("findingOfHead").date = isLeapYear ? DateTime.utc(year, 3, 8) : DateTime.utc(year, 3, 9);
     day("holyFathersSixCouncils").date = Cal.nearestSunday(DateTime.utc(year, 7, 29));
 
+    day("saturdayOfFathers").date = greatLentStart - 2.days;
     day("sunday4GreatLent").date = greatLentStart + 27.days;
 
     day("greatMonday").date = pascha - 6.days;
@@ -61,7 +62,7 @@ class SaintsCalendar {
     day("sunday1AfterPentecost").date = pentecost + 7.days;
 
     day("sunday3AfterPascha").date = pascha + 14.days;
-    //day("sunday4AfterPascha").date = pascha + 21.days;
+    day("sunday4AfterPascha").date = pascha + 21.days;
     day("sunday7AfterPascha").date = pascha + 42.days;
 
     day("kurskTheotokos").date = pentecost + 12.days;
