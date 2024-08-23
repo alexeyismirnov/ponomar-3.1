@@ -34,6 +34,9 @@ class SaintsCalendar {
     List<Map<String, Object?>> query =
         await db.query("content", columns: ["text"], orderBy: "title");
 
+    final cal = ChurchCalendar.fromDate(DateTime.utc(year, 1, 1));
+    JSON.dateParser = cal.dateParser;
+
     days =
         query.map<ChurchDay>((e) => ChurchDay.fromJson(jsonDecode(e["text"] as String))).toList();
 

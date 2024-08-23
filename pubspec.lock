@@ -1301,11 +1301,12 @@ packages:
   vocsy_epub_viewer:
     dependency: "direct main"
     description:
-      name: vocsy_epub_viewer
-      sha256: "30aab4a5be22e8c98f22fed3345f6989caaca861178c38cab2a8b8cd66ad53de"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: "65fe69a23591e90d21f4cf7711317e8a32a87684"
+      url: "https://github.com/alexeyismirnov/vocsy_epub_viewer.git"
+    source: git
+    version: "2.0.13"
   watcher:
     dependency: transitive
     description:

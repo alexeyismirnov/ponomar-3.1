@@ -3,7 +3,7 @@ description: Orthodox Church Calendar
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.4.6+11
+version: 1.4.7+12
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -50,7 +50,9 @@ dependencies:
       url: https://github.com/pinkfish/flutter_native_timezone.git
   flutter_html_svg: ^3.0.0-beta.1
   flutter_html: ^3.0.0-beta.1
-  vocsy_epub_viewer: ^2.0.0
+  vocsy_epub_viewer:
+    git:
+      url: https://github.com/alexeyismirnov/vocsy_epub_viewer.git
 
 # https://easyappicon.com
 
