@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:store_redirect/store_redirect.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 
@@ -116,14 +115,6 @@ class _ChurchPageState extends State<ChurchPage> {
       ]),
       const SizedBox(height: 20),
       Text("church_info".tr(), style: Theme.of(context).textTheme.bodyMedium),
-      const SizedBox(height: 10),
-      Text("app_info".tr(), style: Theme.of(context).textTheme.bodyMedium),
-      const SizedBox(height: 10),
-      SimpleCard(
-          title: "install_church_app".tr(),
-          image: "assets/images/church_icon.jpg",
-          onTap: () =>
-              StoreRedirect.redirect(androidAppId: "com.rlc.church", iOSAppId: "1566259967")),
       const SizedBox(height: 20),
       Text("please_make_donation".tr(), style: Theme.of(context).textTheme.bodyMedium),
       if (isLoading) ...[
