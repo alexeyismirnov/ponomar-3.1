@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
-import 'package:launch_review/launch_review.dart';
+import 'package:in_app_review/in_app_review.dart';
 
 import 'globals.dart';
 import 'church_fasting.dart';
@@ -112,8 +112,12 @@ class CalendarAppbar extends StatelessWidget {
             ? [
                 IconButton(
                     icon: const Icon(Icons.rate_review_outlined, size: 30.0),
-                    onPressed: () => LaunchReview.launch(
-                        androidAppId: "com.rlc.ponomar_ru", iOSAppId: "1095609748")),
+                    onPressed: () async {
+                      final InAppReview inAppReview = InAppReview.instance;
+                      if (await inAppReview.isAvailable()) {
+                        inAppReview.requestReview();
+                      }
+                    }),
                 _getActions(context)
               ]
             : []);

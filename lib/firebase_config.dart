@@ -5,7 +5,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:supercharged/supercharged.dart';
 import 'dart:io';
 
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 class FirebaseConfig {
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -23,7 +23,7 @@ class FirebaseConfig {
   static setup() async {
     tz.initializeTimeZones();
 
-    String timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
+    String timeZoneName = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName));
 
     const InitializationSettings initializationSettings = InitializationSettings(
