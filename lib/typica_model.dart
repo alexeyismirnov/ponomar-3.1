@@ -7,7 +7,6 @@ import 'package:supercharged/supercharged.dart';
 import 'dart:async';
 
 import 'book_model.dart';
-import 'globals.dart';
 import 'church_calendar.dart';
 import 'pericope_model.dart';
 
@@ -144,14 +143,11 @@ class TypikaModel extends BookModel {
     }
 
     final pericope = PericopeModel(lang, reading);
-    await pericope.initFuture;
+    List results = await pericope.getPericope(PericopeFormat.text);
 
-    for (final (i, s) in pericope.title.indexed) {
-      content = content.replaceAll("TITLE${i + 1}", s);
-    }
-
-    for (final (i, s) in pericope.textContent.indexed) {
-      content = content.replaceAll("READING${i + 1}", s);
+    for (final (i, List<dynamic> values) in results.indexed) {
+      content = content.replaceAll("TITLE${i + 1}", values[0] as String);
+      content = content.replaceAll("READING${i + 1}", values[1] as String);
     }
 
     return content;

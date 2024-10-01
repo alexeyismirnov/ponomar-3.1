@@ -28,7 +28,8 @@ class BibleUtil {
   String bookName = "";
   late String lang;
 
-  BibleUtil();
+  BibleUtil(this.bookName, this.lang, this.content);
+  BibleUtil operator +(BibleUtil other) => BibleUtil(bookName, lang, content + other.content);
 
   BibleUtil.fromMap(this.bookName, this.lang, List<Map<String, Object?>> data) {
     for (final Map<String, Object?> d in data) {
@@ -37,7 +38,7 @@ class BibleUtil {
   }
 
   static Future<BibleUtil> fetch(String bookName, String lang, String whereExpr) async {
-    var db = await DB.open(bookName + "_$lang.sqlite");
+    var db = await DB.open("${bookName}_$lang.sqlite");
 
     List<Map<String, Object?>> result =
         await db.query("scripture", columns: ["verse", "text"], where: whereExpr, orderBy: "verse");
