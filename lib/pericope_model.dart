@@ -1,40 +1,23 @@
-import 'package:flutter/material.dart';
-
-import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:quiver/iterables.dart';
 
 import 'bible_model.dart';
 import 'globals.dart';
 
+enum PericopeFormat { text, widget }
+
 class PericopeModel {
   final String lang;
   final String str;
-  final BuildContext? context;
-
-  late Future initFuture;
-  late double fontSize;
-  late String family;
 
   List<String> title = [];
   List<String> textContent = [];
-  List<Widget> widgetContent = [];
+  List<BibleUtil> buContent = [];
 
-  PericopeModel(this.lang, this.str, [this.context]) {
-    initFuture = getPericope();
-  }
+  PericopeModel(this.lang, this.str);
 
-  Future getPericope() async {
+  Future<List<dynamic>> getPericope(PericopeFormat format) async {
     final pericope = str.trim().split(" ");
-
-    if (context != null) {
-      fontSize = ConfigParam.fontSize.val() + 2;
-      family = Theme.of(context!).textTheme.bodyLarge!.fontFamily!;
-
-      if (lang == "cs") {
-        fontSize += 3.0;
-        family = "Ponomar";
-      }
-    }
 
     final model1 = OldTestamentModel(lang);
     final model2 = NewTestamentModel(lang);
@@ -47,12 +30,13 @@ class PericopeModel {
     BibleUtil bu;
 
     for (final i in getRange(0, pericope.length, 2)) {
-      List<String> text = [];
-      List<TextSpan> span = [];
+      var filename = pericope[i].toLowerCase();
+
+      var text = <String>[];
+      var buResult = BibleUtil(filename, lang, []);
 
       var chapter = 0;
-      var filename = pericope[i].toLowerCase();
-      String bookName;
+      var bookName = "";
 
       if (lang == "ru" || lang == "cs") {
         bookName =
@@ -62,22 +46,6 @@ class PericopeModel {
       }
 
       title.add(bookName);
-
-      if (context != null) {
-        widgetContent.add(Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                  child: RichText(
-                text: TextSpan(
-                    text: "$bookName\n",
-                    style: Theme.of(context!).textTheme.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.bold, fontFamily: family, fontSize: fontSize)),
-                textAlign: TextAlign.center,
-              ))
-            ]));
-      }
 
       final arr2 = pericope[i + 1].split(",");
 
@@ -101,40 +69,42 @@ class PericopeModel {
               filename, lang, "chapter=${range[0].chapter} AND verse=${range[0].verse}");
 
           text.add(bu.getText());
-          if (context != null) span.addAll(bu.getTextSpan(context!));
+          buResult += bu;
         } else if (range[0].chapter != range[1].chapter) {
           bu = await BibleUtil.fetch(
               filename, lang, "chapter=${range[0].chapter} AND verse>=${range[0].verse}");
 
           text.add(bu.getText());
-          if (context != null) span.addAll(bu.getTextSpan(context!));
+          buResult += bu;
 
           for (final chap in getRange(range[0].chapter + 1, range[1].chapter)) {
             bu = await BibleUtil.fetch(filename, lang, "chapter=$chap");
+
             text.add(bu.getText());
-            if (context != null) span.addAll(bu.getTextSpan(context!));
+            buResult += bu;
           }
 
           bu = await BibleUtil.fetch(
               filename, lang, "chapter=${range[1].chapter} AND verse<=${range[1].verse}");
 
           text.add(bu.getText());
-          if (context != null) span.addAll(bu.getTextSpan(context!));
+          buResult += bu;
         } else {
           bu = await BibleUtil.fetch(filename, lang,
               "chapter=${range[0].chapter} AND verse>=${range[0].verse} AND verse<=${range[1].verse}");
 
           text.add(bu.getText());
-          if (context != null) span.addAll(bu.getTextSpan(context!));
+          buResult += bu;
         }
       }
 
       textContent.add(text.join(" "));
-
-      if (context != null) {
-        widgetContent.add(RichText(text: TextSpan(children: span)));
-        widgetContent.add(const SizedBox(height: 20));
-      }
+      buContent.add(buResult);
+    }
+    if (format == PericopeFormat.text) {
+      return zip([title, textContent]).toList();
+    } else {
+      return zip([title, buContent]).toList();
     }
   }
 }
