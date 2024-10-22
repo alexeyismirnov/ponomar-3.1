@@ -48,6 +48,7 @@ class SaintsCalendar {
 
     day("findingOfHead").date = isLeapYear ? DateTime.utc(year, 3, 8) : DateTime.utc(year, 3, 9);
     day("holyFathersSixCouncils").date = Cal.nearestSunday(DateTime.utc(year, 7, 29));
+    day("holyFathersSeventhCouncil").date = Cal.nearestSunday(DateTime.utc(year, 10, 24));
 
     day("saturdayOfFathers").date = greatLentStart - 2.days;
     day("sunday4GreatLent").date = greatLentStart + 27.days;
