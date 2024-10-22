@@ -16,7 +16,9 @@ import 'church_day.dart';
 
 class _ChaptersView extends StatefulWidget {
   final BookPosition pos;
-  const _ChaptersView(this.pos);
+  final TextStyle style;
+
+  const _ChaptersView(this.pos, this.style);
 
   @override
   _ChaptersViewState createState() => _ChaptersViewState();
@@ -51,10 +53,7 @@ class _ChaptersViewState extends State<_ChaptersView> {
                         BookPosition.modelIndex(pos.model, pos.index, chapter: i - 1))
                     .dispatch(context),
                 child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child:
-                        Center(child: Text("$i", style: Theme.of(context).textTheme.titleLarge)))))
+                    width: 50, height: 50, child: Center(child: Text("$i", style: widget.style)))))
             .toList());
   }
 }
@@ -142,7 +141,9 @@ class _BookTOCState extends State<BookTOC> {
                               expandedCrossAxisAlignment: CrossAxisAlignment.start,
                               trailing: const Icon(null),
                               title: Text(item, style: fontTitle),
-                              children: [_ChaptersView(BookPosition.modelIndex(model, index))])
+                              children: [
+                                  _ChaptersView(BookPosition.modelIndex(model, index), fontTitle)
+                                ])
                           : ListTile(
                               title: Text(item, style: fontTitle),
                               onTap: () =>
