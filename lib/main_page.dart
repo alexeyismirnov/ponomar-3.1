@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_toolkit/extensions.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vocsy_epub_viewer/epub_viewer.dart';
 
 import 'globals.dart';
@@ -46,6 +48,39 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     }
   }
 
+  Widget getDialog(String title, Widget content) => AlertDialog(
+          shape:
+              const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          contentPadding: const EdgeInsets.all(5.0),
+          content: Container(
+              width: context.screenWidth * 0.5,
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                        padding: const EdgeInsets.only(bottom: 20.0, top: 10.0),
+                        child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(title.tr().toUpperCase(),
+                                  style: Theme.of(context).textTheme.labelLarge)
+                            ])),
+                    content
+                  ])),
+          actions: [
+            TextButton(
+              child: Text("ОТКРЫТЬ", style: Theme.of(context).textTheme.labelLarge),
+              onPressed: () {
+                launchUrl(Uri.parse("http://t.me/ponomar_ru_bot"),
+                    mode: LaunchMode.externalNonBrowserApplication);
+                Navigator.pop(context);
+              },
+            )
+          ]);
+
   void postInit() async {
     await OldTestamentModel("ru").prepare();
     await NewTestamentModel("ru").prepare();
@@ -64,6 +99,16 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
     if (!ConfigParamExt.ver_1_4.val()) {
       ConfigParamExt.ver_1_4.set(true);
+    }
+
+    final dt1 = DateTime.parse("2024-10-31 00:00:01");
+    final dt = DateTime.now();
+
+    if (dt.isAfter(dt1) && !ConfigParamExt.ver_2_2.val()) {
+      getDialog("telegram_title".tr(),
+              Text("telegram_info".tr(), style: Theme.of(context).textTheme.bodyMedium))
+          .show(context);
+      ConfigParamExt.ver_2_2.set(true);
     }
 
     VocsyEpub.setConfig(
