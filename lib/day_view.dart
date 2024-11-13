@@ -14,16 +14,11 @@ import 'globals.dart';
 import 'pericope.dart';
 import 'saint_model.dart';
 import 'icon_model.dart';
-import 'troparion_model.dart';
-import 'troparion_day.dart';
-import 'troparion_feast.dart';
 import 'feofan.dart';
 import 'synaxarion.dart';
 import 'calendar_selector.dart';
 import 'book_cell.dart';
 import 'great_lent_short.dart';
-import 'zerna.dart';
-import 'taushev.dart';
 import 'saints_lives.dart';
 
 class _FeastWidget extends StatelessWidget {
@@ -87,7 +82,6 @@ class _DayViewState extends State<DayView> {
   late SaintModel saints;
 
   late List<SaintIcon> icons = [];
-  late List<Troparion> troparia = [];
 
   late int pageSize;
   late PageController _controller;
@@ -271,31 +265,7 @@ class _DayViewState extends State<DayView> {
       content.add(ReadingView(r));
     }
 
-    if (context.languageCode == "ru") {
-      content.add(FeofanView(date));
-
-      if (date.weekday == DateTime.sunday) {
-        for (final r in reading) {
-          content.add(TaushevView(r));
-        }
-      }
-
-      content.add(SynaxarionView(date));
-
-      if (Cal.getGreatFeast(date).isEmpty &&
-          date.weekday != DateTime.sunday &&
-          reading.length == 1) {
-        content.add(ZernaView(date));
-      }
-
-      content.add(const SizedBox(height: 5));
-      content.add(SaintTroparion(date));
-      content.add(TroparionOfDay(date));
-      content.add(TroparionOfFeast(date));
-
-    } else {
-      content.add(SynaxarionView(date));
-    }
+    content.add(SynaxarionView(date));
 
     if (context.languageCode == "en") {
       content.add(FeofanView(date));

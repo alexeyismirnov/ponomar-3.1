@@ -92,6 +92,7 @@ flutter:
     - assets/epubs/
     - assets/saints/
     - assets/icons/
+    - assets/troparia/
     - assets/translations/en/
     - assets/translations/ru/
     - assets/translations/zh-CN/
