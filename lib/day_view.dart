@@ -20,6 +20,7 @@ import 'calendar_selector.dart';
 import 'book_cell.dart';
 import 'great_lent_short.dart';
 import 'saints_lives.dart';
+import 'troparion_model.dart';
 
 class _FeastWidget extends StatelessWidget {
   final ChurchDay d;
@@ -270,6 +271,9 @@ class _DayViewState extends State<DayView> {
     if (context.languageCode == "en") {
       content.add(FeofanView(date));
       content.add(SaintsLivesView(date));
+
+      content.add(const SizedBox(height: 5));
+      content.add(TroparionWidget(date));
     }
 
     return CardWithTitle(

@@ -42,9 +42,16 @@ Future<void> main() async {
   await rateMyApp.init();
 
   final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
-  final books = assetManifest.listAssets().where((string) => string.startsWith("assets/books/")).toList();
 
+  final books =
+      assetManifest.listAssets().where((string) => string.startsWith("assets/books/")).toList();
   for (final f in books) {
+    await DB.prepare(path: f);
+  }
+
+  final troparia =
+      assetManifest.listAssets().where((string) => string.startsWith("assets/troparia/")).toList();
+  for (final f in troparia) {
     await DB.prepare(path: f);
   }
 
