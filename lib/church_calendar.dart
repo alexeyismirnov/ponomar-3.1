@@ -421,7 +421,7 @@ extension ChurchCalendarFunc on ChurchCalendar {
 
     if (date.isBetween(startOfYear, d("palmSunday") - 1.days)) {
       return tone(Cal.paschaDay(year - 1) >> date);
-    } else if (date.isBetween(pascha + 7.days, endOfYear)) {
+    } else if (date.isBetween(pascha + 8.days, endOfYear)) {
       return tone(pascha >> date);
     } else {
       return null;

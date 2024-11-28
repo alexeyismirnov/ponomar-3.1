@@ -56,7 +56,7 @@ class TroparionWidget extends StatelessWidget {
       result.add(Troparion.fromMap(row));
     }
 
-    if (cal.isLeapYear && date == cal.leapEnd) {
+    if (!cal.isLeapYear && date == cal.leapEnd) {
       List<Map<String, Object?>> data = await dbSaints!
           .query("tropari", columns: ["title", "comment", "content"], where: "day=29 AND month=2");
 
