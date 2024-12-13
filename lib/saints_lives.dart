@@ -98,13 +98,20 @@ class SaintsLivesView extends StatelessWidget {
     final cal = SaintsCalendar.fromDate(date, lang: context.countryCode);
     await cal.initFuture;
 
-    final d = cal.days.where((e) => e.date == date);
-    if (d.isEmpty) return null;
+    final days = cal.days.where((e) => e.date == date);
+    if (days.isEmpty) return null;
 
-    return CustomListTile(
-        title: d.first.comment!,
-        subtitle: 'lives_of_saints'.tr(),
-        onTap: () => VocsyEpub.openAsset('assets/epubs/${d.first.reading}'));
+    List<Widget> res = [];
+
+    for (var d in days) {
+      res.add(CustomListTile(
+          padding: 10,
+          title: d.comment!,
+          subtitle: 'lives_of_saints'.tr(),
+          onTap: () => VocsyEpub.openAsset('assets/epubs/${d.reading}')));
+    }
+
+    return Column(children: res + [const SizedBox(height: 5)]);
   }
 
   @override
@@ -112,11 +119,6 @@ class SaintsLivesView extends StatelessWidget {
       future: fetch(context),
       builder: (BuildContext context, AsyncSnapshot<Widget?> snapshot) {
         final result = snapshot.data;
-
-        if (result != null) {
-          return Column(children: [result, const SizedBox(height: 5)]);
-        }
-
-        return Container();
+        return result ?? Container();
       });
 }
