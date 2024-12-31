@@ -96,9 +96,16 @@ class SaintsLivesView extends StatelessWidget {
 
   Future<Widget?> fetch(BuildContext context) async {
     final cal = SaintsCalendar.fromDate(date, lang: context.countryCode);
+    final cc = ChurchCalendar.fromDate(date);
+    DateTime d = date;
+
     await cal.initFuture;
 
-    final days = cal.days.where((e) => e.date == date);
+    if (cc.isLeapYear && date.isBetween(cc.leapStart, cc.leapEnd - 1.days)) {
+      d = date + 1.days;
+    }
+
+    final days = cal.days.where((e) => e.date == d).toList();
     if (days.isEmpty) return null;
 
     List<Widget> res = [];
