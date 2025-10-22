@@ -86,8 +86,7 @@ class FirebaseConfig {
           icon: 'cross',
         )),
         androidScheduleMode: AndroidScheduleMode.alarmClock,
-        matchDateTimeComponents: DateTimeComponents.dateAndTime,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
+        matchDateTimeComponents: DateTimeComponents.dateAndTime);
   }
 
   static show(String title, String body) {
