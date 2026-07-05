@@ -1,4 +1,4 @@
-package com.rlc.ponomar_ru
+package com.frjonah.ponomar_ru
 
 import io.flutter.embedding.android.FlutterActivity
 import android.content.BroadcastReceiver
