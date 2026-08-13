@@ -539,8 +539,8 @@ packages:
   flutter_toolkit:
     dependency: "direct main"
     description:
-      path: "/home/alexey/workspace/flutter_toolkit"
-      relative: false
+      path: "../flutter_toolkit"
+      relative: true
     source: path
     version: "1.0.0"
   flutter_web_plugins:
