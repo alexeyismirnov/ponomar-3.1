@@ -186,7 +186,9 @@ class _YearContainerState extends State<YearContainer> {
                 final file = File(path);
                 await file.writeAsBytes(pngBytes, flush: true);
 
-                await Share.shareXFiles([XFile(path)]);
+                await SharePlus.instance.share(
+                  ShareParams(files: [XFile(path)]),
+                );
               }),
         ],
         title: AutoSizeText(title,

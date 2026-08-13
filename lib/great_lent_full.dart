@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:markdown/markdown.dart' as md;
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 
 import 'package:html2md/html2md.dart';
@@ -85,7 +85,7 @@ class _GreatLentFullViewState extends State<GreatLentFullView> {
                                     data: text,
                                     extensionSet: md.ExtensionSet.gitHubFlavored,
                                     styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context))
-                                        .copyWith(textScaleFactor: 1.5))
+                                        .copyWith(textScaler: const TextScaler.linear(1.5)))
                               ])))));
 
     return Container(

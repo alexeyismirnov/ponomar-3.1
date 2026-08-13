@@ -112,7 +112,7 @@ class _BookPageMultipleState extends State<BookPageMultiple> with SingleTickerPr
                   Center(
                       child: DotsIndicator(
                     dotsCount: min(totalChapters, 10),
-                    position: 0,
+                    position: 0.0,
                     decorator: const DotsDecorator(
                       color: Colors.grey, // Inactive color
                       activeColor: Colors.grey,

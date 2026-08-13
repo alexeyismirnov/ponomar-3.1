@@ -23,8 +23,8 @@ class FirebaseConfig {
   static setup() async {
     tz.initializeTimeZones();
 
-    String timeZoneName = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timeZoneName));
+    final timeZoneInfo = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneInfo.identifier));
 
     const InitializationSettings initializationSettings = InitializationSettings(
         android: AndroidInitializationSettings('cross'),
@@ -33,7 +33,9 @@ class FirebaseConfig {
           requestBadgePermission: false,
           requestAlertPermission: false,
         ));
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await flutterLocalNotificationsPlugin.initialize(
+      settings: initializationSettings,
+    );
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
@@ -72,36 +74,38 @@ class FirebaseConfig {
     if (scheduledDate.isBefore(now)) return;
 
     await FirebaseConfig.flutterLocalNotificationsPlugin.zonedSchedule(
-        count,
-        title,
-        body,
-        scheduledDate,
-        NotificationDetails(
-            android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channelDescription: channel.description,
-          importance: Importance.max,
-          priority: Priority.high,
-          icon: 'cross',
-        )),
-        androidScheduleMode: AndroidScheduleMode.alarmClock,
-        matchDateTimeComponents: DateTimeComponents.dateAndTime);
+      id: count,
+      title: title,
+      body: body,
+      scheduledDate: scheduledDate,
+      notificationDetails: NotificationDetails(
+          android: AndroidNotificationDetails(
+        channel.id,
+        channel.name,
+        channelDescription: channel.description,
+        importance: Importance.max,
+        priority: Priority.high,
+        icon: 'cross',
+      )),
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
+      matchDateTimeComponents: DateTimeComponents.dateAndTime,
+    );
   }
 
   static show(String title, String body) {
     flutterLocalNotificationsPlugin.show(
-        0,
-        title,
-        body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel.id,
-            channel.name,
-            channelDescription: channel.description,
-            icon: 'cross',
-          ),
-        ));
+      id: 0,
+      title: title,
+      body: body,
+      notificationDetails: NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          channelDescription: channel.description,
+          icon: 'cross',
+        ),
+      ),
+    );
   }
 
   static cancel() async {
