@@ -4,13 +4,13 @@ import 'dart:convert';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:vocsy_epub_viewer/epub_viewer.dart';
 import 'package:supercharged/supercharged.dart';
 
 import 'custom_list_tile.dart';
 import 'globals.dart';
 import 'church_day.dart';
 import 'church_calendar.dart';
+import 'epub_reader.dart';
 
 class SaintsCalendar {
   int year;
@@ -115,7 +115,7 @@ class SaintsLivesView extends StatelessWidget {
           padding: 10,
           title: d.comment!,
           subtitle: 'lives_of_saints'.tr(),
-          onTap: () => VocsyEpub.openAsset('assets/epubs/${d.reading}')));
+          onTap: () => openEpubAsset(d.reading!)));
     }
 
     return Column(children: res + [const SizedBox(height: 5)]);

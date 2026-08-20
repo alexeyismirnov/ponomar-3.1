@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:vocsy_epub_viewer/epub_viewer.dart';
 
 import 'globals.dart';
 import 'calendar_appbar.dart';
@@ -11,6 +10,7 @@ import 'bible_model.dart';
 import 'firebase_config.dart';
 import 'feast_notifications.dart';
 import 'store_listing.dart';
+import 'epub_reader.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -75,12 +75,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       ConfigParamExt.ver_1_2.set(true);
     }
 
-    VocsyEpub.setConfig(
-      themeColor: Theme.of(context).primaryColor,
-      identifier: "myBook",
-      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-      enableTts: true,
-    );
+    configureEpubReader(context);
 
     await Jiffy.setLocale(context.languageCode);
   }

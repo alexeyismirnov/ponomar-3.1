@@ -44,8 +44,7 @@ dependencies:
   url_launcher: ^6.3.2
 
   vocsy_epub_viewer:
-    git:
-      url: https://github.com/alexeyismirnov/vocsy_epub_viewer.git
+    path: packages/vocsy_epub_viewer
   flutter_toolkit:
     path: ../flutter_toolkit
   flutter_markdown_plus: ^1.0.12
