@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
-import 'package:in_app_review/in_app_review.dart';
 
 import 'globals.dart';
 import 'church_fasting.dart';
 import 'bible_view.dart';
 import 'firebase_config.dart';
+import 'store_listing.dart';
 
 class FastingLevelDialog extends StatelessWidget {
   final labels = ['laymen_fasting', 'monastic_fasting'];
@@ -112,11 +112,8 @@ class CalendarAppbar extends StatelessWidget {
             ? [
                 IconButton(
                     icon: const Icon(Icons.rate_review_outlined, size: 30.0),
-                    onPressed: () async {
-                      final InAppReview inAppReview = InAppReview.instance;
-                      if (await inAppReview.isAvailable()) {
-                        inAppReview.requestReview();
-                      }
+                    onPressed: () {
+                      openStoreListing();
                     }),
                 _getActions(context)
               ]

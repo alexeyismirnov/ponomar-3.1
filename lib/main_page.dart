@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:vocsy_epub_viewer/epub_viewer.dart';
@@ -11,6 +10,7 @@ import 'day_view.dart';
 import 'bible_model.dart';
 import 'firebase_config.dart';
 import 'feast_notifications.dart';
+import 'store_listing.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -40,10 +40,9 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     super.didChangeDependencies();
 
     if (rateMyApp.shouldOpenDialog) {
-      Future.delayed(
-          Duration.zero,
-          () =>
-              rateMyApp.showRateDialog(context, title: "title".tr(), message: "please_rate".tr()));
+      Future.delayed(Duration.zero, () {
+        if (context.mounted) showAppRatingDialog(context);
+      });
     }
   }
 
