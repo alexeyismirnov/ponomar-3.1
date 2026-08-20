@@ -1348,9 +1348,11 @@ packages:
   vocsy_epub_viewer:
     dependency: "direct main"
     description:
-      path: "packages/vocsy_epub_viewer"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "4ecb618b69ae26b8d30fe3141219d0954e46e7bf"
+      url: "https://github.com/alexeyismirnov/vocsy_epub_viewer.git"
+    source: git
     version: "3.0.0"
   watcher:
     dependency: transitive
