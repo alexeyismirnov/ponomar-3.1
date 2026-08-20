@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'globals.dart';
 
 /// Android application id used by AppGallery deep links.
-const String kAndroidPackageId = 'com.rlc.ponomar';
+const String kAndroidPackageId = 'com.frjonah.ponomar';
 
 /// Huawei AppGallery app ID (`C` followed by digits) once the listing exists.
 /// The native `appmarket://` deep link works from the package name alone.

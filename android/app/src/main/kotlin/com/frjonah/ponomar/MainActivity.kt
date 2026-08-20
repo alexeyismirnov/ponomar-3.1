@@ -1,4 +1,4 @@
-package com.rlc.ponomar
+package com.frjonah.ponomar
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -20,6 +20,6 @@ class MainActivity : FlutterFragmentActivity() {
     }
 
     companion object {
-        private const val CHANNEL = "com.rlc.ponomar/android"
+        private const val CHANNEL = "com.frjonah.ponomar/android"
     }
 }
