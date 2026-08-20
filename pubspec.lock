@@ -1350,7 +1350,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "2f6bd5e64ea0644329d4755fdf160b0ce82d7d12"
+      resolved-ref: "4ecb618b69ae26b8d30fe3141219d0954e46e7bf"
       url: "https://github.com/alexeyismirnov/vocsy_epub_viewer.git"
     source: git
     version: "3.0.0"
