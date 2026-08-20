@@ -1,6 +1,7 @@
 package com.vocsy.epub_viewer;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -40,6 +41,11 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         messenger = binding.getBinaryMessenger();
         context = binding.getApplicationContext();
+        if (context instanceof Application) {
+            FolioZipCloser.register((Application) context);
+        } else if (context != null) {
+            FolioZipCloser.register((Application) context.getApplicationContext());
+        }
 
         // Set up the event channel
         setupEventChannel();
@@ -162,6 +168,12 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
                         "alldirections", false, false, false);
             }
 
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (Exception ignored) {
+                }
+            }
             reader = new Reader(openContext, messenger, config, sink);
             reader.open(bookPath, lastLocation);
 

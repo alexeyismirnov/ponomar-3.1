@@ -27,7 +27,11 @@ class Util {
     ByteData data = await rootBundle.load(asset);
     String dir = (await getTemporaryDirectory()).path;
     String path = '$dir/${basename(asset)}';
-    final buffer = data.buffer;
-    return File(path).writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+    final file = File(path);
+    final bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    if (await file.exists() && await file.length() == bytes.length) {
+      return file;
+    }
+    return file.writeAsBytes(bytes);
   }
 }
