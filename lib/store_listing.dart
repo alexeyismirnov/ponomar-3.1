@@ -15,7 +15,7 @@ const String kHuaweiAppGalleryAppId = '';
 
 /// Numeric Apple App Store ID (App Store Connect → App Information → Apple ID).
 /// StoreKit in-app review works without this; the write-review URL needs it.
-const String kAppStoreId = '';
+const String kAppStoreId = '1010208102';
 
 bool usesAppleAppStore([TargetPlatform? platform]) {
   final target = platform ?? defaultTargetPlatform;
