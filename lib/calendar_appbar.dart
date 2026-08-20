@@ -113,7 +113,7 @@ class CalendarAppbar extends StatelessWidget {
                 IconButton(
                     icon: const Icon(Icons.rate_review_outlined, size: 30.0),
                     onPressed: () {
-                      openAppGalleryListing();
+                      openStoreListing();
                     }),
                 _getActions(context)
               ]
