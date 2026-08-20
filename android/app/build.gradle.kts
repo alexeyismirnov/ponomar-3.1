@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rlc.ponomar"
+    namespace = "com.frjonah.ponomar"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.rlc.ponomar"
+        applicationId = "com.frjonah.ponomar"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

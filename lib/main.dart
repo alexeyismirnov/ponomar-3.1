@@ -75,7 +75,7 @@ Future<void> main() async {
           canPop: false,
           onPopInvokedWithResult: (didPop, result) {
             if (didPop) return;
-            const MethodChannel('com.rlc.ponomar/android').invokeMethod('moveToBack');
+            const MethodChannel('com.frjonah.ponomar/android').invokeMethod('moveToBack');
           },
           child: ContainerPage(tabs: [
             AnimatedTab(icon: const Icon(Icons.home), title: 'homepage', content: MainPage()),
