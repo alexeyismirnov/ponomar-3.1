@@ -33,7 +33,13 @@ class _BookPageSingleState extends State<BookPageSingle> {
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController()..addListener(() => setState(() {}));
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   addBookmark() {
