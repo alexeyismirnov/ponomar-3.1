@@ -4,13 +4,13 @@ import 'dart:convert';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:vocsy_epub_viewer/epub_viewer.dart';
 import 'package:supercharged/supercharged.dart';
 
 import 'custom_list_tile.dart';
 import 'globals.dart';
 import 'church_day.dart';
 import 'church_calendar.dart';
+import 'epub_reader.dart';
 
 class SaintsCalendar {
   int year;
@@ -34,7 +34,6 @@ class SaintsCalendar {
     List<Map<String, Object?>> query =
         await db.query("content", columns: ["text"], orderBy: "title");
 
-    // prepare for JSON parsing
     final cal = ChurchCalendar.fromDate(DateTime.utc(year, 1, 1));
     JSON.dateParser = cal.dateParser;
 
@@ -50,13 +49,19 @@ class SaintsCalendar {
     day("holyFathersSixCouncils").date = Cal.nearestSunday(DateTime.utc(year, 7, 29));
     day("holyFathersSeventhCouncil").date = Cal.nearestSunday(DateTime.utc(year, 10, 24));
 
-    day("saturdayOfFathers").date = greatLentStart - 2.days;
-    day("sunday4GreatLent").date = greatLentStart + 27.days;
-
     day("greatMonday").date = pascha - 6.days;
     day("greatTuesday").date = pascha - 5.days;
-    // day("greatWednesday").date = pascha - 4.days;
+    day("greatWednesday").date = pascha - 4.days;
     day("greatSaturday").date = pascha - 1.days;
+
+    day("saturdayOfFathers").date = greatLentStart - 2.days;
+    day("beginningOfGreatLent").date = greatLentStart;
+    day("saturday1GreatLent").date = greatLentStart + 5.days;
+    day("sunday1GreatLent").date = greatLentStart + 6.days;
+    day("sunday3GreatLent").date = greatLentStart + 20.days;
+    day("sunday4GreatLent").date = greatLentStart + 27.days;
+    day("sunday5GreatLent").date = greatLentStart + 34.days;
+    day("palmSunday").date = pascha - 7.days;
 
     day("ascension").date = pascha + 39.days;
     day("pentecost").date = pentecost;
@@ -66,16 +71,12 @@ class SaintsCalendar {
     day("sunday4AfterPascha").date = pascha + 21.days;
     day("sunday7AfterPascha").date = pascha + 42.days;
 
-    day("kurskTheotokos").date = pentecost + 12.days;
-
-    /*
     var nativity = DateTime.utc(year, 1, 7);
     if (nativity.weekday == DateTime.sunday) {
       day("josephBetrothed").date = nativity + 1.days;
     } else {
       day("josephBetrothed").date = Cal.nearestSundayAfter(nativity);
     }
-     */
   }
 
   factory SaintsCalendar.fromDate(DateTime d, {required String lang}) {
@@ -95,9 +96,16 @@ class SaintsLivesView extends StatelessWidget {
 
   Future<Widget?> fetch(BuildContext context) async {
     final cal = SaintsCalendar.fromDate(date, lang: context.countryCode);
+    final cc = ChurchCalendar.fromDate(date);
+    DateTime d = date;
+
     await cal.initFuture;
 
-    final days = cal.days.where((e) => e.date == date);
+    if (cc.isLeapYear && date.isBetween(cc.leapStart, cc.leapEnd - 1.days)) {
+      d = date + 1.days;
+    }
+
+    final days = cal.days.where((e) => e.date == d).toList();
     if (days.isEmpty) return null;
 
     List<Widget> res = [];
@@ -107,7 +115,7 @@ class SaintsLivesView extends StatelessWidget {
           padding: 10,
           title: d.comment!,
           subtitle: 'lives_of_saints'.tr(),
-          onTap: () => VocsyEpub.openAsset('assets/epubs/${d.reading}')));
+          onTap: () => openEpubAsset(d.reading!)));
     }
 
     return Column(children: res + [const SizedBox(height: 5)]);

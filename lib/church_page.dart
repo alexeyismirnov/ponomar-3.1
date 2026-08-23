@@ -6,6 +6,23 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'donations_other.dart';
 
+Future<void> openTelegramBot(String botUsername) async {
+  final uris = [
+    Uri.parse('tg://resolve?domain=$botUsername'),
+    Uri.parse('https://t.me/$botUsername'),
+  ];
+
+  for (final uri in uris) {
+    try {
+      if (await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        return;
+      }
+    } catch (_) {
+      // Try the next URI scheme.
+    }
+  }
+}
+
 class ChurchPage extends StatefulWidget {
   @override
   _ChurchPageState createState() => _ChurchPageState();
@@ -36,10 +53,8 @@ class _ChurchPageState extends State<ChurchPage> {
               ),
               icon: const Icon(Icons.telegram, size: 40.0),
               label: Text("open_telegram".tr(), style: Theme.of(context).textTheme.bodyMedium),
-              onPressed: () {
-                launchUrl(Uri.parse("http://t.me/ponomar_ru_bot"),
-                    mode: LaunchMode.externalNonBrowserApplication);
-              })),
+              onPressed: () => openTelegramBot('ponomar_ru_bot'),
+          )),
       const SizedBox(height: 20),
       Text("please_make_donation".tr(), style: Theme.of(context).textTheme.bodyMedium),
       const SizedBox(height: 15),

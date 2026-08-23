@@ -20,7 +20,7 @@ class BookPageMultiple extends StatefulWidget {
   _BookPageMultipleState createState() => _BookPageMultipleState();
 }
 
-class _BookPageMultipleState extends State<BookPageMultiple> with SingleTickerProviderStateMixin {
+class _BookPageMultipleState extends State<BookPageMultiple> {
   BookModel get model => widget.pos.model!;
   BookPosition get pos => widget.pos;
 
@@ -28,8 +28,15 @@ class _BookPageMultipleState extends State<BookPageMultiple> with SingleTickerPr
   late int initialPos;
   int totalChapters = 0;
 
-  late TabController _tabController;
+  late PageController _pageController;
   final _pageNotifier = ValueNotifier<int>(0);
+  final Map<String, Future<dynamic>> _contentFutures = {};
+
+  String _contentKey(BookPosition position) =>
+      '${position.index!.section}_${position.index!.index}_${position.chapter ?? 0}';
+
+  Future<dynamic> _getContent(BookPosition position) =>
+      _contentFutures.putIfAbsent(_contentKey(position), () => model.getContent(position));
 
   @override
   void initState() {
@@ -50,59 +57,64 @@ class _BookPageMultipleState extends State<BookPageMultiple> with SingleTickerPr
       curPos = model.getNextSection(curPos);
     } while (curPos != null);
 
-    _tabController = TabController(vsync: this, length: totalChapters, initialIndex: initialPos)
-      ..addListener(_handleTabSelection);
-
+    _pageController = PageController(initialPage: initialPos);
     _pageNotifier.value = initialPos;
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _pageController.dispose();
+    _pageNotifier.dispose();
     super.dispose();
   }
 
-  void _handleTabSelection() => _pageNotifier.value = _tabController.index;
+  Widget _buildPage(int id) {
+    final pagePos = bookPos[id];
+
+    return FutureBuilder<dynamic>(
+        future: _getContent(pagePos),
+        builder: (context, AsyncSnapshot<dynamic> snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (model is BibleModel) {
+            return BibleChapterView(pagePos, safeBottom: totalChapters == 1);
+          }
+
+          final title = model.getTitle(pagePos);
+          final text = snapshot.data;
+
+          if (model.contentType == BookContentType.html) {
+            return BookPageSingle(title,
+                bookmark: model.getBookmark(pagePos),
+                builder: () => BookCellHTML(text, model),
+                padding: 5,
+                safeBottom: totalChapters == 1);
+          }
+
+          return BookPageSingle(title,
+              bookmark: model.getBookmark(pagePos),
+              builder: () => BookCellText(text),
+              safeBottom: totalChapters == 1);
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Expanded(
-          child: TabBarView(
-              controller: _tabController,
-              children: List<Widget>.generate(
-                  totalChapters,
-                  (id) => FutureBuilder<dynamic>(
-                      future: model.getContent(bookPos[id]),
-                      builder: (context, AsyncSnapshot<dynamic> snapshot) {
-                        if (!snapshot.hasData) return Container();
-
-                        if (model is BibleModel) {
-                          return BibleChapterView(bookPos[id], safeBottom: totalChapters == 1);
-                        } else {
-                          String title = model.getTitle(bookPos[id]);
-                          var text = snapshot.data;
-
-                          if (model.contentType == BookContentType.html) {
-                            return BookPageSingle(title,
-                                bookmark: model.getBookmark(bookPos[id]),
-                                builder: () => BookCellHTML(text, model),
-                                padding: 5,
-                                safeBottom: totalChapters == 1);
-                          } else {
-                            return BookPageSingle(title,
-                                bookmark: model.getBookmark(bookPos[id]),
-                                builder: () => BookCellText(text),
-                                safeBottom: totalChapters == 1);
-                          }
-                        }
-                      })).toList())),
+          child: PageView.builder(
+              controller: _pageController,
+              itemCount: totalChapters,
+              onPageChanged: (index) => _pageNotifier.value = index,
+              itemBuilder: (context, id) => _buildPage(id))),
       if (totalChapters > 1) ...[
         LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) => Stack(children: [
                   LinearProgressPageIndicator(
-                    itemCount: _tabController.length,
+                    itemCount: totalChapters,
                     currentPageNotifier: _pageNotifier,
                     progressColor: Theme.of(context).primaryColor,
                     duration: const Duration(microseconds: 0),
@@ -110,14 +122,16 @@ class _BookPageMultipleState extends State<BookPageMultiple> with SingleTickerPr
                     height: 40,
                   ),
                   Center(
-                      child: DotsIndicator(
-                    dotsCount: min(totalChapters, 10),
-                    position: 0.0,
-                    decorator: const DotsDecorator(
-                      color: Colors.grey, // Inactive color
-                      activeColor: Colors.grey,
-                    ),
-                  )),
+                      child: ValueListenableBuilder<int>(
+                          valueListenable: _pageNotifier,
+                          builder: (context, page, _) => DotsIndicator(
+                                dotsCount: min(totalChapters, 10),
+                                position: page.toDouble(),
+                                decorator: const DotsDecorator(
+                                  color: Colors.grey,
+                                  activeColor: Colors.grey,
+                                ),
+                              )))
                 ]))
       ]
     ]));

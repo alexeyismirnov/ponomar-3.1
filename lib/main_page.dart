@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_toolkit/extensions.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:vocsy_epub_viewer/epub_viewer.dart';
 
 import 'globals.dart';
 import 'calendar_appbar.dart';
@@ -12,6 +10,9 @@ import 'day_view.dart';
 import 'bible_model.dart';
 import 'firebase_config.dart';
 import 'feast_notifications.dart';
+import 'store_listing.dart';
+import 'epub_reader.dart';
+import 'church_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -41,10 +42,9 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     super.didChangeDependencies();
 
     if (rateMyApp.shouldOpenDialog) {
-      Future.delayed(
-          Duration.zero,
-          () =>
-              rateMyApp.showRateDialog(context, title: "title".tr(), message: "please_rate".tr()));
+      Future.delayed(Duration.zero, () {
+        if (context.mounted) showAppRatingDialog(context);
+      });
     }
   }
 
@@ -74,8 +74,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
             TextButton(
               child: Text("ОТКРЫТЬ", style: Theme.of(context).textTheme.labelLarge),
               onPressed: () {
-                launchUrl(Uri.parse("http://t.me/ponomar_ru_bot"),
-                    mode: LaunchMode.externalNonBrowserApplication);
+                openTelegramBot('ponomar_ru_bot');
                 Navigator.pop(context);
               },
             )
@@ -111,12 +110,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       ConfigParamExt.ver_2_2.set(true);
     }
 
-    VocsyEpub.setConfig(
-      themeColor: Theme.of(context).primaryColor,
-      identifier: "myBook",
-      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-      enableTts: true,
-    );
+    configureEpubReader(context);
 
     await Jiffy.setLocale(context.languageCode);
   }

@@ -59,19 +59,25 @@ Future<void> main() async {
       assetLoader: DirectoryAssetLoader(basePath: "assets/translations"),
       fallbackLocale: const Locale('ru', ''),
       startLocale: const Locale('ru', ''),
-      child: RestartWidget(ContainerPage(tabs: [
-        AnimatedTab(icon: const Icon(Icons.home), title: 'homepage', content: MainPage()),
-        AnimatedTab(
-            icon: const ImageIcon(
-              AssetImage('assets/images/library.png'),
-            ),
-            title: 'library',
-            content: LibraryPage()),
-        AnimatedTab(
-            icon: const ImageIcon(
-              AssetImage('assets/images/cross.png'),
-            ),
-            title: 'about_us',
-            content: ChurchPage()),
-      ]))));
+      child: RestartWidget(PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, result) {
+            if (didPop) return;
+            const MethodChannel('com.frjonah.ponomar_ru/android').invokeMethod('moveToBack');
+          },
+          child: ContainerPage(tabs: [
+            AnimatedTab(icon: const Icon(Icons.home), title: 'homepage', content: MainPage()),
+            AnimatedTab(
+                icon: const ImageIcon(
+                  AssetImage('assets/images/library.png'),
+                ),
+                title: 'library',
+                content: LibraryPage()),
+            AnimatedTab(
+                icon: const ImageIcon(
+                  AssetImage('assets/images/cross.png'),
+                ),
+                title: 'about_us',
+                content: ChurchPage()),
+          ])))));
 }

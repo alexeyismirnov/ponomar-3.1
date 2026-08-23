@@ -37,10 +37,9 @@ class EbookModel extends BookModel {
     initFuture = loadBook(filename);
   }
 
-  Future loadBook(String filename) async {
-    List<Map<String, Object?>> queryItems = [];
-
+  Future<dynamic> loadBook(String filename) async {
     db = await DB.open(filename);
+    List<Map<String, Object?>> queryItems = [];
 
     code = (await loadString("code"))!;
     title = (await loadString("title"))!;

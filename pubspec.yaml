@@ -35,7 +35,6 @@ dependencies:
   screenshot: ^3.0.0
   rate_my_app: ^2.4.1
   fluttertoast: ^10.0.0
-  in_app_review: ^2.0.12
   rxdart: ^0.28.0
   firebase_core: ^4.13.0
   flutter_local_notifications: ^22.3.0
@@ -60,13 +59,14 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^6.0.0
-  change_app_package_name: ^1.1.0
 
-flutter_icons:
-  ios: true
+flutter_launcher_icons:
   android: true
+  ios: true
+  image_path_android: "assets/images/newicon2.png"
   image_path_ios: "assets/images/newicon2.png"
-  image_path_android: "assets/images/newicon.png"
+  adaptive_icon_background: "#39B39B"
+  adaptive_icon_foreground: "assets/images/newicon2.png"
 
 flutter_native_splash:
   image: assets/images/launch_icon.png
