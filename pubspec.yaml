@@ -60,11 +60,13 @@ dev_dependencies:
 
   flutter_lints: ^6.0.0
 
-flutter_icons:
-  ios: true
+flutter_launcher_icons:
   android: true
+  ios: true
+  image_path_android: "assets/images/newicon2.png"
   image_path_ios: "assets/images/newicon2.png"
-  image_path_android: "assets/images/newicon.png"
+  adaptive_icon_background: "#39B39B"
+  adaptive_icon_foreground: "assets/images/newicon2.png"
 
 flutter_native_splash:
   image: assets/images/launch_icon.png
