@@ -3,6 +3,7 @@
     >
     <queries>
         <package android:name="com.huawei.appmarket" />
+        <package android:name="org.telegram.messenger" />
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="appmarket" />
@@ -10,6 +11,10 @@
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tg" />
         </intent>
     </queries>
     <uses-permission android:name="android.permission.INTERNET"/>
