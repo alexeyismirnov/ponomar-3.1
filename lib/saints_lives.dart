@@ -49,19 +49,13 @@ class SaintsCalendar {
     day("holyFathersSixCouncils").date = Cal.nearestSunday(DateTime.utc(year, 7, 29));
     day("holyFathersSeventhCouncil").date = Cal.nearestSunday(DateTime.utc(year, 10, 24));
 
+    day("saturdayOfFathers").date = greatLentStart - 2.days;
+    day("sunday4GreatLent").date = greatLentStart + 27.days;
+
     day("greatMonday").date = pascha - 6.days;
     day("greatTuesday").date = pascha - 5.days;
-    day("greatWednesday").date = pascha - 4.days;
+    // day("greatWednesday").date = pascha - 4.days;
     day("greatSaturday").date = pascha - 1.days;
-
-    day("saturdayOfFathers").date = greatLentStart - 2.days;
-    day("beginningOfGreatLent").date = greatLentStart;
-    day("saturday1GreatLent").date = greatLentStart + 5.days;
-    day("sunday1GreatLent").date = greatLentStart + 6.days;
-    day("sunday3GreatLent").date = greatLentStart + 20.days;
-    day("sunday4GreatLent").date = greatLentStart + 27.days;
-    day("sunday5GreatLent").date = greatLentStart + 34.days;
-    day("palmSunday").date = pascha - 7.days;
 
     day("ascension").date = pascha + 39.days;
     day("pentecost").date = pentecost;
@@ -71,12 +65,7 @@ class SaintsCalendar {
     day("sunday4AfterPascha").date = pascha + 21.days;
     day("sunday7AfterPascha").date = pascha + 42.days;
 
-    var nativity = DateTime.utc(year, 1, 7);
-    if (nativity.weekday == DateTime.sunday) {
-      day("josephBetrothed").date = nativity + 1.days;
-    } else {
-      day("josephBetrothed").date = Cal.nearestSundayAfter(nativity);
-    }
+    day("kurskTheotokos").date = pentecost + 12.days;
   }
 
   factory SaintsCalendar.fromDate(DateTime d, {required String lang}) {
