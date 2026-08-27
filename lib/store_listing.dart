@@ -11,7 +11,7 @@ const String kAndroidPackageId = 'com.frjonah.ponomar';
 
 /// Huawei AppGallery app ID (`C` followed by digits) once the listing exists.
 /// The native `appmarket://` deep link works from the package name alone.
-const String kHuaweiAppGalleryAppId = '';
+const String kHuaweiAppGalleryAppId = 'C118744765';
 
 /// Numeric Apple App Store ID (App Store Connect → App Information → Apple ID).
 /// StoreKit in-app review works without this; the write-review URL needs it.
