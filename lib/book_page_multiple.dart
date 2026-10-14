@@ -14,7 +14,11 @@ import 'bible_view.dart';
 class BookPageMultiple extends StatefulWidget {
   final BookPosition pos;
 
-  BookPageMultiple(this.pos);
+  /// Embedded mode renders the pager without a Scaffold so it can live
+  /// inside a tablet reader pane.
+  final bool embedded;
+
+  BookPageMultiple(this.pos, {Key? key, this.embedded = false}) : super(key: key);
 
   @override
   _BookPageMultipleState createState() => _BookPageMultipleState();
@@ -79,7 +83,8 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
           }
 
           if (model is BibleModel) {
-            return BibleChapterView(pagePos, safeBottom: totalChapters == 1);
+            return BibleChapterView(pagePos,
+                safeBottom: totalChapters == 1, embedded: widget.embedded);
           }
 
           final title = model.getTitle(pagePos);
@@ -90,20 +95,21 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
                 bookmark: model.getBookmark(pagePos),
                 builder: () => BookCellHTML(text, model),
                 padding: 5,
-                safeBottom: totalChapters == 1);
+                safeBottom: totalChapters == 1,
+                embedded: widget.embedded);
           }
 
           return BookPageSingle(title,
               bookmark: model.getBookmark(pagePos),
               builder: () => BookCellText(text),
-              safeBottom: totalChapters == 1);
+              safeBottom: totalChapters == 1,
+              embedded: widget.embedded);
         });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    final content = Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Expanded(
           child: PageView.builder(
               controller: _pageController,
@@ -134,6 +140,8 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
                               )))
                 ]))
       ]
-    ]));
+    ]);
+
+    return widget.embedded ? SafeArea(child: content) : Scaffold(body: content);
   }
 }

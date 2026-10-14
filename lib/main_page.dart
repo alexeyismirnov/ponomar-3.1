@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:jiffy/jiffy.dart';
 
 import 'globals.dart';
 import 'calendar_appbar.dart';
+import 'day_dashboard.dart';
 import 'day_view.dart';
+import 'layout_info.dart';
 import 'bible_model.dart';
 import 'firebase_config.dart';
 import 'feast_notifications.dart';
@@ -113,23 +116,60 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     });
   }
 
+  Widget buildTablet(BuildContext context) {
+    return SafeArea(
+        child: Column(children: [
+      SizedBox(
+          height: 50.0,
+          child: Row(children: [
+            const SizedBox(width: 5),
+            IconButton(
+                icon: const Icon(Icons.chevron_left, size: 30.0),
+                onPressed: () => setDate(date.subtract(const Duration(days: 1)))),
+            IconButton(
+                icon: const Icon(Icons.chevron_right, size: 30.0),
+                onPressed: () => setDate(date.add(const Duration(days: 1)))),
+            const SizedBox(width: 5),
+            Text("title".tr(),
+                textAlign: TextAlign.left, style: Theme.of(context).textTheme.titleLarge),
+            const Spacer(),
+            const CalendarActions(),
+            const SizedBox(width: 5),
+          ])),
+      const Divider(height: 1, thickness: 1),
+      Expanded(
+          child: NotificationListener<Notification>(
+              onNotification: (n) {
+                if (n is DateChangedNotification) setDate(n.newDate);
+                return true;
+              },
+              child: DayDashboard(key: ValueKey(date), date: date)))
+    ]));
+  }
+
   @override
-  Widget build(BuildContext context) => SafeArea(
-      child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
-              [CalendarAppbar()],
-          body: Padding(
-              padding: const EdgeInsets.all(10),
-              child: PageView.builder(
-                controller: _controller,
-                itemBuilder: (BuildContext context, int index) {
-                  final currentDate = date.add(Duration(days: index - initialPage));
-                  return NotificationListener<Notification>(
-                      onNotification: (n) {
-                        if (n is DateChangedNotification) setDate(n.newDate);
-                        return true;
-                      },
-                      child: DayView(key: ValueKey(currentDate), date: currentDate));
-                },
-              ))));
+  Widget build(BuildContext context) {
+    if (LayoutInfo.dayViewLayout(context) != DayViewLayout.phone) {
+      return buildTablet(context);
+    }
+
+    return SafeArea(
+        child: NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
+                [CalendarAppbar()],
+            body: Padding(
+                padding: const EdgeInsets.all(10),
+                child: PageView.builder(
+                  controller: _controller,
+                  itemBuilder: (BuildContext context, int index) {
+                    final currentDate = date.add(Duration(days: index - initialPage));
+                    return NotificationListener<Notification>(
+                        onNotification: (n) {
+                          if (n is DateChangedNotification) setDate(n.newDate);
+                          return true;
+                        },
+                        child: DayView(key: ValueKey(currentDate), date: currentDate));
+                  },
+                ))));
+  }
 }

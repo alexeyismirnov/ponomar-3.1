@@ -5,18 +5,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'troparion_model.dart';
 import 'book_page_single.dart';
 
-class TroparionView extends StatefulWidget {
+/// Renders a list of troparia as content (no scaffold); shared by
+/// [TroparionView] and the tablet dashboard reader pane.
+class TroparionContent extends StatelessWidget {
   final List<Troparion> troparia;
-  final bool showActions;
 
-  const TroparionView(this.troparia, {this.showActions = true});
+  const TroparionContent(this.troparia);
 
-  @override
-  TroparionViewState createState() => TroparionViewState();
-}
-
-class TroparionViewState extends State<TroparionView> {
-  Widget buildTroparion(Troparion t) {
+  Widget buildTroparion(BuildContext context, Troparion t) {
     final fontSize = ConfigParam.fontSize.val();
 
     List<Widget> content = [];
@@ -48,12 +44,25 @@ class TroparionViewState extends State<TroparionView> {
     return Column(children: content);
   }
 
-  Widget getContent() => Column(
+  @override
+  Widget build(BuildContext context) => Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: widget.troparia.map((t) => buildTroparion(t)).toList());
+      children: troparia.map((t) => buildTroparion(context, t)).toList());
+}
+
+class TroparionView extends StatefulWidget {
+  final List<Troparion> troparia;
+  final bool showActions;
+
+  const TroparionView(this.troparia, {this.showActions = true});
 
   @override
+  TroparionViewState createState() => TroparionViewState();
+}
+
+class TroparionViewState extends State<TroparionView> {
+  @override
   Widget build(BuildContext context) => BookPageSingle("troparia_kontakia".tr(),
-      builder: () => getContent(), showActions: widget.showActions);
+      builder: () => TroparionContent(widget.troparia), showActions: widget.showActions);
 }

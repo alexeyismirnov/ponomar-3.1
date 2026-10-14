@@ -5,7 +5,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 
 import 'main_page.dart';
-import 'library_page.dart';
+import 'library_dashboard.dart';
+import 'layout_info.dart';
 import 'globals.dart';
 import 'church_fasting.dart';
 import 'saint_model.dart';
@@ -57,9 +58,13 @@ Future<void> main() async {
 
   await IconModel.prepare();
 
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  // Phones stay portrait-only; tablets are allowed to rotate so that
+  // the dashboard layouts (see LayoutInfo) can be used in landscape.
+  if (!LayoutInfo.isTabletDevice) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+  }
 
   runApp(EasyLocalization(
       supportedLocales: const [
@@ -84,7 +89,7 @@ Future<void> main() async {
                   AssetImage('assets/images/library.png'),
                 ),
                 title: 'library',
-                content: LibraryPage()),
+                content: const LibraryTab()),
             AnimatedTab(
                 icon: const ImageIcon(
                   AssetImage('assets/images/cross.png'),

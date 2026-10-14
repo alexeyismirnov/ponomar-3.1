@@ -6,7 +6,7 @@ import 'package:supercharged/supercharged.dart';
 
 import 'church_calendar.dart';
 import 'custom_list_tile.dart';
-import 'book_page_single.dart';
+import 'day_scope.dart';
 import 'globals.dart';
 import 'church_reading.dart';
 import 'book_cell.dart';
@@ -41,8 +41,7 @@ class FeofanViewState extends State<FeofanView> {
         child: CustomListTile(
             title: title,
             subtitle: subtitle,
-            onTap: () =>
-                BookPageSingle(title, builder: () => BookCellText(content)).push(context)));
+            onTap: () => openReading(context, title: title, builder: () => BookCellText(content))));
   }
 
   Future<String?> getFeofan(String id) async {

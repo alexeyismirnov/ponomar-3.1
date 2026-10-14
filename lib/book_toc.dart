@@ -60,7 +60,16 @@ class _ChaptersViewState extends State<_ChaptersView> {
 
 class BookTOC extends StatefulWidget {
   final BookModel model;
-  const BookTOC(this.model);
+
+  /// Embedded mode renders the TOC without Scaffold/app bar (tablet pane).
+  final bool embedded;
+
+  /// When provided, selecting a position reports it here instead of pushing
+  /// BookPageMultiple (tablet reader pane).
+  final void Function(BookPosition pos)? onPositionSelected;
+
+  const BookTOC(this.model, {Key? key, this.embedded = false, this.onPositionSelected})
+      : super(key: key);
 
   @override
   _BookTOCState createState() => _BookTOCState();
@@ -70,6 +79,15 @@ class _BookTOCState extends State<BookTOC> {
   BookModel get model => widget.model;
 
   List<String> get sections => model.getSections();
+
+  void _openPosition(BookPosition pos) {
+    if (widget.onPositionSelected != null) {
+      widget.onPositionSelected!(pos);
+      setState(() {});
+    } else {
+      BookPageMultiple(pos).push(context).then((_) => setState(() {}));
+    }
+  }
 
   TextStyle getFontCS(TextStyle font) =>
       font.copyWith(fontFamily: "Ponomar", fontSize: font.fontSize! + 3.0);
@@ -95,12 +113,9 @@ class _BookTOCState extends State<BookTOC> {
 
               if (pos.model is BibleModel) {
                 // this is needed to initialize numChaptersCache in BibleModel
-                pos.model!
-                    .getNumChapters(pos.index!)
-                    .then((value) => BookPageMultiple(pos!).push(context))
-                    .then((_) => setState(() {}));
+                pos.model!.getNumChapters(pos.index!).then((value) => _openPosition(pos!));
               } else {
-                BookPageMultiple(pos).push(context).then((_) => setState(() {}));
+                _openPosition(pos);
               }
             } else if (model.contentType == BookContentType.epub) {
               model.getContent(pos).then((json) {
@@ -108,7 +123,7 @@ class _BookTOCState extends State<BookTOC> {
                 openEpubAsset(day.reading!);
               });
             } else {
-              BookPageMultiple(pos).push(context).then((_) => setState(() {}));
+              _openPosition(pos);
             }
           }
           return true;
@@ -164,6 +179,10 @@ class _BookTOCState extends State<BookTOC> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.embedded) {
+      return Padding(padding: const EdgeInsets.all(15), child: getContent());
+    }
+
     return Scaffold(
         body: Container(
             height: MediaQuery.of(context).size.height,

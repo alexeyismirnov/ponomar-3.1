@@ -15,15 +15,19 @@ import 'yungerov.dart';
 import 'bookmarks_model.dart';
 import 'typica_model.dart';
 
-class LibraryPage extends StatefulWidget {
+/// The grouped list of books (Bookmarks, Bible, prayerbook, services, other).
+/// Shared by the phone [LibraryPage] (pushes BookTOC) and the tablet
+/// [LibraryDashboard] (reports selection via [onBookSelected]).
+class LibraryListView extends StatefulWidget {
+  final void Function(BookModel model) onBookSelected;
+
+  const LibraryListView({required this.onBookSelected});
+
   @override
-  _LibraryPageState createState() => _LibraryPageState();
+  _LibraryListViewState createState() => _LibraryListViewState();
 }
 
-class _LibraryPageState extends State<LibraryPage> {
-  late DateTime date;
-  late DateTime savedDate;
-
+class _LibraryListViewState extends State<LibraryListView> {
   late List<List<BookModel>> books;
   List<String> sections = [];
   bool ready = false;
@@ -141,10 +145,11 @@ class _LibraryPageState extends State<LibraryPage> {
 
               if (serviceDate != null) {
                 model.date = serviceDate;
-                Future.wait([model.initFuture]).then((_) => BookTOC(model).push(context));
+                Future.wait([model.initFuture])
+                    .then((_) => widget.onBookSelected(model));
               }
             } else {
-              BookTOC(books[index.section][index.index]).push(context);
+              widget.onBookSelected(model);
             }
           },
           title: books[index.section][index.index].title,
@@ -163,9 +168,22 @@ class _LibraryPageState extends State<LibraryPage> {
   }
 
   @override
+  Widget build(BuildContext context) => getContent();
+}
+
+class LibraryPage extends StatefulWidget {
+  @override
+  _LibraryPageState createState() => _LibraryPageState();
+}
+
+class _LibraryPageState extends State<LibraryPage> {
+  @override
   Widget build(BuildContext context) => SafeArea(
       child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
               [CalendarAppbar(title: "", showActions: false)],
-          body: Padding(padding: const EdgeInsets.all(15), child: getContent())));
+          body: Padding(
+              padding: const EdgeInsets.all(15),
+              child: LibraryListView(
+                  onBookSelected: (model) => BookTOC(model).push(context)))));
 }

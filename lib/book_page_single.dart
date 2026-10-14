@@ -15,13 +15,18 @@ class BookPageSingle extends StatefulWidget {
   final bool? bibleFontButton;
   final String? bookmark;
 
+  /// Embedded mode renders the content without Scaffold/app bar so the page
+  /// can live inside a tablet reader pane; controls move to a compact header.
+  final bool embedded;
+
   const BookPageSingle(this.title,
       {required this.builder,
       this.bookmark,
       this.bibleFontButton,
       this.padding = 15,
       this.safeBottom = true,
-      this.showActions = true});
+      this.showActions = true,
+      this.embedded = false});
 
   @override
   _BookPageSingleState createState() => _BookPageSingleState();
@@ -76,6 +81,41 @@ class _BookPageSingleState extends State<BookPageSingle> {
       bibleFontButton = IconButton(
           icon: const Icon(Icons.font_download_outlined, size: 30.0),
           onPressed: () => BibleLangDialog().show(context).then((value) => setState(() {})));
+    }
+
+    if (widget.embedded) {
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        SizedBox(
+            height: 50.0,
+            child: Row(children: [
+              const SizedBox(width: 15),
+              Expanded(
+                  child: Text(widget.title,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleLarge)),
+              if (widget.showActions) ...[
+                IconButton(
+                    icon: const Icon(Icons.zoom_in_outlined, size: 30.0),
+                    onPressed: () =>
+                        FontSizeDialog().show(context).then((value) => setState(() {}))),
+                if (bookmarkButton != null) ...[bookmarkButton],
+                if (bibleFontButton != null) ...[bibleFontButton]
+              ],
+              const SizedBox(width: 5),
+            ])),
+        const Divider(height: 1, thickness: 1),
+        Expanded(
+            child: CustomScrollView(
+                controller: _scrollController,
+                physics: const ClampingScrollPhysics(),
+                slivers: [
+              SliverToBoxAdapter(
+                  key: ValueKey(ConfigParam.fontSize.val()),
+                  child: Padding(
+                      padding: EdgeInsets.all(widget.padding), child: widget.builder()))
+            ]))
+      ]);
     }
 
     return Scaffold(

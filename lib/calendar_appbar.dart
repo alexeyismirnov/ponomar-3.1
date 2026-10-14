@@ -30,6 +30,22 @@ class FastingLevelDialog extends StatelessWidget {
       ]);
 }
 
+/// Rate + settings actions, shared by [CalendarAppbar] (sliver, phone) and
+/// the plain header row used on tablets.
+class CalendarActions extends StatelessWidget {
+  const CalendarActions();
+
+  @override
+  Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [
+        IconButton(
+            icon: const Icon(Icons.rate_review_outlined, size: 30.0),
+            onPressed: () {
+              openStoreListing();
+            }),
+        CalendarAppbar._getActions(context)
+      ]);
+}
+
 class CalendarAppbar extends StatelessWidget {
   final bool showActions;
   final String title;
@@ -37,7 +53,7 @@ class CalendarAppbar extends StatelessWidget {
 
   CalendarAppbar({this.showActions = true, this.title = "title", this.lang});
 
-  Widget _getActions(BuildContext context) {
+  static Widget _getActions(BuildContext context) {
     List<PopupMenuEntry> contextMenu = [
       if (context.countryCode != "ru") ...[
         PopupMenuItem(
@@ -108,15 +124,6 @@ class CalendarAppbar extends StatelessWidget {
         floating: true,
         title: Text(title.tr(), textAlign: TextAlign.left, style: font),
         centerTitle: false,
-        actions: showActions
-            ? [
-                IconButton(
-                    icon: const Icon(Icons.rate_review_outlined, size: 30.0),
-                    onPressed: () {
-                      openStoreListing();
-                    }),
-                _getActions(context)
-              ]
-            : []);
+        actions: showActions ? [const CalendarActions()] : []);
   }
 }

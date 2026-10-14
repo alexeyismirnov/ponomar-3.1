@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ponomar/book_model.dart';
 
-import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:supercharged/supercharged.dart';
 import 'package:group_list_view/group_list_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'church_calendar.dart';
 import 'custom_list_tile.dart';
-import 'book_page_single.dart';
+import 'day_scope.dart';
 import 'book_cell.dart';
 import 'ebook_model.dart';
 import 'globals.dart';
@@ -102,7 +101,7 @@ class SynaxarionViewState extends State<SynaxarionView> {
       return CustomListTile(
           title: title,
           subtitle: "synaxarion_annotation".tr(),
-          onTap: () => BookPageSingle(title, padding: 5, builder: () => content).push(context));
+          onTap: () => openReading(context, title: title, builder: () => content));
     }
   }
 

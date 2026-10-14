@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 
 import 'bible_model.dart';
-import 'book_page_single.dart';
+import 'day_scope.dart';
 import 'globals.dart';
 import 'custom_list_tile.dart';
 import 'pericope_model.dart';
@@ -103,9 +103,9 @@ class _ReadingViewState extends State<ReadingView> {
       child: CustomListTile(
           title: title,
           subtitle: subtitle,
-          onTap: () => BookPageSingle("Gospel of the day".tr(),
+          onTap: () => openReading(context,
+              title: "Gospel of the day".tr(),
               bibleFontButton: (context.languageCode == "ru"),
               builder: () => PericopeView(
-                  key: ValueKey(ConfigParamExt.bibleLang.val()),
-                  currentReading[0])).push(context)));
+                  key: ValueKey(ConfigParamExt.bibleLang.val()), currentReading[0]))));
 }

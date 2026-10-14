@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:supercharged/supercharged.dart';
 
 import 'custom_list_tile.dart';
+import 'day_scope.dart';
 import 'troparion_view.dart';
 import 'globals.dart';
 import 'church_calendar.dart';
@@ -179,7 +180,9 @@ class TroparionWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 5),
                 child: CustomListTile(
                     title: "troparia_kontakia".tr(),
-                    onTap: () => TroparionView(troparia).push(context)));
+                    onTap: () => openReading(context,
+                        title: "troparia_kontakia".tr(),
+                        builder: () => TroparionContent(troparia))));
           }
         }
 
