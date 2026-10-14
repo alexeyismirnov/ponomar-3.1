@@ -14,15 +14,19 @@ import 'ebook_model.dart';
 import 'yungerov.dart';
 import 'bookmarks_model.dart';
 
-class LibraryPage extends StatefulWidget {
+/// The grouped list of books (Bookmarks, Bible, prayerbook, services, other).
+/// Shared by the phone [LibraryPage] (pushes BookTOC) and the tablet
+/// [LibraryDashboard] (reports selection via [onBookSelected]).
+class LibraryListView extends StatefulWidget {
+  final void Function(BookModel model) onBookSelected;
+
+  const LibraryListView({required this.onBookSelected});
+
   @override
-  _LibraryPageState createState() => _LibraryPageState();
+  _LibraryListViewState createState() => _LibraryListViewState();
 }
 
-class _LibraryPageState extends State<LibraryPage> {
-  late DateTime date;
-  late DateTime savedDate;
-
+class _LibraryListViewState extends State<LibraryListView> {
   late List<List<BookModel>> books;
   List<String> sections = [];
   bool ready = false;
@@ -94,7 +98,39 @@ class _LibraryPageState extends State<LibraryPage> {
           padding: 10,
           reversed: true,
           lang: books[index.section][index.index].lang,
-          onTap: () => BookTOC(books[index.section][index.index]).push(context),
+          onTap: () async {
+            final model = books[index.section][index.index];
+            if (model.dateIterator != null) {
+              final df = DateFormat.yMMMMd(context.languageCode);
+
+              final serviceDate = await AlertDialog(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                      contentPadding: const EdgeInsets.all(5.0),
+                      content: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  maxWidth: context.screenWidth * 0.5,
+                                  minWidth: context.screenWidth * 0.5,
+                                  maxHeight: 200),
+                              child: ListView.builder(
+                                  itemBuilder: (BuildContext _, int i) => ListTile(
+                                      dense: true,
+                                      onTap: () =>
+                                          Navigator.pop(context, model.dateIterator!.elementAt(i)),
+                                      title: Text(df.format(model.dateIterator!.elementAt(i)),
+                                          style: Theme.of(context).textTheme.titleMedium))))))
+                  .show(context);
+
+              if (serviceDate != null) {
+                model.date = serviceDate;
+                Future.wait([model.initFuture]).then((_) => widget.onBookSelected(model));
+              }
+            } else {
+              widget.onBookSelected(model);
+            }
+          },
           title: books[index.section][index.index].title,
           subtitle: books[index.section][index.index].author ?? "",
         );
@@ -112,9 +148,22 @@ class _LibraryPageState extends State<LibraryPage> {
   }
 
   @override
+  Widget build(BuildContext context) => getContent();
+}
+
+class LibraryPage extends StatefulWidget {
+  @override
+  _LibraryPageState createState() => _LibraryPageState();
+}
+
+class _LibraryPageState extends State<LibraryPage> {
+  @override
   Widget build(BuildContext context) => SafeArea(
       child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
               [CalendarAppbar(title: "", showActions: false)],
-          body: Padding(padding: const EdgeInsets.all(15), child: getContent())));
+          body: Padding(
+              padding: const EdgeInsets.all(15),
+              child: LibraryListView(
+                  onBookSelected: (model) => BookTOC(model).push(context)))));
 }

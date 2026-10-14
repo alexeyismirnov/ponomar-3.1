@@ -32,7 +32,8 @@ class BibleLangDialog extends StatelessWidget {
 class BibleChapterView extends StatefulWidget {
   final BookPosition pos;
   final bool safeBottom;
-  const BibleChapterView(this.pos, {required this.safeBottom});
+  final bool embedded;
+  const BibleChapterView(this.pos, {required this.safeBottom, this.embedded = false});
 
   @override
   _BibleChapterViewState createState() => _BibleChapterViewState();
@@ -67,5 +68,6 @@ class _BibleChapterViewState extends State<BibleChapterView> {
   Widget build(BuildContext context) => BookPageSingle(title,
       bookmark: pos.model!.getBookmark(pos),
       builder: () => getContent(),
-      safeBottom: widget.safeBottom);
+      safeBottom: widget.safeBottom,
+      embedded: widget.embedded);
 }

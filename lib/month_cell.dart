@@ -8,7 +8,15 @@ import 'church_calendar.dart';
 
 class MonthViewCell extends StatelessWidget {
   final DateTime date;
-  const MonthViewCell(this.date);
+
+  /// When provided, tapping the cell calls this instead of popping the
+  /// navigator (used by the tablet month rail).
+  final void Function(DateTime date)? onSelected;
+
+  /// Highlighted with a ring when different from "today".
+  final DateTime? selectedDate;
+
+  const MonthViewCell(this.date, {this.onSelected, this.selectedDate});
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +64,10 @@ class MonthViewCell extends StatelessWidget {
                       .titleLarge!
                       .copyWith(fontWeight: fontWeight, color: textColor)));
 
+          final isSelected = selectedDate != null && date == selectedDate;
+
           Widget wrapper;
-
           if (date == today && config.highlightToday) {
-
             wrapper = Container(
                 width: config.cellWidth,
                 height: config.cellHeight,
@@ -67,23 +75,34 @@ class MonthViewCell extends StatelessWidget {
                 child: Container(
                     width: config.cellWidth,
                     height: config.cellHeight,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.red,
+                      border: isSelected
+                          ? Border.all(color: Theme.of(context).primaryColor, width: 2)
+                          : null,
                     ),
                     child: content));
           } else {
             wrapper = Container(
                 width: config.cellWidth,
                 height: config.cellHeight,
-                color: fasting.type.color,
+                decoration: BoxDecoration(
+                    color: fasting.type.color,
+                    border: isSelected
+                        ? Border.all(color: Theme.of(context).primaryColor, width: 2)
+                        : null),
                 child: content);
           }
 
           return GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                Navigator.pop(context, date);
+                if (onSelected != null) {
+                  onSelected!(date);
+                } else {
+                  Navigator.pop(context, date);
+                }
               },
               child: wrapper);
         });

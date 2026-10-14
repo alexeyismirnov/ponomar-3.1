@@ -14,9 +14,6 @@ import 'globals.dart';
 import 'pericope.dart';
 import 'saint_model.dart';
 import 'icon_model.dart';
-import 'troparion_model.dart';
-import 'troparion_day.dart';
-import 'troparion_feast.dart';
 import 'feofan.dart';
 import 'synaxarion.dart';
 import 'calendar_selector.dart';
@@ -25,6 +22,9 @@ import 'great_lent_short.dart';
 import 'zerna.dart';
 import 'taushev.dart';
 import 'saints_lives.dart';
+import 'troparion_model.dart';
+import 'troparion_day.dart';
+import 'troparion_feast.dart';
 
 class _FeastWidget extends StatelessWidget {
   final ChurchDay d;
@@ -68,63 +68,20 @@ class _FeastWidget extends StatelessWidget {
   }
 }
 
-class DayView extends StatefulWidget {
-  final DateTime date, dateOld;
+/// Tappable date row (opens the calendar selector).
+class DateHeader extends StatelessWidget {
+  final DateTime date;
 
-  DayView({Key? key, required this.date})
-      : dateOld = date.subtract(const Duration(days: 13)),
-        super(key: key);
+  DateTime get dateOld => date.subtract(const Duration(days: 13));
 
-  @override
-  _DayViewState createState() => _DayViewState();
-}
-
-class _DayViewState extends State<DayView> {
-  DateTime get date => widget.date;
-  DateTime get dateOld => widget.dateOld;
-
-  late Cal cal;
-  late SaintModel saints;
-
-  late List<SaintIcon> icons = [];
-  late List<Troparion> troparia = [];
-
-  late int pageSize;
-  late PageController _controller;
-
-  final space10 = const SizedBox(height: 10);
-  final space5 = const SizedBox(height: 5);
+  const DateHeader(this.date);
 
   @override
-  void initState() {
-    super.initState();
-    cal = Cal.fromDate(date);
-    _controller = PageController(initialPage: 0);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    saints = SaintModel(context.countryCode);
-
-    const itemWidth = 100;
-    const padding = 10;
-
-    pageSize = (MediaQuery.of(context).size.width - 4 * padding) ~/ (itemWidth + 10);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  Widget getDate() {
+  Widget build(BuildContext context) {
     final df1 = DateFormat.yMMMMEEEEd(context.languageCode);
     final df2 = DateFormat.yMMMMd(context.languageCode);
 
-    var dateWidget = GestureDetector(
+    return GestureDetector(
         child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -156,15 +113,22 @@ class _DayViewState extends State<DayView> {
             }
           });
         });
-
-    return dateWidget;
   }
+}
 
-  Widget getDescription() {
+/// Week/tone description line + feast rows.
+class DayDescription extends StatelessWidget {
+  final DateTime date;
+
+  const DayDescription(this.date);
+
+  @override
+  Widget build(BuildContext context) {
+    final cal = Cal.fromDate(date);
+
     var list = [cal.getWeekDescription(date), cal.getToneDescription(date)];
     var weekDescr = list.whereType<String>().join('; ');
     var dayDescr = cal.getDayDescription(date);
-    // var greatFeasts = Cal.getGreatFeast(date);
 
     List<Widget> feastWidgets = dayDescr.map((d) => _FeastWidget(d)).toList();
 
@@ -175,8 +139,16 @@ class _DayViewState extends State<DayView> {
                 : <Widget>[]) +
             feastWidgets);
   }
+}
 
-  Widget getFasting() => FutureBuilder<FastingModel>(
+/// Fasting row with icon and optional comment popup.
+class FastingRow extends StatelessWidget {
+  final DateTime date;
+
+  const FastingRow(this.date);
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<FastingModel>(
       future: ChurchFasting.forDate(date, context.countryCode),
       builder: (BuildContext context, AsyncSnapshot<FastingModel> snapshot) {
         if (snapshot.hasData) {
@@ -210,60 +182,104 @@ class _DayViewState extends State<DayView> {
           return Container();
         }
       });
+}
 
-  Widget getIcons() => FutureBuilder<List<SaintIcon>>(
-      future: IconModel.fetch(date),
+/// Paged strip of saint icons for the day.
+class IconGallery extends StatefulWidget {
+  final DateTime date;
+
+  const IconGallery(this.date);
+
+  @override
+  _IconGalleryState createState() => _IconGalleryState();
+}
+
+class _IconGalleryState extends State<IconGallery> {
+  late List<SaintIcon> icons = [];
+  late PageController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(initialPage: 0);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<List<SaintIcon>>(
+      future: IconModel.fetch(widget.date),
       builder: (BuildContext context, AsyncSnapshot<List<SaintIcon>> snapshot) {
         if (snapshot.hasData) {
           if (icons.isEmpty) {
             icons = List<SaintIcon>.from(snapshot.data!);
           }
 
-          Widget _iconPage(int page) {
-            final newItems =
-                icons.sublist(page * pageSize, min((page + 1) * pageSize, icons.length));
+          return LayoutBuilder(builder: (context, constraints) {
+            const itemWidth = 100;
+            const padding = 10;
 
-            final pageNotFull = page > 0 && (page + 1) * pageSize > icons.length;
+            final pageSize =
+                max(1, (constraints.maxWidth - 4 * padding) ~/ (itemWidth + 10));
 
-            return Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment:
-                    pageNotFull ? MainAxisAlignment.start : MainAxisAlignment.spaceAround,
-                children: [
-                  if (!pageNotFull) ...[const Spacer()],
-                  ...newItems
-                      .map<Widget>((s) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-                          child: GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: () {
-                                if (context.languageCode == 'ru') {
-                                  PopupComment(s.name).show(context);
-                                }
-                              },
-                              child: Image.asset(
-                                'assets/icons/${s.id}.jpg',
-                                height: 110.0,
-                                fit: BoxFit.contain,
-                              ))))
-                      .toList(),
-                  if (!pageNotFull) ...[const Spacer()],
-                ]);
-          }
+            Widget _iconPage(int page) {
+              final newItems =
+                  icons.sublist(page * pageSize, min((page + 1) * pageSize, icons.length));
 
-          return Container(
-              margin: const EdgeInsets.symmetric(vertical: 20.0),
-              height: 120.0,
-              child: PageView.builder(
-                  controller: _controller,
-                  itemCount: (icons.length - 1) ~/ pageSize + 1,
-                  itemBuilder: (BuildContext context, int index) => _iconPage(index)));
+              final pageNotFull = page > 0 && (page + 1) * pageSize > icons.length;
+
+              return Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment:
+                      pageNotFull ? MainAxisAlignment.start : MainAxisAlignment.spaceAround,
+                  children: [
+                    if (!pageNotFull) ...[const Spacer()],
+                    ...newItems
+                        .map<Widget>((s) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+                            child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () {
+                                  if (context.languageCode == 'ru') {
+                                    PopupComment(s.name).show(context);
+                                  }
+                                },
+                                child: Image.asset(
+                                  'assets/icons/${s.id}.jpg',
+                                  height: 110.0,
+                                  fit: BoxFit.contain,
+                                ))))
+                        .toList(),
+                    if (!pageNotFull) ...[const Spacer()],
+                  ]);
+            }
+
+            return Container(
+                margin: const EdgeInsets.symmetric(vertical: 20.0),
+                height: 120.0,
+                child: PageView.builder(
+                    controller: _controller,
+                    itemCount: (icons.length - 1) ~/ pageSize + 1,
+                    itemBuilder: (BuildContext context, int index) => _iconPage(index)));
+          });
         } else {
           return Container();
         }
       });
+}
 
-  Widget getReading() {
+/// "Reading of the day" card: Apostle/Gospel, synaxarion, feofan, lives, troparia.
+class ReadingsCard extends StatelessWidget {
+  final DateTime date;
+
+  const ReadingsCard(this.date);
+
+  @override
+  Widget build(BuildContext context) {
     final reading = ChurchReading.forDate(date);
     List<Widget> content = [];
 
@@ -304,9 +320,30 @@ class _DayViewState extends State<DayView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: content));
   }
+}
 
-  Widget getSaints() => FutureBuilder<List<Saint>>(
-      future: saints.fetch(date),
+/// "Memory of saints" card.
+class SaintsCard extends StatefulWidget {
+  final DateTime date;
+
+  const SaintsCard(this.date);
+
+  @override
+  _SaintsCardState createState() => _SaintsCardState();
+}
+
+class _SaintsCardState extends State<SaintsCard> {
+  late SaintModel saints;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    saints = SaintModel(context.countryCode);
+  }
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<List<Saint>>(
+      future: saints.fetch(widget.date),
       builder: (BuildContext context, AsyncSnapshot<List<Saint>> snapshot) {
         if (snapshot.hasData) {
           return CardWithTitle(
@@ -318,12 +355,50 @@ class _DayViewState extends State<DayView> {
                       .map((s) => _FeastWidget(s,
                           style: Theme.of(context).textTheme.titleMedium, translate: false))
                       .toList()));
-
-          // log(snapshot.data.toString());
         } else {
           return Container();
         }
       });
+}
+
+/// The header card grouping date, description, fasting and icons.
+class DayHeaderCard extends StatelessWidget {
+  final DateTime date;
+
+  const DayHeaderCard(this.date);
+
+  @override
+  Widget build(BuildContext context) => CardWithTitle(
+      title: "",
+      content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DateHeader(date),
+            const SizedBox(height: 10),
+            DayDescription(date),
+            const SizedBox(height: 10),
+            FastingRow(date),
+            const SizedBox(height: 10),
+            IconGallery(date)
+          ]));
+}
+
+/// All day-view sections in order; shared by the phone [DayView] and the
+/// tablet dashboard summary pane.
+List<Widget> dayViewSections(DateTime date) => [
+      DayHeaderCard(date),
+      GreatLentShortView(date: date),
+      const SizedBox(height: 10),
+      ReadingsCard(date),
+      const SizedBox(height: 10),
+      SaintsCard(date)
+    ];
+
+class DayView extends StatelessWidget {
+  final DateTime date;
+
+  const DayView({Key? key, required this.date}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -331,26 +406,6 @@ class _DayViewState extends State<DayView> {
         child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-          CardWithTitle(
-              title: "",
-              content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    getDate(),
-                    space10,
-                    getDescription(),
-                    space10,
-                    getFasting(),
-                    space10,
-                    getIcons()
-                  ])),
-          GreatLentShortView(date: date),
-          space10,
-          getReading(),
-          space10,
-          getSaints()
-        ]));
+            children: dayViewSections(date)));
   }
 }

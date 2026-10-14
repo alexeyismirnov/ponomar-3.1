@@ -9,7 +9,17 @@ import 'month_cell.dart';
 
 class MonthInfoContainer extends StatefulWidget {
   final DateTime initialDate;
-  const MonthInfoContainer(this.initialDate);
+
+  /// Rail mode is used inside the tablet month rail: no info toggle,
+  /// compact header with month chevrons, cell taps are reported via
+  /// [onCellSelected] and [selectedDate] is ringed.
+  final bool railMode;
+  final void Function(DateTime date)? onCellSelected;
+  final DateTime? selectedDate;
+
+  const MonthInfoContainer(this.initialDate,
+      {Key? key, this.railMode = false, this.onCellSelected, this.selectedDate})
+      : super(key: key);
 
   @override
   _MonthInfoContainerState createState() => _MonthInfoContainerState();
@@ -30,6 +40,12 @@ class _MonthInfoContainerState extends State<MonthInfoContainer> {
     updateTitle();
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   void updateTitle([int index = initialPage]) {
     final currentDate =
         Jiffy.parseFromDateTime(widget.initialDate).add(months: index - initialPage);
@@ -41,8 +57,51 @@ class _MonthInfoContainerState extends State<MonthInfoContainer> {
 
   @override
   Widget build(BuildContext context) {
-    const spacer = SizedBox(height: 10);
+    final spacer = SizedBox(height: widget.railMode ? 5 : 10);
     final config = MonthViewConfig.of(context)!;
+
+    Widget header;
+
+    if (widget.railMode) {
+      header = Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+                onPressed: () => _controller.previousPage(
+                    duration: const Duration(milliseconds: 200), curve: Curves.easeOut),
+                iconSize: 22.0,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                icon: const Icon(Icons.chevron_left)),
+            Text(title, style: Theme.of(context).textTheme.titleMedium),
+            IconButton(
+                onPressed: () => _controller.nextPage(
+                    duration: const Duration(milliseconds: 200), curve: Curves.easeOut),
+                iconSize: 22.0,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                icon: const Icon(Icons.chevron_right)),
+          ]);
+    } else {
+      header = Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const SizedBox(width: 40),
+            Text(showInfo ? "info".tr() : title,
+                style: Theme.of(context).textTheme.titleLarge),
+            showInfo
+                ? IconButton(
+                    onPressed: () => setState(() => showInfo = false),
+                    iconSize: 30.0,
+                    icon: const Icon(Icons.close_sharp))
+                : IconButton(
+                    onPressed: () => setState(() => showInfo = true),
+                    iconSize: 30.0,
+                    icon: const Icon(Icons.help_outline)),
+          ]);
+    }
 
     return Container(
         width: config.containerWidth,
@@ -51,23 +110,7 @@ class _MonthInfoContainerState extends State<MonthInfoContainer> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const SizedBox(width: 40),
-                    Text(showInfo ? "info".tr() : title,
-                        style: Theme.of(context).textTheme.titleLarge),
-                    showInfo
-                        ? IconButton(
-                            onPressed: () => setState(() => showInfo = false),
-                            iconSize: 30.0,
-                            icon: const Icon(Icons.close_sharp))
-                        : IconButton(
-                            onPressed: () => setState(() => showInfo = true),
-                            iconSize: 30.0,
-                            icon: const Icon(Icons.help_outline)),
-                  ]),
+              header,
               if (!showInfo) ...[WeekdaysView()],
               spacer,
               SizedBox(
@@ -92,7 +135,12 @@ class _MonthInfoContainerState extends State<MonthInfoContainer> {
                                           ])))
                                       .toList())))
                       : PageView.builder(
-                          key: const PageStorageKey("monthview"),
+                          // In rail mode the container is recreated when the
+                          // selected month changes; a month-specific storage
+                          // key prevents restoring a stale page offset.
+                          key: widget.railMode
+                              ? PageStorageKey("monthview_rail_${widget.initialDate}")
+                              : const PageStorageKey("monthview"),
                           controller: _controller,
                           onPageChanged: (page) => updateTitle(page),
                           itemBuilder: (BuildContext context, int index) {
@@ -103,7 +151,9 @@ class _MonthInfoContainerState extends State<MonthInfoContainer> {
                             return Align(
                                 alignment: Alignment.topCenter,
                                 child: MonthView(DateTime.utc(cd.year, cd.month, cd.day),
-                                    cellBuilder: (date) => MonthViewCell(date)));
+                                    cellBuilder: (date) => MonthViewCell(date,
+                                        onSelected: widget.onCellSelected,
+                                        selectedDate: widget.selectedDate)));
                           })),
               if (showInfo) ...[const SizedBox(height: 20)]
             ]));

@@ -6,6 +6,7 @@ import 'package:supercharged/supercharged.dart';
 
 import 'church_calendar.dart';
 import 'custom_list_tile.dart';
+import 'day_scope.dart';
 import 'troparion_view.dart';
 
 class Troparion {
@@ -78,7 +79,9 @@ class SaintTroparion extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 5),
                 child: CustomListTile(
                     title: "Тропари и кондаки святым",
-                    onTap: () => TroparionView(troparia).push(context)));
+                    onTap: () => openReading(context,
+                        title: "Тропари и кондаки святым",
+                        builder: () => TroparionContent(troparia))));
           }
         }
 
