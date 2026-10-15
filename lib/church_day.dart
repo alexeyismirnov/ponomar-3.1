@@ -57,3 +57,17 @@ class ChurchDay {
 DateTime? _fromJson(String? date) => JSON.dateParser(date);
 
 typedef Saint = ChurchDay;
+
+/// A forefeast / afterfeast / apodosis day linked back to its major feast.
+class FeastPeriod {
+  /// One of `forefeast`, `afterfeast`, `apodosis`.
+  final String kind;
+
+  /// Calendar feast key, e.g. `transfiguration`.
+  final String feast;
+
+  /// Date of the feast itself (for navigation).
+  final DateTime feastDate;
+
+  const FeastPeriod({required this.kind, required this.feast, required this.feastDate});
+}

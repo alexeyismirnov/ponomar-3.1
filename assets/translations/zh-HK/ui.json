@@ -45,5 +45,8 @@
   "network_error": "網絡錯誤",
   "from_till": "從%s至%s — %s",
   "memory_of": "",
-  "landscape_layout_hint": "橫向模式下平板佈局更佳"
+  "landscape_layout_hint": "橫向模式下平板佈局更佳",
+  "forefeast_of": "%s前日",
+  "afterfeast_of": "%s慶期",
+  "apodosis_of": "%s慶期圓滿日"
 }

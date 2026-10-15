@@ -28,6 +28,11 @@ class BibleUtil {
   String bookName = "";
   late String lang;
 
+  /// Copied from assets at least once this process; avoids racing MainPage.postInit
+  /// (which prepares all books asynchronously after the first frame).
+  static final Set<String> _prepared = {};
+  static final Map<String, Future<void>> _preparing = {};
+
   BibleUtil(this.bookName, this.lang, this.content);
   BibleUtil operator +(BibleUtil other) => BibleUtil(bookName, lang, content + other.content);
 
@@ -37,7 +42,24 @@ class BibleUtil {
     }
   }
 
+  /// Ensures `assets/bible/{book}_{lang}.sqlite` is on disk before [DB.open].
+  static Future<void> ensurePrepared(String bookName, String lang) {
+    final filename = "${bookName}_$lang.sqlite";
+    if (_prepared.contains(filename)) return Future.value();
+
+    return _preparing.putIfAbsent(filename, () async {
+      try {
+        await DB.prepare(path: "assets/bible/$filename");
+        _prepared.add(filename);
+      } finally {
+        _preparing.remove(filename);
+      }
+    });
+  }
+
   static Future<BibleUtil> fetch(String bookName, String lang, String whereExpr) async {
+    await ensurePrepared(bookName, lang);
+
     var db = await DB.open("${bookName}_$lang.sqlite");
 
     List<Map<String, Object?>> result =
@@ -110,7 +132,7 @@ mixin BibleModel on BookModel {
   @override
   Future prepare() async {
     for (final f in filenames.expand((e) => e)) {
-      await DB.prepare(path: "assets/bible/${f}_$lang.sqlite");
+      await BibleUtil.ensurePrepared(f, lang);
     }
   }
 

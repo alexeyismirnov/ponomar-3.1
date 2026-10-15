@@ -382,6 +382,29 @@ extension ChurchCalendarFunc on ChurchCalendar {
 
   List<ChurchDay> getAllReadings() => days.where((e) => e.reading != null).toList();
 
+  /// Forefeast / afterfeast / apodosis of a major feast on [date], if any.
+  /// Each entry is `(kind, feastName, feastDate)` where [kind] is one of
+  /// `forefeast`, `afterfeast`, `apodosis`.
+  List<FeastPeriod> getFeastPeriods(DateTime date) {
+    const kinds = ['forefeast', 'afterfeast', 'apodosis'];
+    final result = <FeastPeriod>[];
+
+    for (final day in getDayDescription(date)) {
+      for (final kind in kinds) {
+        final prefix = '${kind}_';
+        if (!day.name.startsWith(prefix)) continue;
+
+        final feast = day.name.substring(prefix.length);
+        final matches = days.where((e) => e.name == feast && e.date != null);
+        if (matches.isEmpty) continue;
+
+        result.add(FeastPeriod(kind: kind, feast: feast, feastDate: matches.first.date!));
+      }
+    }
+
+    return result;
+  }
+
   String? getWeekDescription(DateTime date) {
     final dayOfWeek = (date.weekday == DateTime.sunday) ? "Sunday" : "Week";
 

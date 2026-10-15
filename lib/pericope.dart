@@ -18,24 +18,48 @@ class PericopeView extends StatefulWidget {
 }
 
 class _PericopeViewState extends State<PericopeView> {
-  bool ready = false;
-  List<Widget> content = [];
+  Future<List<dynamic>>? _future;
+  String? _lang;
+
+  String _resolveLang(BuildContext context) {
+    String lang = context.countryCode;
+    if (lang == "ru") lang = ConfigParamExt.bibleLang.val();
+    return lang;
+  }
+
+  void _load(String lang) {
+    _lang = lang;
+    _future = PericopeModel(lang, widget.str).getPericope(PericopeFormat.widget);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final lang = _resolveLang(context);
+    // First call, or bible language changed (e.g. CS ↔ Russian).
+    if (_lang != lang) _load(lang);
+  }
+
+  @override
+  void didUpdateWidget(covariant PericopeView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.str != widget.str) {
+      _load(_resolveLang(context));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    String lang = context.countryCode;
-    if (lang == "ru") lang = ConfigParamExt.bibleLang.val();
-
     double fontSize = ConfigParam.fontSize.val() + 2;
     String family = Theme.of(context).textTheme.bodyLarge!.fontFamily!;
 
-    if (lang == "cs") {
+    if (_lang == "cs") {
       fontSize += 3.0;
       family = "Ponomar";
     }
 
     return FutureBuilder<List<dynamic>>(
-        future: PericopeModel(lang, widget.str).getPericope(PericopeFormat.widget),
+        future: _future!,
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError) {
             return const Center(child: Text("network error"));

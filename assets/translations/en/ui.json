@@ -46,5 +46,8 @@
   "bookmarks": "Bookmarks",
   "no_bookmarks": "No bookmarks",
   "lives_of_saints": "Lives of Saints",
-  "landscape_layout_hint": "Landscape orientation provides a better layout on tablets"
+  "landscape_layout_hint": "Landscape orientation provides a better layout on tablets",
+  "forefeast_of": "Forefeast of %s",
+  "afterfeast_of": "Afterfeast of %s",
+  "apodosis_of": "Apodosis of %s"
 }

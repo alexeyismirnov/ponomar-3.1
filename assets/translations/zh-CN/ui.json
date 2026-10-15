@@ -45,5 +45,8 @@
   "network_error": "网络错误",
   "from_till": "从%s至%s — %s",
   "memory_of": "",
-  "landscape_layout_hint": "横屏模式下平板布局更佳"
+  "landscape_layout_hint": "横屏模式下平板布局更佳",
+  "forefeast_of": "%s前日",
+  "afterfeast_of": "%s庆期",
+  "apodosis_of": "%s庆期圆满日"
 }
