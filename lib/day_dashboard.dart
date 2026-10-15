@@ -96,10 +96,6 @@ class _ReaderPane extends StatelessWidget {
                     maxLines: 1,
                     minFontSize: 5,
                     style: Theme.of(context).textTheme.titleLarge)),
-            IconButton(
-                icon: const Icon(Icons.zoom_in_outlined, size: 30.0),
-                onPressed: () =>
-                    FontSizeDialog().show(context).then((_) => onFontChanged())),
             if (selection!.bibleFontButton && context.languageCode == "ru") ...[
               IconButton(
                   icon: const Icon(Icons.font_download_outlined, size: 30.0),
