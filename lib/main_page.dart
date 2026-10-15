@@ -117,6 +117,9 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
             Text("title".tr(),
                 textAlign: TextAlign.left, style: Theme.of(context).textTheme.titleLarge),
             const Spacer(),
+            IconButton(
+                icon: const Icon(Icons.zoom_in_outlined, size: 30.0),
+                onPressed: () => FontSizeDialog().show(context).then((_) => setState(() {}))),
             const CalendarActions(),
             const SizedBox(width: 5),
           ])),
