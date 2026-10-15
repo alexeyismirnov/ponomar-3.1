@@ -19,6 +19,9 @@ class BookPageSingle extends StatefulWidget {
   /// can live inside a tablet reader pane; controls move to a compact header.
   final bool embedded;
 
+  /// Extra trailing controls for the embedded header (e.g. pane expand).
+  final List<Widget>? extraActions;
+
   const BookPageSingle(this.title,
       {required this.builder,
       this.bookmark,
@@ -26,7 +29,8 @@ class BookPageSingle extends StatefulWidget {
       this.padding = 15,
       this.safeBottom = true,
       this.showActions = true,
-      this.embedded = false});
+      this.embedded = false,
+      this.extraActions});
 
   @override
   _BookPageSingleState createState() => _BookPageSingleState();
@@ -102,6 +106,7 @@ class _BookPageSingleState extends State<BookPageSingle> {
                 if (bookmarkButton != null) ...[bookmarkButton],
                 if (bibleFontButton != null) ...[bibleFontButton]
               ],
+              if (widget.extraActions != null) ...widget.extraActions!,
               const SizedBox(width: 5),
             ])),
         const Divider(height: 1, thickness: 1),

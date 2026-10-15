@@ -56,5 +56,7 @@
   "landscape_layout_hint": "橫向模式下平板佈局更佳",
   "forefeast_of": "%s前日",
   "afterfeast_of": "%s慶期",
-  "apodosis_of": "%s慶期圓滿日"
+  "apodosis_of": "%s慶期圓滿日",
+  "expand_pane": "展開",
+  "restore_pane": "還原"
 }

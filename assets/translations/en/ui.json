@@ -56,5 +56,7 @@
   "landscape_layout_hint": "Landscape orientation provides a better layout on tablets",
   "forefeast_of": "Forefeast of %s",
   "afterfeast_of": "Afterfeast of %s",
-  "apodosis_of": "Apodosis of %s"
+  "apodosis_of": "Apodosis of %s",
+  "expand_pane": "Expand",
+  "restore_pane": "Restore"
 }

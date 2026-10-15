@@ -54,5 +54,7 @@
   "landscape_layout_hint": "В горизонтальной ориентации расположение элементов удобнее",
   "forefeast_of": "Предпразднство %s",
   "afterfeast_of": "Попразднство %s",
-  "apodosis_of": "Отдание %s"
+  "apodosis_of": "Отдание %s",
+  "expand_pane": "Развернуть",
+  "restore_pane": "Восстановить"
 }
