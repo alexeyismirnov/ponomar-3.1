@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:easy_localization/easy_localization.dart';
-
 import 'book_model.dart';
 import 'book_page_multiple.dart';
 import 'book_toc.dart';
@@ -16,8 +14,7 @@ class LibraryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (LayoutInfo.isTabletDevice &&
-        MediaQuery.orientationOf(context) == Orientation.portrait) {
+    if (LayoutInfo.isPortraitTablet(context)) {
       return const _PortraitTabletLibrary();
     }
 
@@ -29,34 +26,15 @@ class LibraryTab extends StatelessWidget {
 
 /// Phone-style library for tablets in portrait, topped by a closable banner
 /// suggesting rotation to landscape.
-class _PortraitTabletLibrary extends StatefulWidget {
+class _PortraitTabletLibrary extends StatelessWidget {
   const _PortraitTabletLibrary();
-
-  @override
-  State<_PortraitTabletLibrary> createState() => _PortraitTabletLibraryState();
-}
-
-class _PortraitTabletLibraryState extends State<_PortraitTabletLibrary> {
-  /// Session-wide dismissal: static so it survives the State being destroyed
-  /// on orientation changes.
-  static bool _hintDismissed = false;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (!_hintDismissed)
-          MaterialBanner(
-            leading: const Icon(Icons.screen_rotation_outlined),
-            content: Text('landscape_layout_hint'.tr()),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () => setState(() => _hintDismissed = true),
-              ),
-            ],
-          ),
+        const LandscapeLayoutHintBanner(),
         Expanded(child: LibraryPage()),
       ],
     );
