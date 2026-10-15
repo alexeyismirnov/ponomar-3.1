@@ -45,5 +45,6 @@
   "memory_of": "Memory of %s",
   "bookmarks": "Bookmarks",
   "no_bookmarks": "No bookmarks",
-  "lives_of_saints": "Lives of Saints"
+  "lives_of_saints": "Lives of Saints",
+  "landscape_layout_hint": "Landscape orientation provides a better layout on tablets"
 }
