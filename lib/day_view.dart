@@ -17,6 +17,7 @@ import 'icon_model.dart';
 import 'feofan.dart';
 import 'synaxarion.dart';
 import 'calendar_selector.dart';
+import 'layout_info.dart';
 import 'book_cell.dart';
 import 'great_lent_short.dart';
 import 'saints_lives.dart';
@@ -64,7 +65,8 @@ class _FeastWidget extends StatelessWidget {
   }
 }
 
-/// Tappable date row (opens the calendar selector).
+/// Date row. Tappable (opens the calendar selector) except on the tablet
+/// dashboard, where the month rail already provides today/year navigation.
 class DateHeader extends StatelessWidget {
   final DateTime date;
 
@@ -77,6 +79,27 @@ class DateHeader extends StatelessWidget {
     final df1 = DateFormat.yMMMMEEEEd(context.languageCode);
     final df2 = DateFormat.yMMMMd(context.languageCode);
 
+    final dates = Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          AutoSizeText(df1.format(date).capitalize(),
+              textAlign: TextAlign.left,
+              maxLines: 1,
+              minFontSize: 5,
+              style: Theme.of(context).textTheme.titleLarge),
+          AutoSizeText(df2.format(dateOld) + " " + "old_style".tr(),
+              textAlign: TextAlign.left,
+              maxLines: 1,
+              minFontSize: 5,
+              style: Theme.of(context).textTheme.titleMedium),
+        ]);
+
+    if (LayoutInfo.dayViewLayout(context) == DayViewLayout.dashboard) {
+      return dates;
+    }
+
     return GestureDetector(
         child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -84,23 +107,7 @@ class DateHeader extends StatelessWidget {
             children: <Widget>[
               const Icon(Icons.calendar_today, size: 30.0),
               const SizedBox(width: 10),
-              Expanded(
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                    AutoSizeText(df1.format(date).capitalize(),
-                        textAlign: TextAlign.left,
-                        maxLines: 1,
-                        minFontSize: 5,
-                        style: Theme.of(context).textTheme.titleLarge),
-                    AutoSizeText(df2.format(dateOld) + " " + "old_style".tr(),
-                        textAlign: TextAlign.left,
-                        maxLines: 1,
-                        minFontSize: 5,
-                        style: Theme.of(context).textTheme.titleMedium),
-                  ]))
+              Expanded(child: dates)
             ]),
         onTap: () {
           CalendarSelector(date).show(context).then((newDate) {
