@@ -50,5 +50,6 @@
   "bible_language": "Язык Библии",
   "other": "Разное",
   "synaxarion_annotation": "",
-  "liturgical_books": "Богослужение"
+  "liturgical_books": "Богослужение",
+  "landscape_layout_hint": "В горизонтальной ориентации расположение элементов удобнее"
 }

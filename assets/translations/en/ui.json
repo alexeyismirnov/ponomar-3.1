@@ -52,5 +52,6 @@
   "troparia_kontakia": "Troparia and Kontakia",
   "telegram_info": "Orthodox Calendar+ is now available as a mini-app in Telegram. Please subscribe to our bot!",
   "open_telegram": "Open Telegram",
-  "telegram_title": "Telegram bot"
+  "telegram_title": "Telegram bot",
+  "landscape_layout_hint": "Landscape orientation provides a better layout on tablets"
 }
