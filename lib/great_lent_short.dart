@@ -7,6 +7,7 @@ import 'dart:math';
 import 'story_model.dart';
 import 'great_lent_full.dart';
 import 'church_calendar.dart';
+import 'day_scope.dart';
 import 'globals.dart';
 
 enum GreatLentDayMode { short, long, popup }
@@ -173,7 +174,9 @@ class _GreatLentShortViewState extends State<GreatLentShortView> {
     if (widget.mode == GreatLentDayMode.long) {
       return GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTap: () => GreatLentFullView(widget.date.year).push(context),
+          onTap: () => openReading(context,
+              title: "journey_to_pascha".tr(),
+              builder: () => GreatLentFullView(widget.date.year, embedded: true)),
           child: Padding(
               padding: const EdgeInsets.only(top: 10),
               child: CardWithTitle(title: "journey_to_pascha", content: content)));
