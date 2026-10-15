@@ -265,7 +265,7 @@ class ChurchReading {
           feasts[0].name == "nativityOfTheotokos") {
         return feasts.map((f) => f.reading!).toList();
       } else if (feasts.first.type == FeastType.great) {
-        return List.from(rr[date] ?? [])
+        return List<String>.from(rr[date] ?? [])
           ..addAll(feasts.filter((f) => f.type == FeastType.great).map((f) => f.reading!));
       } else {
         List<String> result = [];
@@ -278,9 +278,9 @@ class ChurchReading {
             date == cal.d("sundayOfProdigalSon") ||
             date == cal.d("sundayOfDreadJudgement") ||
             date == cal.d("cheesefareSunday")) {
-          result = List.from(rr[date] ?? [])..addAll(feasts.map((f) => f.reading!));
+          result = List<String>.from(rr[date] ?? [])..addAll(feasts.map((f) => f.reading!));
         } else {
-          result = List.from(feasts.map((f) => f.reading!))..addAll(rr[date] ?? []);
+          result = List<String>.from(feasts.map((f) => f.reading!))..addAll(rr[date] ?? []);
         }
 
         return result.take(2).toList();
