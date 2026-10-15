@@ -41,9 +41,14 @@ class ExpandablePanes extends StatelessWidget {
           child: AnimatedAlign(
               duration: duration,
               curve: Curves.easeInOutCubic,
-              alignment: Alignment.centerLeft,
+              // topLeft keeps the month rail / library list pinned to the top;
+              // centerLeft was vertically centering the leading panes.
+              alignment: Alignment.topLeft,
               widthFactor: expanded ? 0.0 : 1.0,
-              child: Row(mainAxisSize: MainAxisSize.min, children: leading))),
+              child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: leading))),
       Expanded(child: reader),
     ]);
   }
