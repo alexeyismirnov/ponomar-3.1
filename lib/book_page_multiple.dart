@@ -18,7 +18,8 @@ class BookPageMultiple extends StatefulWidget {
   /// inside a tablet reader pane.
   final bool embedded;
 
-  BookPageMultiple(this.pos, {Key? key, this.embedded = false}) : super(key: key);
+  BookPageMultiple(this.pos, {Key? key, this.embedded = false})
+    : super(key: key);
 
   @override
   _BookPageMultipleState createState() => _BookPageMultipleState();
@@ -39,8 +40,8 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
   String _contentKey(BookPosition position) =>
       '${position.index!.section}_${position.index!.index}_${position.chapter ?? 0}';
 
-  Future<dynamic> _getContent(BookPosition position) =>
-      _contentFutures.putIfAbsent(_contentKey(position), () => model.getContent(position));
+  Future<dynamic> _getContent(BookPosition position) => _contentFutures
+      .putIfAbsent(_contentKey(position), () => model.getContent(position));
 
   @override
   void initState() {
@@ -76,82 +77,104 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
     final pagePos = bookPos[id];
 
     return FutureBuilder<dynamic>(
-        future: _getContent(pagePos),
-        builder: (context, AsyncSnapshot<dynamic> snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      future: _getContent(pagePos),
+      builder: (context, AsyncSnapshot<dynamic> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-          if (model is BibleModel) {
-            return BibleChapterView(pagePos,
-                safeBottom: totalChapters == 1, embedded: widget.embedded);
-          }
+        if (model is BibleModel) {
+          return BibleChapterView(
+            pagePos,
+            safeBottom: totalChapters == 1,
+            embedded: widget.embedded,
+          );
+        }
 
-          final title = model.getTitle(pagePos);
-          final text = snapshot.data;
+        final title = model.getTitle(pagePos);
+        final text = snapshot.data;
 
-          if (model.contentType == BookContentType.html) {
-            return BookPageSingle(title,
-                bookmark: model.getBookmark(pagePos),
-                builder: () => BookCellHTML(text, model),
-                padding: 5,
-                safeBottom: totalChapters == 1,
-                embedded: widget.embedded);
-          }
+        if (model.contentType == BookContentType.html) {
+          return BookPageSingle(
+            title,
+            bookmark: model.getBookmark(pagePos),
+            builder: () => BookCellHTML(text, model),
+            padding: 5,
+            safeBottom: totalChapters == 1,
+            embedded: widget.embedded,
+          );
+        }
 
-          return BookPageSingle(title,
-              bookmark: model.getBookmark(pagePos),
-              builder: () => BookCellText(text),
-              safeBottom: totalChapters == 1,
-              embedded: widget.embedded);
-        });
+        return BookPageSingle(
+          title,
+          bookmark: model.getBookmark(pagePos),
+          builder: () => BookCellText(text),
+          safeBottom: totalChapters == 1,
+          embedded: widget.embedded,
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final content = Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Expanded(
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
           child: PageView.builder(
-              controller: _pageController,
-              itemCount: totalChapters,
-              onPageChanged: (index) => _pageNotifier.value = index,
-              itemBuilder: (context, id) => _buildPage(id))),
-      if (totalChapters > 1) ...[
-        LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) => Stack(children: [
-                  LinearProgressPageIndicator(
-                    itemCount: totalChapters,
-                    currentPageNotifier: _pageNotifier,
-                    progressColor: Theme.of(context).primaryColor,
-                    duration: const Duration(microseconds: 0),
-                    width: constraints.maxWidth,
-                    height: 40,
-                  ),
+            controller: _pageController,
+            itemCount: totalChapters,
+            onPageChanged: (index) => _pageNotifier.value = index,
+            itemBuilder: (context, id) => _buildPage(id),
+          ),
+        ),
+        if (totalChapters > 1) ...[
+          LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) => Stack(
+              children: [
+                LinearProgressPageIndicator(
+                  itemCount: totalChapters,
+                  currentPageNotifier: _pageNotifier,
+                  progressColor: Theme.of(context).primaryColor,
+                  duration: const Duration(microseconds: 0),
+                  width: constraints.maxWidth,
+                  height: 40,
+                ),
+                // In embedded mode (tablet 3-pane landscape) the chapter
+                // grid is already visible in the middle panel, so the dots
+                // are redundant.
+                if (!widget.embedded)
                   Center(
-                      child: ValueListenableBuilder<int>(
-                          valueListenable: _pageNotifier,
-                          builder: (context, page, _) {
-                            const maxDots = 10;
-                            final dots = min(totalChapters, maxDots);
-                            // DotsIndicator asserts position < dotsCount, so when the
-                            // chapter count exceeds the dot cap, scale the raw page
-                            // index from chapter space into dot space.
-                            final position = totalChapters > maxDots
-                                ? page * maxDots / totalChapters
-                                : page.toDouble();
+                    child: ValueListenableBuilder<int>(
+                      valueListenable: _pageNotifier,
+                      builder: (context, page, _) {
+                        const maxDots = 10;
+                        final dots = min(totalChapters, maxDots);
+                        // DotsIndicator asserts position < dotsCount, so when the
+                        // chapter count exceeds the dot cap, scale the raw page
+                        // index from chapter space into dot space.
+                        final position = totalChapters > maxDots
+                            ? page * maxDots / totalChapters
+                            : page.toDouble();
 
-                            return DotsIndicator(
-                              dotsCount: dots,
-                              position: position.clamp(0.0, dots - 1.0),
-                              decorator: const DotsDecorator(
-                                color: Colors.grey,
-                                activeColor: Colors.grey,
-                              ),
-                            );
-                          }))
-                ]))
-      ]
-    ]);
+                        return DotsIndicator(
+                          dotsCount: dots,
+                          position: position.clamp(0.0, dots - 1.0),
+                          decorator: const DotsDecorator(
+                            color: Colors.grey,
+                            activeColor: Colors.grey,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ],
+    );
 
     return widget.embedded ? SafeArea(child: content) : Scaffold(body: content);
   }
