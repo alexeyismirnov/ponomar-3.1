@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum DayViewLayout { phone, split, dashboard }
 
@@ -12,7 +13,13 @@ class LayoutInfo {
   /// The app shell switches from BottomNavigationBar to NavigationRail.
   static const double railBreakpoint = 840;
 
+  static bool isPortraitTablet(BuildContext context) =>
+      isTabletDevice && MediaQuery.orientationOf(context) == Orientation.portrait;
+
   static DayViewLayout dayViewLayout(BuildContext context) {
+    // Tablets in portrait use the single-column phone day view.
+    if (isPortraitTablet(context)) return DayViewLayout.phone;
+
     final w = MediaQuery.of(context).size.width;
     if (w >= dashboardBreakpoint) return DayViewLayout.dashboard;
     if (w >= splitBreakpoint) return DayViewLayout.split;
@@ -27,5 +34,34 @@ class LayoutInfo {
     final view = WidgetsBinding.instance.platformDispatcher.views.first;
     final shortest = view.physicalSize.shortestSide / view.devicePixelRatio;
     return shortest >= splitBreakpoint;
+  }
+}
+
+/// Closable banner suggesting landscape for a better tablet layout.
+/// Dismissal is session-wide (shared across home / library tabs).
+class LandscapeLayoutHintBanner extends StatefulWidget {
+  const LandscapeLayoutHintBanner({super.key});
+
+  @override
+  State<LandscapeLayoutHintBanner> createState() => _LandscapeLayoutHintBannerState();
+}
+
+class _LandscapeLayoutHintBannerState extends State<LandscapeLayoutHintBanner> {
+  static bool _dismissed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    if (_dismissed) return const SizedBox.shrink();
+
+    return MaterialBanner(
+      leading: const Icon(Icons.screen_rotation_outlined),
+      content: Text('landscape_layout_hint'.tr()),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => setState(() => _dismissed = true),
+        ),
+      ],
+    );
   }
 }

@@ -58,6 +58,12 @@ class YearMonthViewState extends State<YearMonthView> {
     Color textColor =
         config.sharing ? Colors.black : Theme.of(context).textTheme.titleMedium!.color!;
 
+    // Portrait / sharing: 3×4. Landscape: 4×3.
+    final monthCols = config.sharing ||
+            MediaQuery.orientationOf(context) == Orientation.portrait
+        ? 3
+        : 4;
+
     return SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -67,7 +73,7 @@ class YearMonthViewState extends State<YearMonthView> {
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  crossAxisCount: 3,
+                  crossAxisCount: monthCols,
                   childAspectRatio: 1.0,
                   children: List<int>.generate(12, (i) => i)
                       .map<Widget>((i) => buildMonth(context, DateTime.utc(widget.year, i + 1, 1)))
@@ -76,8 +82,8 @@ class YearMonthViewState extends State<YearMonthView> {
               GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: monthCols == 4 ? 4 : 3,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     mainAxisExtent: 50, // here set custom Height You Want
@@ -138,6 +144,15 @@ class _YearContainerState extends State<YearContainer> {
     });
   }
 
+  void _shiftYear(int delta) {
+    if (!_controller.hasClients) return;
+    _controller.animateToPage(
+      currentPage + delta,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
+    );
+  }
+
   Widget getScreenshot() {
     return EasyLocalization(
         supportedLocales: const [
@@ -191,11 +206,20 @@ class _YearContainerState extends State<YearContainer> {
                 );
               }),
         ],
-        title: AutoSizeText(title,
-            maxLines: 1,
-            minFontSize: 5,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium),
+        title: Row(children: [
+          IconButton(
+              icon: const Icon(Icons.chevron_left, size: 30.0),
+              onPressed: () => _shiftYear(-1)),
+          Expanded(
+              child: AutoSizeText(title,
+                  maxLines: 1,
+                  minFontSize: 5,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium)),
+          IconButton(
+              icon: const Icon(Icons.chevron_right, size: 30.0),
+              onPressed: () => _shiftYear(1)),
+        ]),
       );
 
   @override

@@ -143,29 +143,41 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     ]));
   }
 
+  Widget buildPhone(BuildContext context) {
+    return NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
+            [CalendarAppbar()],
+        body: Padding(
+            padding: const EdgeInsets.all(10),
+            child: PageView.builder(
+              controller: _controller,
+              itemBuilder: (BuildContext context, int index) {
+                final currentDate = date.add(Duration(days: index - initialPage));
+                return NotificationListener<Notification>(
+                    onNotification: (n) {
+                      if (n is DateChangedNotification) setDate(n.newDate);
+                      return true;
+                    },
+                    child: DayView(key: ValueKey(currentDate), date: currentDate));
+              },
+            )));
+  }
+
   @override
   Widget build(BuildContext context) {
     if (LayoutInfo.dayViewLayout(context) != DayViewLayout.phone) {
       return buildTablet(context);
     }
 
-    return SafeArea(
-        child: NestedScrollView(
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
-                [CalendarAppbar()],
-            body: Padding(
-                padding: const EdgeInsets.all(10),
-                child: PageView.builder(
-                  controller: _controller,
-                  itemBuilder: (BuildContext context, int index) {
-                    final currentDate = date.add(Duration(days: index - initialPage));
-                    return NotificationListener<Notification>(
-                        onNotification: (n) {
-                          if (n is DateChangedNotification) setDate(n.newDate);
-                          return true;
-                        },
-                        child: DayView(key: ValueKey(currentDate), date: currentDate));
-                  },
-                ))));
+    // Tablet portrait: phone single-column layout + landscape hint banner.
+    if (LayoutInfo.isPortraitTablet(context)) {
+      return SafeArea(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        const LandscapeLayoutHintBanner(),
+        Expanded(child: buildPhone(context)),
+      ]));
+    }
+
+    return SafeArea(child: buildPhone(context));
   }
 }
