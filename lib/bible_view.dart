@@ -33,7 +33,10 @@ class BibleChapterView extends StatefulWidget {
   final BookPosition pos;
   final bool safeBottom;
   final bool embedded;
-  const BibleChapterView(this.pos, {required this.safeBottom, this.embedded = false});
+  final List<Widget>? extraActions;
+
+  const BibleChapterView(this.pos,
+      {required this.safeBottom, this.embedded = false, this.extraActions});
 
   @override
   _BibleChapterViewState createState() => _BibleChapterViewState();
@@ -69,5 +72,6 @@ class _BibleChapterViewState extends State<BibleChapterView> {
       bookmark: pos.model!.getBookmark(pos),
       builder: () => getContent(),
       safeBottom: widget.safeBottom,
-      embedded: widget.embedded);
+      embedded: widget.embedded,
+      extraActions: widget.extraActions);
 }

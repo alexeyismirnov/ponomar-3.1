@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'book_model.dart';
 import 'book_page_multiple.dart';
 import 'book_toc.dart';
+import 'expandable_reader.dart';
 import 'layout_info.dart';
 import 'library_page.dart';
 
@@ -52,13 +53,19 @@ class LibraryDashboard extends StatefulWidget {
 class _LibraryDashboardState extends State<LibraryDashboard> {
   BookModel? _book;
   BookPosition? _pos;
+  bool _readerExpanded = false;
 
   void _onBookSelected(BookModel model) => setState(() {
-    _book = model;
-    _pos = null;
-  });
+        _book = model;
+        _pos = null;
+      });
 
   void _onPositionSelected(BookPosition pos) => setState(() => _pos = pos);
+
+  void _toggleExpand() => setState(() => _readerExpanded = !_readerExpanded);
+
+  List<Widget> get _expandAction =>
+      [PaneExpandButton(expanded: _readerExpanded, onPressed: _toggleExpand)];
 
   @override
   Widget build(BuildContext context) {
@@ -91,56 +98,83 @@ class _LibraryDashboardState extends State<LibraryDashboard> {
                 );
 
           Widget readerPane = _pos == null
-              ? Center(
-                  child: Icon(
+              ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  SizedBox(
+                      height: 50.0,
+                      child: Row(children: [
+                        const Spacer(),
+                        ..._expandAction,
+                        const SizedBox(width: 5),
+                      ])),
+                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                      child: Center(
+                          child: Icon(
                     Icons.auto_stories_outlined,
                     size: 40.0,
                     color: Theme.of(context).secondaryHeaderColor,
-                  ),
-                )
-              : BookPageMultiple(key: ValueKey(_pos), _pos!, embedded: true);
+                  ))),
+                ])
+              : BookPageMultiple(
+                  key: ValueKey(_pos),
+                  _pos!,
+                  embedded: true,
+                  extraActions: _expandAction,
+                );
 
           if (wide) {
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+            return ExpandablePanes(
+              expanded: _readerExpanded,
+              leading: [
                 listPane,
                 const VerticalDivider(width: 1, thickness: 1),
                 SizedBox(width: 300, child: tocPane),
                 const VerticalDivider(width: 1, thickness: 1),
-                Expanded(child: readerPane),
               ],
+              reader: readerPane,
             );
           }
 
           // Narrow tablet: list + one content pane (TOC until a chapter is
           // selected, then the reader with a back button).
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+          final content = _pos == null
+              ? tocPane
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () => setState(() => _pos = null),
+                      icon: const Icon(Icons.chevron_left),
+                      label: Text(
+                        _book!.title,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                    const Divider(height: 1, thickness: 1),
+                    Expanded(child: readerPane),
+                  ],
+                );
+
+          return ExpandablePanes(
+            expanded: _readerExpanded,
+            leading: [
               listPane,
               const VerticalDivider(width: 1, thickness: 1),
-              Expanded(
-                child: _pos == null
-                    ? tocPane
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextButton.icon(
-                            onPressed: () => setState(() => _pos = null),
-                            icon: const Icon(Icons.chevron_left),
-                            label: Text(
-                              _book!.title,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                          const Divider(height: 1, thickness: 1),
-                          Expanded(child: readerPane),
-                        ],
-                      ),
-              ),
             ],
+            reader: _pos == null
+                ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    SizedBox(
+                        height: 50.0,
+                        child: Row(children: [
+                          const Spacer(),
+                          ..._expandAction,
+                          const SizedBox(width: 5),
+                        ])),
+                    const Divider(height: 1, thickness: 1),
+                    Expanded(child: content),
+                  ])
+                : content,
           );
         },
       ),

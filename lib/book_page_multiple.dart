@@ -18,7 +18,10 @@ class BookPageMultiple extends StatefulWidget {
   /// inside a tablet reader pane.
   final bool embedded;
 
-  BookPageMultiple(this.pos, {Key? key, this.embedded = false})
+  /// Extra trailing controls forwarded to each embedded page header.
+  final List<Widget>? extraActions;
+
+  BookPageMultiple(this.pos, {Key? key, this.embedded = false, this.extraActions})
     : super(key: key);
 
   @override
@@ -88,6 +91,7 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
             pagePos,
             safeBottom: totalChapters == 1,
             embedded: widget.embedded,
+            extraActions: widget.extraActions,
           );
         }
 
@@ -102,6 +106,7 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
             padding: 5,
             safeBottom: totalChapters == 1,
             embedded: widget.embedded,
+            extraActions: widget.extraActions,
           );
         }
 
@@ -111,6 +116,7 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
           builder: () => BookCellText(text),
           safeBottom: totalChapters == 1,
           embedded: widget.embedded,
+          extraActions: widget.extraActions,
         );
       },
     );

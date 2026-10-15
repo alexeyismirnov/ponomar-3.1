@@ -6,6 +6,7 @@ import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'church_reading.dart';
 import 'day_scope.dart';
 import 'day_view.dart';
+import 'expandable_reader.dart';
 import 'globals.dart';
 import 'layout_info.dart';
 import 'month_rail.dart';
@@ -26,6 +27,7 @@ class DayDashboard extends StatefulWidget {
 
 class _DayDashboardState extends State<DayDashboard> {
   ReadingSelection? _selection;
+  bool _readerExpanded = false;
 
   @override
   void initState() {
@@ -50,39 +52,60 @@ class _DayDashboardState extends State<DayDashboard> {
   Widget build(BuildContext context) {
     final layout = LayoutInfo.dayViewLayout(context);
 
+    final leading = <Widget>[
+      if (layout == DayViewLayout.dashboard) ...[
+        SingleChildScrollView(child: MonthRail(date: widget.date)),
+        const VerticalDivider(width: 1, thickness: 1),
+      ],
+      SizedBox(
+          width: layout == DayViewLayout.dashboard ? 380 : 340,
+          child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              children: dayViewSections(widget.date))),
+      const VerticalDivider(width: 1, thickness: 1),
+    ];
+
     return DayScope(
         onReadingSelected: (sel) => setState(() => _selection = sel),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          if (layout == DayViewLayout.dashboard) ...[
-            SingleChildScrollView(child: MonthRail(date: widget.date)),
-            const VerticalDivider(width: 1, thickness: 1),
-          ],
-          SizedBox(
-              width: layout == DayViewLayout.dashboard ? 380 : 340,
-              child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  children: dayViewSections(widget.date))),
-          const VerticalDivider(width: 1, thickness: 1),
-          Expanded(child: _ReaderPane(_selection, onFontChanged: () => setState(() {})))
-        ]));
+        child: ExpandablePanes(
+            expanded: _readerExpanded,
+            leading: leading,
+            reader: _ReaderPane(_selection,
+                expanded: _readerExpanded,
+                onToggleExpand: () => setState(() => _readerExpanded = !_readerExpanded),
+                onFontChanged: () => setState(() {}))));
   }
 }
 
 class _ReaderPane extends StatelessWidget {
   final ReadingSelection? selection;
+  final bool expanded;
+  final VoidCallback onToggleExpand;
   final VoidCallback onFontChanged;
 
-  const _ReaderPane(this.selection, {required this.onFontChanged});
+  const _ReaderPane(this.selection,
+      {required this.expanded, required this.onToggleExpand, required this.onFontChanged});
 
   @override
   Widget build(BuildContext context) {
     if (selection == null) {
-      return Center(
-          child: Text("Reading of the day",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Theme.of(context).secondaryHeaderColor)));
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        SizedBox(
+            height: 50.0,
+            child: Row(children: [
+              const Spacer(),
+              PaneExpandButton(expanded: expanded, onPressed: onToggleExpand),
+              const SizedBox(width: 5),
+            ])),
+        const Divider(height: 1, thickness: 1),
+        Expanded(
+            child: Center(
+                child: Text("Reading of the day",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(color: Theme.of(context).secondaryHeaderColor))))
+      ]);
     }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -101,6 +124,7 @@ class _ReaderPane extends StatelessWidget {
                   onPressed: () =>
                       BibleLangDialog().show(context).then((_) => onFontChanged()))
             ],
+            PaneExpandButton(expanded: expanded, onPressed: onToggleExpand),
             const SizedBox(width: 5),
           ])),
       const Divider(height: 1, thickness: 1),
