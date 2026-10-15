@@ -130,14 +130,25 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
                   Center(
                       child: ValueListenableBuilder<int>(
                           valueListenable: _pageNotifier,
-                          builder: (context, page, _) => DotsIndicator(
-                                dotsCount: min(totalChapters, 10),
-                                position: page.toDouble(),
-                                decorator: const DotsDecorator(
-                                  color: Colors.grey,
-                                  activeColor: Colors.grey,
-                                ),
-                              )))
+                          builder: (context, page, _) {
+                            const maxDots = 10;
+                            final dots = min(totalChapters, maxDots);
+                            // DotsIndicator asserts position < dotsCount, so when the
+                            // chapter count exceeds the dot cap, scale the raw page
+                            // index from chapter space into dot space.
+                            final position = totalChapters > maxDots
+                                ? page * maxDots / totalChapters
+                                : page.toDouble();
+
+                            return DotsIndicator(
+                              dotsCount: dots,
+                              position: position.clamp(0.0, dots - 1.0),
+                              decorator: const DotsDecorator(
+                                color: Colors.grey,
+                                activeColor: Colors.grey,
+                              ),
+                            );
+                          }))
                 ]))
       ]
     ]);
