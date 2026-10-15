@@ -46,6 +46,43 @@ class _MonthInfoContainerState extends State<MonthInfoContainer> {
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(covariant MonthInfoContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!widget.railMode) return;
+
+    if (widget.initialDate != oldWidget.initialDate) {
+      // Selected month changed (Today / cell / feast link): show that month.
+      _jumpToInitialMonth();
+      return;
+    }
+
+    // Same selected month, but the user may have browsed away with chevrons.
+    _syncToSelectedMonth();
+  }
+
+  void _jumpToInitialMonth() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_controller.hasClients) return;
+      _controller.jumpToPage(initialPage);
+      updateTitle(initialPage);
+    });
+  }
+
+  void _syncToSelectedMonth() {
+    final sel = widget.selectedDate;
+    if (sel == null || !_controller.hasClients) return;
+
+    final page = _controller.page?.round() ?? initialPage;
+    final shown =
+        Jiffy.parseFromDateTime(widget.initialDate).add(months: page - initialPage);
+
+    if (shown.year == sel.year && shown.month == sel.month) return;
+
+    // [MonthRail] always passes initialDate = month-start of selectedDate.
+    _jumpToInitialMonth();
+  }
+
   void updateTitle([int index = initialPage]) {
     final currentDate =
         Jiffy.parseFromDateTime(widget.initialDate).add(months: index - initialPage);
@@ -135,11 +172,11 @@ class _MonthInfoContainerState extends State<MonthInfoContainer> {
                                           ])))
                                       .toList())))
                       : PageView.builder(
-                          // In rail mode the container is recreated when the
-                          // selected month changes; a month-specific storage
-                          // key prevents restoring a stale page offset.
+                          // Rail mode must not use PageStorage: browsing with
+                          // chevrons then jumping via "Today" / date selection
+                          // would restore a stale page while the title resets.
                           key: widget.railMode
-                              ? PageStorageKey("monthview_rail_${widget.initialDate}")
+                              ? null
                               : const PageStorageKey("monthview"),
                           controller: _controller,
                           onPageChanged: (page) => updateTitle(page),
