@@ -12,7 +12,12 @@ import 'story_model.dart';
 
 class GreatLentFullView extends StatefulWidget {
   final int year;
-  const GreatLentFullView(this.year);
+
+  /// When true, render only the scrollable body (for the tablet reader pane
+  /// or [BookPageSingle]); otherwise wrap in a full-screen Scaffold.
+  final bool embedded;
+
+  const GreatLentFullView(this.year, {this.embedded = false});
 
   @override
   _GreatLentFullViewState createState() => _GreatLentFullViewState();
@@ -61,32 +66,32 @@ class _GreatLentFullViewState extends State<GreatLentFullView> {
     });
   }
 
+  Widget _body() {
+    // No inner scroll view: parent (reader pane / BookPageSingle) scrolls.
+    return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: days
+                .map<Widget>((item) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          GreatLentShortView(date: cal.d(item), mode: GreatLentDayMode.short),
+                          const Divider(color: Colors.black),
+                        ]))
+                .toList() +
+            (!initialized
+                ? [Container()]
+                : [
+                    MarkdownBody(
+                        data: text,
+                        extensionSet: md.ExtensionSet.gitHubFlavored,
+                        styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context))
+                            .copyWith(textScaler: const TextScaler.linear(1.5)))
+                  ]));
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget content = SafeArea(
-        top: false,
-        child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SingleChildScrollView(
-                child: Column(
-                    children: days
-                            .map<Widget>((item) => Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      GreatLentShortView(
-                                          date: cal.d(item), mode: GreatLentDayMode.short),
-                                      const Divider(color: Colors.black),
-                                    ]))
-                            .toList() +
-                        (!initialized
-                            ? [Container()]
-                            : [
-                                MarkdownBody(
-                                    data: text,
-                                    extensionSet: md.ExtensionSet.gitHubFlavored,
-                                    styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context))
-                                        .copyWith(textScaler: const TextScaler.linear(1.5)))
-                              ])))));
+    if (widget.embedded) return _body();
 
     return Container(
         decoration: AppTheme.bg_decor_2() ?? BoxDecoration(color: Theme.of(context).canvasColor),
@@ -99,6 +104,10 @@ class _GreatLentFullViewState extends State<GreatLentFullView> {
                 title: Padding(
                     padding: const EdgeInsets.only(top: 5.0),
                     child: const Text("journey_to_pascha").tr())),
-            body: content));
+            body: SafeArea(
+                top: false,
+                child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SingleChildScrollView(child: _body())))));
   }
 }
