@@ -113,14 +113,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       SizedBox(
           height: 50.0,
           child: Row(children: [
-            const SizedBox(width: 5),
-            IconButton(
-                icon: const Icon(Icons.chevron_left, size: 30.0),
-                onPressed: () => setDate(date.subtract(const Duration(days: 1)))),
-            IconButton(
-                icon: const Icon(Icons.chevron_right, size: 30.0),
-                onPressed: () => setDate(date.add(const Duration(days: 1)))),
-            const SizedBox(width: 5),
+            const SizedBox(width: 10),
             Text("title".tr(),
                 textAlign: TextAlign.left, style: Theme.of(context).textTheme.titleLarge),
             const Spacer(),
