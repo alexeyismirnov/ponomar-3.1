@@ -53,5 +53,8 @@
   "telegram_info": "Orthodox Calendar+ 應用程式現已作為 Telegram 中的迷你應用程式提供。請訂閱我們的機器人！",
   "open_telegram": "打开 Telegram",
   "telegram_title": "Telegram bot",
-  "landscape_layout_hint": "橫向模式下平板佈局更佳"
+  "landscape_layout_hint": "橫向模式下平板佈局更佳",
+  "forefeast_of": "%s前日",
+  "afterfeast_of": "%s慶期",
+  "apodosis_of": "%s慶期圓滿日"
 }

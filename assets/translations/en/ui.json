@@ -53,5 +53,8 @@
   "telegram_info": "Orthodox Calendar+ is now available as a mini-app in Telegram. Please subscribe to our bot!",
   "open_telegram": "Open Telegram",
   "telegram_title": "Telegram bot",
-  "landscape_layout_hint": "Landscape orientation provides a better layout on tablets"
+  "landscape_layout_hint": "Landscape orientation provides a better layout on tablets",
+  "forefeast_of": "Forefeast of %s",
+  "afterfeast_of": "Afterfeast of %s",
+  "apodosis_of": "Apodosis of %s"
 }

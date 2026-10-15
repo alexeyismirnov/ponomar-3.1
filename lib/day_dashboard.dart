@@ -33,13 +33,12 @@ class _DayDashboardState extends State<DayDashboard> {
     _selection = _defaultSelection();
   }
 
-  /// Preselect the Gospel (last reading of the day) so the reader pane
-  /// is never empty.
+  /// Preselect the first Reading of the day so the reader pane is never empty.
   ReadingSelection? _defaultSelection() {
     final reading = ChurchReading.forDate(widget.date);
     if (reading.isEmpty) return null;
 
-    final r = reading.last.split("#").first.trim();
+    final r = reading.first.split("#").first.trim();
     return ReadingSelection(
         title: "Gospel of the day".tr(),
         bibleFontButton: true,
