@@ -129,7 +129,10 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
             itemBuilder: (context, id) => _buildPage(id),
           ),
         ),
-        if (totalChapters > 1) ...[
+        // In embedded mode (tablet 3-pane landscape) the chapter grid is
+        // already visible in the middle panel, so no progress indicator
+        // (bar or dots) is shown in the reader pane.
+        if (totalChapters > 1 && !widget.embedded) ...[
           LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) => Stack(
               children: [
@@ -141,34 +144,30 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
                   width: constraints.maxWidth,
                   height: 40,
                 ),
-                // In embedded mode (tablet 3-pane landscape) the chapter
-                // grid is already visible in the middle panel, so the dots
-                // are redundant.
-                if (!widget.embedded)
-                  Center(
-                    child: ValueListenableBuilder<int>(
-                      valueListenable: _pageNotifier,
-                      builder: (context, page, _) {
-                        const maxDots = 10;
-                        final dots = min(totalChapters, maxDots);
-                        // DotsIndicator asserts position < dotsCount, so when the
-                        // chapter count exceeds the dot cap, scale the raw page
-                        // index from chapter space into dot space.
-                        final position = totalChapters > maxDots
-                            ? page * maxDots / totalChapters
-                            : page.toDouble();
+                Center(
+                  child: ValueListenableBuilder<int>(
+                    valueListenable: _pageNotifier,
+                    builder: (context, page, _) {
+                      const maxDots = 10;
+                      final dots = min(totalChapters, maxDots);
+                      // DotsIndicator asserts position < dotsCount, so when the
+                      // chapter count exceeds the dot cap, scale the raw page
+                      // index from chapter space into dot space.
+                      final position = totalChapters > maxDots
+                          ? page * maxDots / totalChapters
+                          : page.toDouble();
 
-                        return DotsIndicator(
-                          dotsCount: dots,
-                          position: position.clamp(0.0, dots - 1.0),
-                          decorator: const DotsDecorator(
-                            color: Colors.grey,
-                            activeColor: Colors.grey,
-                          ),
-                        );
-                      },
-                    ),
+                      return DotsIndicator(
+                        dotsCount: dots,
+                        position: position.clamp(0.0, dots - 1.0),
+                        decorator: const DotsDecorator(
+                          color: Colors.grey,
+                          activeColor: Colors.grey,
+                        ),
+                      );
+                    },
                   ),
+                ),
               ],
             ),
           ),
