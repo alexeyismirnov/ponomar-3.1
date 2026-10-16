@@ -10,6 +10,7 @@ import 'church_calendar.dart';
 import 'custom_list_tile.dart';
 import 'file_download.dart';
 import 'globals.dart';
+import 'day_scope.dart';
 import 'troparion_view.dart';
 import 'troparion_model.dart';
 
@@ -90,9 +91,11 @@ class TroparionOfDayState extends State<TroparionOfDay> {
                   padding: const EdgeInsets.only(bottom: 5),
                   child: CustomListTile(
                       title: title,
-                      onTap: () =>
-                          TroparionView(List<Troparion>.from(snapshot.data!), showActions: false)
-                              .push(context)))
+                      onTap: () => openReading(context,
+                          title: title,
+                          showActions: false,
+                          builder: () =>
+                              TroparionContent(List<Troparion>.from(snapshot.data!)))))
               : Container());
     } else {
       return Padding(
@@ -105,7 +108,10 @@ class TroparionOfDayState extends State<TroparionOfDay> {
                       .then((dynamic res) {
                     if (res is List<Troparion>) {
                       setState(() {});
-                      TroparionView(List<Troparion>.from(res), showActions: false).push(context);
+                      openReading(context,
+                          title: title,
+                          showActions: false,
+                          builder: () => TroparionContent(List<Troparion>.from(res)));
                     }
                   })));
     }

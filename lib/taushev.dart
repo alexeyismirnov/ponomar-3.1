@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 
 import 'custom_list_tile.dart';
-import 'book_page_single.dart';
 import 'book_cell.dart';
+import 'day_scope.dart';
 import 'ebook_model.dart';
 import 'globals.dart';
 
@@ -32,8 +32,8 @@ class TaushevView extends StatelessWidget {
         return CustomListTile(
             title: data["subtitle"] as String,
             subtitle: author,
-            onTap: () => BookPageSingle(id, builder: () => BookCellText(data["text"] as String))
-                .push(context));
+            onTap: () => openReading(context,
+                title: id, builder: () => BookCellText(data["text"] as String)));
       }
     }
 

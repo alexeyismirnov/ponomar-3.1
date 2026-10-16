@@ -98,39 +98,7 @@ class _LibraryListViewState extends State<LibraryListView> {
           padding: 10,
           reversed: true,
           lang: books[index.section][index.index].lang,
-          onTap: () async {
-            final model = books[index.section][index.index];
-            if (model.dateIterator != null) {
-              final df = DateFormat.yMMMMd(context.languageCode);
-
-              final serviceDate = await AlertDialog(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                      contentPadding: const EdgeInsets.all(5.0),
-                      content: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                  maxWidth: context.screenWidth * 0.5,
-                                  minWidth: context.screenWidth * 0.5,
-                                  maxHeight: 200),
-                              child: ListView.builder(
-                                  itemBuilder: (BuildContext _, int i) => ListTile(
-                                      dense: true,
-                                      onTap: () =>
-                                          Navigator.pop(context, model.dateIterator!.elementAt(i)),
-                                      title: Text(df.format(model.dateIterator!.elementAt(i)),
-                                          style: Theme.of(context).textTheme.titleMedium))))))
-                  .show(context);
-
-              if (serviceDate != null) {
-                model.date = serviceDate;
-                Future.wait([model.initFuture]).then((_) => widget.onBookSelected(model));
-              }
-            } else {
-              widget.onBookSelected(model);
-            }
-          },
+          onTap: () => widget.onBookSelected(books[index.section][index.index]),
           title: books[index.section][index.index].title,
           subtitle: books[index.section][index.index].author ?? "",
         );

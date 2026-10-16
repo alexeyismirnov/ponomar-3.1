@@ -42,7 +42,7 @@ class _DayDashboardState extends State<DayDashboard> {
 
     final r = reading.first.split("#").first.trim();
     return ReadingSelection(
-        title: "Gospel of the day".tr(),
+        title: "Reading of the day".tr(),
         bibleFontButton: true,
         builder: () =>
             PericopeView(key: ValueKey(ConfigParamExt.bibleLang.val()), r));
@@ -100,7 +100,7 @@ class _ReaderPane extends StatelessWidget {
         const Divider(height: 1, thickness: 1),
         Expanded(
             child: Center(
-                child: Text("Reading of the day",
+                child: Text("Reading of the day".tr(),
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!

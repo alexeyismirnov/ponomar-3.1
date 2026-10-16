@@ -5,8 +5,8 @@ import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:group_list_view/group_list_view.dart';
 
 import 'custom_list_tile.dart';
-import 'book_page_single.dart';
 import 'book_cell.dart';
+import 'day_scope.dart';
 import 'ebook_model.dart';
 import 'globals.dart';
 
@@ -32,7 +32,7 @@ class ZernaView extends StatelessWidget {
     return CustomListTile(
         title: model.title,
         subtitle: title,
-        onTap: () => BookPageSingle(title, builder: () => content).push(context));
+        onTap: () => openReading(context, title: title, builder: () => content));
   }
 
   @override

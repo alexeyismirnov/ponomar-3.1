@@ -31,13 +31,18 @@ class DayScope extends InheritedWidget {
 }
 
 void openReading(BuildContext context,
-    {required String title, required Widget Function() builder, bool bibleFontButton = false}) {
+    {required String title,
+    required Widget Function() builder,
+    bool bibleFontButton = false,
+    bool showActions = true}) {
   final scope = DayScope.maybeOf(context);
 
   if (scope != null) {
     scope.onReadingSelected(
         ReadingSelection(title: title, builder: builder, bibleFontButton: bibleFontButton));
   } else {
-    BookPageSingle(title, builder: builder, bibleFontButton: bibleFontButton).push(context);
+    BookPageSingle(title,
+            builder: builder, bibleFontButton: bibleFontButton, showActions: showActions)
+        .push(context);
   }
 }
