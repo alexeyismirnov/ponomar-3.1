@@ -1,16 +1,14 @@
-# ponomar3
+# Ponomar
 
-A new Flutter project.
+Orthodox church calendar for Android and iOS: the day, readings, saints, fasting, and a liturgical library. The Russian and English editions are separate apps.
 
-## Getting Started
+## Branches
 
-This project is a starting point for a Flutter application.
+`master` is not used for development or releases. Each edition lives on its own version branch:
 
-A few resources to get you started if this is your first Flutter project:
+| Branch | Edition |
+| --- | --- |
+| [`ru-3.0`](https://github.com/alexeyismirnov/ponomar-3.1/tree/ru-3.0) | Russian (current) |
+| [`en-3.0`](https://github.com/alexeyismirnov/ponomar-3.1/tree/en-3.0) | English (current) |
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Earlier releases stay on `ru-2.3` and `en-2.3`.
