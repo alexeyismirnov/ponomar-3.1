@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-
 import 'package:group_list_view/group_list_view.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,8 +9,6 @@ import 'globals.dart';
 import 'book_page_multiple.dart';
 import 'bookmarks_model.dart';
 import 'bible_model.dart';
-import 'church_day.dart';
-import 'epub_reader.dart';
 
 class _ChaptersView extends StatefulWidget {
   final BookPosition pos;
@@ -117,11 +113,6 @@ class _BookTOCState extends State<BookTOC> {
               } else {
                 _openPosition(pos);
               }
-            } else if (model.contentType == BookContentType.epub) {
-              model.getContent(pos).then((json) {
-                final day = ChurchDay.fromJson(jsonDecode(json));
-                openEpubAsset(day.reading!);
-              });
             } else {
               _openPosition(pos);
             }

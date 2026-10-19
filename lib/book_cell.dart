@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html_svg/flutter_html_svg.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
+import 'package:markdown/markdown.dart' as md;
 
 import 'package:html/dom.dart' as dom;
 
@@ -40,6 +43,58 @@ class BookCellText extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(text,
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: ConfigParam.fontSize.val()));
+}
+
+/// Loads a markdown asset under [assets/lives/] and renders it with the app font size.
+class BookCellMarkdown extends StatefulWidget {
+  final String filename;
+
+  const BookCellMarkdown(this.filename);
+
+  @override
+  State<BookCellMarkdown> createState() => _BookCellMarkdownState();
+}
+
+class _BookCellMarkdownState extends State<BookCellMarkdown> {
+  late final Future<String> _future;
+
+  String get _assetPath {
+    final name = widget.filename;
+    return name.startsWith('assets/') ? name : 'assets/lives/$name';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _future = rootBundle.loadString(_assetPath);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final fontSize = ConfigParam.fontSize.val();
+    final base = Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: fontSize);
+
+    return FutureBuilder<String>(
+      future: _future,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        return MarkdownBody(
+          data: snapshot.data!,
+          extensionSet: md.ExtensionSet.gitHubFlavored,
+          styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+            p: base,
+            h1: base.copyWith(fontWeight: FontWeight.bold, fontSize: fontSize * 1.2),
+            h2: base.copyWith(fontWeight: FontWeight.bold, fontSize: fontSize * 1.1),
+            strong: base.copyWith(fontWeight: FontWeight.bold),
+            em: base.copyWith(fontStyle: FontStyle.italic),
+          ),
+        );
+      },
+    );
+  }
 }
 
 class BookCellHTML extends StatelessWidget {

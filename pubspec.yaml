@@ -43,9 +43,6 @@ dependencies:
   flutter_html: ^3.0.0
   url_launcher: ^6.3.2
 
-  vocsy_epub_viewer:
-    git:
-      url: https://github.com/alexeyismirnov/vocsy_epub_viewer.git
   flutter_toolkit:
     path: ../flutter_toolkit
   flutter_markdown_plus: ^1.0.12
@@ -87,7 +84,7 @@ flutter:
     - assets/calendar/
     - assets/bible/
     - assets/books/
-    - assets/epubs/
+    - assets/lives/
     - assets/saints/
     - assets/icons/
     - assets/translations/ru/

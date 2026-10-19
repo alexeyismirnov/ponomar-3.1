@@ -13,7 +13,6 @@ import 'bible_model.dart';
 import 'firebase_config.dart';
 import 'feast_notifications.dart';
 import 'store_listing.dart';
-import 'epub_reader.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -68,8 +67,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     if (!ConfigParamExt.ver_1_4.val()) {
       ConfigParamExt.ver_1_4.set(true);
     }
-
-    configureEpubReader(context);
 
     await Jiffy.setLocale(context.languageCode);
   }

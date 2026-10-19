@@ -3,6 +3,7 @@ import 'package:page_view_indicators/linear_progress_page_indicator.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:group_list_view/group_list_view.dart';
 
+import 'dart:convert';
 import 'dart:math';
 
 import 'book_model.dart';
@@ -10,6 +11,7 @@ import 'bible_model.dart';
 import 'book_page_single.dart';
 import 'book_cell.dart';
 import 'bible_view.dart';
+import 'church_day.dart';
 
 class BookPageMultiple extends StatefulWidget {
   final BookPosition pos;
@@ -104,6 +106,18 @@ class _BookPageMultipleState extends State<BookPageMultiple> {
             bookmark: model.getBookmark(pagePos),
             builder: () => BookCellHTML(text, model),
             padding: 5,
+            safeBottom: totalChapters == 1,
+            embedded: widget.embedded,
+            extraActions: widget.extraActions,
+          );
+        }
+
+        if (model.contentType == BookContentType.markdown) {
+          final day = ChurchDay.fromJson(jsonDecode(text as String));
+          return BookPageSingle(
+            title,
+            bookmark: model.getBookmark(pagePos),
+            builder: () => BookCellMarkdown(day.reading!),
             safeBottom: totalChapters == 1,
             embedded: widget.embedded,
             extraActions: widget.extraActions,
