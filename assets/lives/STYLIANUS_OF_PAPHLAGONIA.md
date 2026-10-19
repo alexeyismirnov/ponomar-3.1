@@ -1,0 +1,9 @@
+# STYLIANUS OF PAPHLAGONIA
+
+The very name of St. Stylianus is derived from the Greek word meaning pillar. In the Orthodox ascetic tradition stylites are called ascetics who have chosen as their feat a long or even lifelong stay on a high tower. Day and night and day after day they read the Scriptures, offered prayers to God, and gave advice to those who came to them. This method of asceticism originated from Syria. However, very few saints were able to reproduce this feat in other countries and other time contexts.
+
+Saint Stylianus lived in the 6th century in Paphlagonia, on the Black Sea coast of modern Turkey. His contemporary and, possibly, associate was another great stylite, Alypius, whose memory is also celebrated by the Church on this day. Their lives and exploits are so similar that some researchers of modern times believed that the same saint was hiding under two different names. Perhaps the only difference between Stylianus and Alypius is revealed in the fact that Alypius was a mentor to monastics, while Stylianus received and gave advice from the pillar to family people.
+
+Thus, according to life, and, most importantly, the tradition of venerating the saint in subsequent times, through the prayerful intercession of Stylianus, many barren women acquired the gift of childbearing. Small children who were brought for blessing were healed of illnesses. “Do not prevent the children from coming to me,” the Lord commanded in the Gospel (Matt. 19:14). In the healing meeting of the ancient ascetic and newborns, according to the amazing plan of God, the saving meaning 
+ of Jesus'
+  words was revealed. Saint Stylianus is depicted on icons with a baby in his arms. In our times, the veneration of this great ancient saint is very relevant. After all, modernity is now suffering greatly from the loss of meaning, from the sterility of body, soul, and spirit.

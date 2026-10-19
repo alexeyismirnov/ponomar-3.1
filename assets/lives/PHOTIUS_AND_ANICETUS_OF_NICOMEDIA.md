@@ -1,0 +1,19 @@
+# PHOTIUS AND ANICETUS OF NICOMEDIA
+
+On August 25, the Church honors the memory of the holy martyrs Photius and Anicetus. The Saints suffered for Christ around the year 305 during the reign of Emperor Diocletian (284-305). In church tradition, they are revered as healers and miracle workers. According to the charter, their name is invoked in prayers for the healing of the sick and even in the sacrament of unction. This is evidence of their special veneration by the Ancient Church.
+
+According to the place of their suffering, Photius and Anicetus are called the martyrs of Nicomedia. This 
+ city is in Bithynia
+ , on the site of modern Turkish Izmit, about 100 km from the settlement of Byzantium on the banks of the Bosporus, where Constantinople was founded in 330 by Constantine the Great. Under Diocletian and his successors, Nicomedia was the capital city. Since Christianity had been spreading in the cities since apostolic times, the number of those who suffered for Christ in Nicomedia at that time was very large.
+
+According to the life, Photius and Anicetus were relatives. Anicetus was an uncle, and Photius was his nephew. As his name itself suggests, in Greek meaning invincible, Anicetus was a Roman officer. Previously, little attention was paid to this, but modern researchers are surprised to note that Christ was very popular in the Roman army, even among pagans. Moreover, he was dearly loved by Christians.
+
+It is amazing that the Roman soldiers chose as their ideal not any demigod or all-conquering hero, but the Great Sufferer. “There is no greater love than if a man lays down his life for his friends” (John 15:13). This key quotation for understanding the essence of the Gospel of John is said in the circumstances of the Last Supper. It points to the voluntariness of the suffering of the Lord. Anticipating his crucifixion in the mysteries of His Body and Blood, Jesus announced that He would be crucified on the Cross not because of unfortunate circumstances but would give His life for the salvation of the world that God loved (John 3:16). It is important that, according to the Romans of that time, who innocently experienced the depth of suffering, comprehended the truth in a special way. Thus, the Gospel spread where it was least expected.
+
+To paraphrase Metallica, Jesus is the Harvester of Sorrow. So paradoxically and unexpectedly, the Roman society of that time ripened to the harvest of the gospel (John 4:35), in which, in an amazing succession of miracles, signs, and, importantly, the omnipotent kenosis of the God of the Bible, the martyrs became the true Apostles of Christ.
+
+According to the vita, one day, while walking through the city, Anicetus saw how, on the site of the usual attractions for the entertainment of the people, according to the principle of "bread and circuses", instruments for torture were erected. Upon learning of the impending persecution of Christians, he expressed his indignation, but was arrested and subjected to proceedings and torture. His nephew Photius stood up for his relative. After refusing to renounce Christ and prolonged torment, the saints were thrown into the furnace. The circumstances of their suffering were accompanied by an earthquake.
+
+When the persecution ceased, the relics of Photius and Anicetus were found and transferred to Constantinople, and a church was erected in the name of the saints. Many sick people were healed there. The shrine was the place of anointing with consecrated oil.
+
+Although Anicetus was older than his nephew, in the Orthodox liturgical calendars, contrary to the rules, they are mentioned in reverse order. In this small detail, there is evidence that there is no envy in holiness (cf. Mark 10:37), and that the degrees of earthly hierarchy and seniority in the Kingdom of the Father will be abolished by Christ Himself (cf. 1 Cor. 15:24).

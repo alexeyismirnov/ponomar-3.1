@@ -1,0 +1,37 @@
+# GREAT TUESDAY
+
+At the Liturgy of the Presanctified Gifts on Great Tuesday, the narrative from the first chapter of the Book of Job (13-20) is read. Eight verses of the biblical text tell how Job lost his entire home and family. The ancient Church, the Fathers of the Church, and subsequent tradition saw Job as an undoubted prototype of the Lord Jesus.
+
+“He took upon Himself our infirmities and bore our sicknesses,” says the prophet Isaiah about Christ the Lord (Isaiah 53:4). The book of Job and the messianic prophecies of the Old Testament evangelist, as Tradition calls Isaiah, call the Church, as a community of believers, to attentive reflection on the redemptive work of Jesus Christ in the Days of the Holy Week.
+
+To come closer to understanding the words of Scripture about the Great Sufferer, revealed in biblical images and words, it is extremely important to know the biblical and patristic understanding of the disease. The theology of sickness or the theology of suffering has gradually developed and gained full understanding throughout history.
+
+The essence of illness and even death was hardly understandable to the man of ancient times. Moreover, many perceived illness or death as some kind of autonomous entities. In the imagination of the authors of the narratives, they suddenly came, penetrated into a person, took possession of him. It's paradoxical how some of these images from the past have come to life during the recent pandemic!
+
+Some believed that if a person had some special teaching, invented some kind of antidote, invented a spell, he would remain forever unharmed. As a continuation of this extra-biblical, essentially non-scientific, pagan worldview, the heresy of Pelagius (360-418) arose at the beginning of the 5th century. The British émigré monk, who left Italy after the fall of Rome in 410, tried to transfer the idea of ​​overcoming sin and death through one's own efforts into the theology of the Church.
+
+Pelagius and his disciples were condemned at the III Ecumenical Council of 431 in Ephesus. This condemnation of a non-scientific and, at the same time, deeply heretical idea of ​​a person is extremely important. In turn, various versions of the delusion that a person is able not to sin in this life were rejected at the Carthaginian Councils of the beginning of the 5th century. The decisions of these Councils were included in the canon rules and were received, that is, accepted by the Ecumenical Church.
+
+So, belief in the ability to live and not sin is heresy. The condition of us humans as children of Adam is such that sin is a sign of life. According to the words of the Apostle Paul, only "the dead cease to sin" (Rom. 6:7). The Father of the Church, Bishop Augustine of Hippo (354-430), expounded in detail the teaching of the Church on this subject. Therefore, those preachers who cite images of great saints as examples of sinlessness are very wrong.
+
+Sin for us is a sign of life, and, at the same time, a visiting card of death. It is stored in our spiritual wallet. Sin dwells in everyone, abides with every person, and will never be separated from us until it completely destroys us. As The Russian band Nautilus Pompilius figuratively sang about this: "Cain will destroy us all, because Cain has no more eyes."
+
+“God is with us,” Adam and Eve could rightly sing in Paradise. “Sin is with us - until we leave the world,” sighs the flesh and blood of their descendants until the end of time. “For the punishment of sin is death,” writes the Apostle Paul in Romans 6:23. It was in this Epistle of his that the Apostle of Grace expounded in detail the truths about the human fall into sin and the theology of the divine predestination of salvation in Christ.
+
+No teaching, no meditation, no religion, no technology is simply capable of delivering a person from death and sin. Modernity offers, or, better, in fact, borrowing its way of addressing a person from the biblical logic of the Testament and Promise, as a reward for obedience, many types of immortality: biological, medical, physiological, ecological, and others. As if trying to restore the metaphysical way of thinking brought down by Nietzsche (1844-1900) and Heidegger, (1889-1976) they use the word "meta" for her names, as if after such a renaming people will stop dying. But neither science, nor even religion, is simply capable of overturning death.
+
+Death is next to us, it is in man and the world, as one of the medieval mystics said, she is our sister. It is no coincidence that doctors and scientists simply cannot imagine a world in which she would 
+ not reign
+ .
+
+Deliverance from sin, sickness, and death, according to the Scriptures and the Faith of the Church, was accomplished in the Lord Jesus Christ. He was not born of a husband and wife, but of the Holy Spirit and the Virgin Mary. Being born of the Holy Spirit means that He is a newly created Man, in whom there is neither sickness nor death. There is neither death nor sin in him (2 Cor. 5:21).
+
+The first man, Adam, by the power of grace and his original nature, which did not yet know sin, could not sin. The children of Adam, the people born of him and all their descendants, cannot but sin. The Lord Jesus, the Second Adam, the New Adam from God, could not sin. Therefore, He was completely free. The Lord of Liberation is one of the names of Christ.
+
+According to Scripture, only Jesus could heal and deliver. According to St. Augustine, the Lord heals and frees, for it is, in fact, one thing. The great biblical stories about the Exodus from Egypt, the return from the Babylonian Captivity, the final deliverance of Job from the "all-curse" that befell him, testify that God is "Knowing to Liberate."
+
+Death and hell, which we all deserve, became  the condemnation that fell upon Him. And when the Lord was crucified, the paternal voice that accompanied Him all the days of His earthly life – “This is my beloved Son, in whom I am well pleased” – became forever our property (cf. Matt. 17:5). It became the property of all who believe and have faith in Christ Jesus until the end of time. “The Cross is the Guardian of the Entire Universe,” the Church sings in her hymns.
+
+Through baptism and communion, believers become brothers and sisters of the New Adam and children of God, incomparably closer to Him than blood children are for people. In the Kingdom of the Father, but not here and not now, we will, according to the promise of Himself, drink new wine with His Son (Matt. 26:29), partake in body and spirit of joy, gladness, and freedom. Then the trees will sing and the animals will smile. For people - the children of God will be made free because they will no longer be able to do or even desire evil. According to the abundance of grace, according to the word of Paul, we will become brothers of the Only Begotten Son of God (cf. Rom. 5:17).
+
+“May the Name be blessed the Name of the Lord,” Job said in his suffering (1:21). Fulfilling this prophecy about Himself, the Lord Jesus proclaimed on the Cross: “It is finished” (John 19:30). Thus, the favor of the Father has turned to us. We have become heirs of His Life, for He has become heirs of our death. This is the essence of the New Testament. As the author of the Epistle to the Hebrews writes: “For where there is a covenant, the death of the testator is needed” (Heb. 9:16). He took upon Himself all of ours and gave us all of His.

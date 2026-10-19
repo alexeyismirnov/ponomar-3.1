@@ -1,0 +1,23 @@
+# SAINT NICHOLAS
+
+The winter holiday of St. Nicholas is the main and universal day of celebration in honor of the saint. The veneration of his memory is extremely great. The tradition of celebrating in his honor is widespread in both the East and the West. Without a doubt, Nicholas is one of the most revered saints in history. Moreover, this veneration extends not only to the entire Orthodox world, but also to the entire Christian world. As a spontaneous reaction to such great glory of one of the saints, the question arises, why are some saints more revered than others?
+
+The answer to this question is revealed in the biblical teaching about man. The Word of God tells us about immortality. Unlike ancient philosophical ideas, in which the immortality of the soul is explained by its natural properties, Scripture speaks of the creation of man in the image of God. The image of God is indestructible. Man is immortal by virtue of his creation by the hand of God. According to the figurative expression of Irenaeus of Lyons (+202), the Hands of God are the Lord Jesus and the Holy Spirit.
+
+The Church's tradition of understanding sacred texts traditionally distinguishes between the image of God and His likeness. In this sense, the image of God is the same in every person. It is given, consists of various characteristics, is immutable and cannot be destroyed. His likeness is the revelation of the image. Therefore, to a very significant extent, the likeness of God is inherent in the saints. It remains with them when, after death, they physically leave this world.
+
+According to Scripture, man is immortal. At the same time, the immortal man created in the image of God, who has achieved Godlikeness in holiness, lives and continues to live forever. You continue to live and love God, goodness, and neighbors whom you once loved. In the Church, in particular, the prayer to God with a request for help through the intercession of the saints is based on this.
+
+At the same time, every person, and especially the saints, remains a living, thinking, loving person even after leaving this world. Therefore, many saints chose to praise God always, “day and night”. Speaking, at the same time, in poetic and biblical language, they seemed to have decided to withdraw from the veneration of people, and after bodily death to preserve the humility that enlivened their souls in their physical life on earth. As it is said in the book of the Apocalypse: “These are they who came out of the great tribulation; they washed their robes and made them white in the blood of the Lamb. For this reason, they now remain before the throne of God and serve Him day and night in His temple, and He who sits on the throne will dwell in them” (Rev. 7:14-15).
+
+These saints, who loved the praise of God most of all, laid their hands on St. Nicholas and entrusted him with intercession for the people. They themselves preferred to remain in the unknown. Great saints and, above all, saints, holy bishops are contemporaries of Nicholas himself.
+
+From the history of the Ancient Church, it is known that just a few decades after the death of St. Nicholas, within the Roman Empire, which then numbered, according to various estimates, approximately fifty million people, there were two thousand Christian canonical bishops. Nikolai was one of them.
+
+Why was Nicholas chosen by his brothers and God for such great service to people among the saints? If we turn to the text of his life, we can be convinced that almost nothing has come down to us from his very biography, that is, from the story of his specific earthly life. His glory of holiness is primarily a posthumous glory of signs and wonders, born of veneration.
+
+Nicholas' contemporaries, the great holy bishops of the East and West of the Christian world - Basil the Great, Gregory the Theologian, John Chrysostom, Ambrose of Milan, Augustine of Hippo and Leo the Great - did not say anything about Nicholas in their works. While their biographies in certain periods of their lives are known to us almost day by day.
+
+According to his life, the saint was born in 270, that is, he was a confessor of the era of persecution and departed to the Lord in 345. He survived not only the legalization of Christianity under Emperor Constantine (+337), but also saw the First Ecumenical Council of 325, marking the beginning of the era of great dogmatic disputes. But for his contemporaries and his closest descendants, Nikolai remained in obscurity.
+
+This is the method of grace. For his mysterious disappearance from the immediate memory of history was rewarded by God with the great glorification and glory which he received from above to intercede for the whole world.

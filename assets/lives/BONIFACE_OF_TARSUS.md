@@ -1,0 +1,19 @@
+# SAINT BONIFACE OF TARSUS
+
+The Holy Martyr Boniface of Tarsus suffered for Christ in the city of Tarsus in Cilicia during the reign of Emperor Diocletian (284-305). After his suffering, the martyr's body was transferred to Rome and placed on the Via Latina.
+
+The life of the saint was translated from Greek into Latin in the 7th century. At that time, a church dedicated to him already existed on the Roman Aventine Hill. At the turn of the millennium, a monastery was founded at the church, the patron saint of which, in addition to Boniface, became another Roman saint, the righteous Alexis the Man of God (+412). The ancient Church celebrated the memory of the saint twice a year: December 19 and May 14. It is assumed that one of these days corresponds to the day of his martyrdom, and the other to the transfer of his relics. This is the historical core of the veneration of the saint.
+
+Over time, the life of the saint underwent significant literary processing and acquired the features of a complete narrative, the details of which are familiar to most Orthodox Christians. According to the text, Boniface was the cohabitant of a wealthy Roman citizen named Aglaia. According to the common custom of that time, they lived in concubinage, that is, in cohabitation outside of the marriage accepted by Roman law. At the same time, they spent their days in luxury and pampering.
+
+Hearing about the persecution of Christians in the East of the Empire, Aglaia sent Boniface to Tarsus of Cilicia to acquire the relics of the holy martyrs. Arriving at his destination, Boniface came into direct contact with the reality of the suffering of the saints for Christ. Grace touched his heart.
+
+He proclaimed himself a Christian and, after much suffering, was killed. Boniface's death for Christ became a baptism of blood, and his body, after a long search, found and returned to Rome, became those very "relics of the saints" that his cohabitant sought in an inexplicable metaphysical and, at the same time, superstitious impulse. The life tells of her repentance and righteous life as a result of Boniface's martyrdom. In the Orthodox calendar, she is remembered as "Righteous Aglaia" and is celebrated as a saint on the same day as Boniface.
+
+Since, as a result of the calendar reform carried out by the Bolsheviks in 1918 in the former Russian Empire without taking into account the opinion of believers, the Orthodox church calendar of the Russian Church and the Churches, in one way or another connected with it by a common calendar or tradition, shifted by 13 days, Boniface's day of remembrance began to fall on January 1, that is, on the New Year itself. In popular piety, the veneration of this saint has acquired a second wind. In modern Orthodoxy, the martyr is called upon to resist the disease of drunkenness.
+
+"Nothing that enters a man from outside can defile him; but what comes out of him, these are the things that defile a man" (Mark 7:5). These words of the Lord Jesus in the Gospel were addressed to his contemporaries, whose religious attention was focused on the issues of careful selection of food for ritual purity. The New Testament abolished the concept of ritual impurity, and in its place came the commandment about the need to maintain moral righteousness. The Lord spoke about this new, New 
+ Testament
+  purity in the Gospel.
+
+In the Bible, as in Christianity, there is no prohibition on alcohol consumption. But its abuse can make a person a violator of the commandments. Apostle Paul warned about this with the words that "drunkards will not inherit the kingdom of God" in the Epistle to the Corinthians (1 Cor. 6:10). Unlike, for example, Islam, the abstinence from alcohol in Orthodox Christianity is not ritualistic, but moral. It is important to remember this when honoring Saint Boniface.

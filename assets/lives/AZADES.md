@@ -1,0 +1,23 @@
+# MARTYR AZADES AND 1000 MARTYRS OF PERSIA
+
+In 337, Emperor Constantine was baptized on his deathbed. This event crowned the long journey of his conversion. The stages were the Edict of Milan in 313, which stopped the persecution of Christians in the Empire, as well as the Council of Nicaea in 325. The Council’s resolution on the consubstantiality of the Son of God with God the Father meant not only the victory of the Orthodox, but also meant that from now on Christian Orthodoxy became the official confession of the Roman state.
+
+With the baptism of Constantine, this path of Christianization of the Roman Empire seemed to become final and irrevocable. Constantine went down in history under the name “The Great”. The Eastern Church called him “Equal to the Apostles.” The immediate reason for this was the will of Constantine to be buried in the Church of the Holy Apostles. The people said that from now on the deceased emperor became one of them. What contained an element of surprise and irony became, in fact, a paradoxical prophecy, a kind of act of canonization of a previously pagan emperor becoming a Christian saint.
+
+What was a boon for the Orthodox of the Roman Empire meant a radical change for Christians outside its borders. The Persian Empire, another geopolitical entity, in modern terms a superpower with which Rome constantly waged war, also gradually became Christianized. The Persian Shahs were Zoroastrians, but they did not destroy Christians, as the pagan Roman emperors had done before.
+
+When Constantine was baptized, the Persian state changed its attitude towards Christians. From now on they began to be suspected of disloyalty. The era of persecution began. A century later, the Orthodox of Persia would have to call themselves “Nestorians” or “Monophysites,” and formally declare their separation from the “Byzantine Churches,” the so-called “Orthodox Pentarchy.” Thus, through the conflict, the tolerance of the Shah returned, and the opportunity for the Mission appeared.
+
+Persian Christianity, compared to Byzantine, Roman, and Egyptian, was much less dogmatic. It was figurative and poetic. Therefore, formal distancing from the rest of Christendom in matters of doctrine was not particularly important. “Nestorian”, in essence, of course, were Orthodox Persian preachers, and, following them, the dioceses reached the depths of Asia. The famous “Stele of the Illustrious Religion” of 781 in China is a keeper of the memory of those days. Historians and theologians still do not know the answer to the question of why this enormous Christian presence in Asian countries came to naught.
+
+The Constantinian turn in the history of the Roman Empire coincided with the reign of Shah Shapur II (309–379). He reigned for 70 years and became the first, and perhaps only, great monarch in history to be crowned in his mother's womb. The crown was placed on her stomach. It is not known whether the Persians 
+ themselves had any
+  similar intention in this 
+ action
+ , but a definite prototype of this in Christian dogma was the event of the Annunciation.
+
+Shortly before the death of Constantine, Shapur decided to break the Peace of Nisibis 297 between the two Empires, which by that time had already been in effect for 40 years. Preparing for military action, and at the same time testing the loyalty of the Christian population, he ordered the tax to be doubled. In essence, this meant the beginning of persecution. Christians were declared rebels.
+
+On April 17, 341, the Persian bishop of Seleucia and Ctesiphon, Simeon, suffered martyrdom for resisting the edict. Presbyters Habdelai and Ananias suffered along with him. Azades, Phusicus, his daughter Askitrea, Usphazanes, and other Shah's courtiers, stood up for those being executed, for they themselves turned out to be secret Christians. Many others suffered along with them. The ancient Menologions speak of a thousand martyrs. This is a symbolic number, evidence that the number of Persian martyrs was very large.
+
+“Oh, the depth of the riches of the wisdom and knowledge of God! How unsearchable his judgments, and his paths beyond tracing out!” writes the Apostle Paul (Rom. 11:33). In 361, Constantine's nephew Julian ascended the Roman throne. He declared himself a pagan and began to return the Empire to idolatry. Considering his main task to be the fight against Persia, in the spring of 363 he set out on a campaign. On June 26, under unclear circumstances, Julian the Apostate was defeated in battle and died from his wounds. Christians, as evidenced by the life of Basil the Great (330-379), were convinced that this happened through the prayers of the saints. The churches were prophetically divided, but the communion of saints continued.

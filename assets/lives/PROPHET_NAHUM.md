@@ -1,0 +1,11 @@
+# PROPHET NAHUM
+
+The Prophet of God Nahum, whose name is translated from Hebrew as “Comforter,” the seventh of the minor biblical prophets, was from Judea and preached in 660–612 BC, being a contemporary of the prophets Jeremiah and Zephaniah. One of the shortest books of the Old Testament, the prophecy of Nahum consists of 47 verses, divided into three chapters.
+
+The first chapter is a psalm of praise, celebrating the greatness of God. In the final verse of this chapter, the Fathers of the Church saw a prophecy about the future preaching of the Apostles: “Look, there on the mountains, the feet of one who brings good news, who proclaims peace: Celebrate your feasts, O Judea!” (1.15).
+  
+ The second and third chapters herald the destruction of the Assyrian Empire and its majestic capital Nineveh: “It is for the many fornications of a harlot of a pleasant appearance, skilled in sorcery, who sells nations with her fornications and tribes with her charms” (3.4). Subsequently, already in the New Testament, these words, as applied to the fall of the Whore of Babylon - this embodiment of human sin, apostasy, and fight against God, will be perceived in the Apocalypse (cf. Rev. 18:2).
+
+Despite its stunning poetic power and sparkling brevity, Nahum's prophecy about the destruction of Nineveh describes the destruction of the Assyrian capital in such detail and realistically that some researchers still wonder whether Nahum himself witnessed the destruction that took place in 612.
+
+Prophetic memories during the Advent period are evidence that, in the consciousness of the Ancient Church, faith in the Lord Jesus Christ was closely connected with a thorough knowledge and constant reading of the Old Testament texts, the authors of which prepared the people of God for the Coming of the Messiah and Savior. Paradoxically, in our days they become a prophetic warning for of Christians who have never read the Old and New Testaments completely, from beginning to end. Scripture, after the creation of the world and before the Nativity of Christ, is the second, great degree of the incarnation of God in the word. Feeding yourself on the flesh and blood of His words is worthy and saving for everyone.

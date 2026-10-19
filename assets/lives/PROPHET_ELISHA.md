@@ -1,0 +1,21 @@
+# PROPHET ELISHA
+
+On June 27, that is, exactly 35 days before the celebration in honor of the prophet Elijah, the Church honors the memory of the biblical prophet Elisha. He was Elijah's disciple and his successor in the prophetic ministry. Like his Master, Elisha left no scriptures behind him. At the same time, Scripture itself, this writing hand of God in history (Dan. 5:5), dedicated a lot of lines to both prophets.
+
+The establishment of a holiday in honor of the prophet Elisha is associated with specific historical events. Until the middle of the 4th century, the saint was highly revered in Palestine. According to a contemporary of those events, St Jerome (347-420), demons were driven out of the saint's tomb in fear.
+
+In order to prevent the desecration of the memory of Elisha by Emperor Julian the Apostate (361-363), the relics of the saint were hidden and then transferred from Jerusalem to Constantinople.
+
+The relics of Elisha were laid in the Church of the Holy Apostles in the Capital, where by that time the relics of the prophet Elijah were already located. In ancient times, the celebration in honor of the prophets Elijah and Elisha was бcelebrated solemnly and jointly.
+
+It is noteworthy that the memory of Jerome himself in our Church is celebrated on June 28, that is, the day after the memory of Elisha. So, as if the prophet of God wished in a special way to bring Jerome, the great interpreter of Scripture and a witness of signs from God, closer to himself in the doxology of the Church and in the Heavenly Glory.
+
+According to the Bible, the grace that Elisha received through Elijah was twofold. That is, it twice exceeded the totality of gifts, signs and wonders given by God to Elijah. At the same time, the very concept of “double measure” corresponds to the measure that, according to the Law, was given to the firstborn sons (cf. Gen. 25:27-28:5). This testimony precedes John's words about the glory given to Christians, to receive grace for grace and to be the Sons of God (cf. John 1:16).
+
+Unlike Elijah, whose prophetic ministry took place in the denunciation of idolaters, Elisha primarily interceded for the people of God and performed miracles. The whole image of Elijah is permeated with loneliness, while Elisha was in communion with the "schools of the prophets" that Samuel once founded (cf. 2 Kings 6:1). His name is translated as “God's salvation”. The prophetic testimony of Elisha marked the entire 9th century. Elisha's ministry lasted over 65 years.
+
+The prophet parted the waters of the Jordan, made the springs drinkable, delivered the armies of Judah and Israel from thirst. By multiplying the oil in the widow's vessel, he saved her from hunger. The prophet predicted victory over the superior enemy to the king of the people of God. He healed a Syrian military leader of leprosy, resurrected the son of a widow. Even after the death of the prophet, touching his bones resurrected a dead man carried by (2 Kings 13:21).
+
+As a living personification of the words of the Apocalypse, Elijah and Elisha shone like “two olive trees and two candlesticks before God” (cf. Rev. 11:4). Their prophetic glory is inextricably linked with each other. Therefore, it is very regrettable that the memory of Elisha, in fact, is practically not celebrated and forgotten by the people of God. Today, this great memory is just a date on the church calendar. This certainly needs to be corrected. It is necessary to read the texts of Scripture dedicated to the prophets and call on their intercession before God in Heaven.
+
+Elisha and Elijah were types of the Lord and John the Baptist. John fasted, reproved, and lived in the wilderness, the Lord Jesus blessed the marriage in Cana of Galilee, preached the gospel, healed, and resurrected the dead. Elisha performed miracles for himself when he was in need, for his neighbors, and for all the people. The Lord did not perform a single miracle for Himself. Thus, the Face of God as Self-giving, infinite being not for himself was revealed in Jesus. Grace is a gift given by God. This is the ability to do good and give – the image of God the Giver, according to which, according to the Scriptures, man was created (cf. Gen. 1:27).

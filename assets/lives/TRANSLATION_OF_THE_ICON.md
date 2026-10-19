@@ -1,0 +1,12 @@
+# TRANSLATION OF THE IMAGE NOT MADE BY HANDS FROM EDESSA TO CONSTANTINOPLE
+
+The historical reason for the establishment of the liturgical celebration was the translation of the Icon of Christ the Savior Not-Made-by-Hands from Edessa to Constantinople in 944. This was the time when the Byzantine Empire, several centuries after a series of defeats and the loss of vast areas previously under its rule, due to Arab conquests, was able to recover, regain some of its former power and begin cultural, military and even territorial expansion.
+
+At the same time, the surviving written evidence does not allow us to draw an unambiguous conclusion about the reasons that prompted the then Emir of Edessa to give the Byzantines the great shrine, which had been in the city since apostolic times. It is possible that the Byzantines offered a very significant sum for the relic, but it is also likely that the transfer of the shrine was a diplomatic gesture of reconciliation characteristic of that time. These are possible historical explanations.
+
+But there is another, theological interpretation. 
+ Very
+  likely, and this is also mentioned in historical documents, the presence of the image in the city, which by that time had ceased to be Christian, began to inspire fear in the local residents, and, most importantly, in the authorities. Thus, according to chroniclers, attempts to open the shrine and approach it during the time of Arab rule led to earthquakes. Likewise, even during the time of the Byzantines, the Image Not-Made-by-Hands awed the pagan Persians who besieged the city. Then, by the will of the Christians themselves, who sought to protect the shrine, but, perhaps, at the request of the Gentiles, the Image was walled up in the wall for a long time. It nevertheless survived, so subsequent interpreters saw divine providence in such an act. However, the shrine wa
+ s then considered completely lost for a long time.
+
+This theological explanation for the transfer of the Image Not-Made-by-Hands from Edessa to Constantinople contains a visible message. Every shrine becomes a blessing for those who approach it with faith. For God Himself does not look at faces (Acts 10:34), but at the hearts of men. One must guard oneself from the pagan and non-Christian perception of sacred things. A shrine is a manifestation of God’s love for people. According to the Apostle John, “There is no fear in love, but perfect love casts out superstition and fear” (1 John 4:18).

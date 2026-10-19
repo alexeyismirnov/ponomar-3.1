@@ -1,0 +1,11 @@
+# BEHEADING OF JOHN THE BAPTIST
+
+According to the ancient tradition of the Church, the “Year of the Lord” ends with the day of the Beheading of John the Baptist on September 11 (August 29).  That’s right, “The Year of the Lord” is what the church year is called in the language of Orthodox liturgy. Since the church new year is celebrated three days later, September 14 (1), a unique time is created between it and the Beheading. Indeed, in relation to the day of the Beheading of John the Baptist, the Church New Year falls on the third day. Thus, in the minds of the faithful, the great reminiscent image of the sacred rest of the Lord Jesus in the tomb is recreated. Thus, at the beginning of autumn, the period of silence and reflection on time, as in the saving time of Easter, is again reproduced.
+
+The end of John's journey is extremely sad. But it is precisely this that marks the end. After all, this is how the line of biblical prophets who proclaimed the Victory of God, passing through thousands of years of sacred history, ends. It ends with John the Beheaded.
+
+Calling John “the greatest of those born of women” (Matthew 11:11), the Lord Jesus reveals the true face of the Biblical God. Because He Himself, the Coming One, expected in glory, comes in obscurity and triumphs in ignominy. Expected in the liberation of the people, it is revealed in his own captivity from the people. Our Lord ascended the Cross of Infamy. In the greatest culmination of the event of the cross, by which the world was saved, the true Face of the Biblical God was revealed.
+
+Therefore, John’s proclamation is not only in his words about the Coming Messiah, but in the image of dishonor, humiliation, humility and meekness of the Lord that he reveals in himself. Thus foreshadowing what will happen to the One Whom he foretells. Thus, the Lord Jesus and His Prophet John stand before us in their sorrows, in the greatness of what is called “divine exhaustion” (cf. Phil. 2:6-11).
+
+Faith in the Holy Scriptures has a threefold dimension: to believe God, to believe in God, and to follow Him. God brought John closer to Himself in a special, unique, inimitable, amazing way. After all, completing the History of the Testament, He made John a partaker of His humility in order to introduce to glory those who believed his call to repentance and followed Jesus Christ.

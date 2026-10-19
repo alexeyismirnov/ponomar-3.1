@@ -1,0 +1,11 @@
+# ONUPHRIUS THE GREAT
+
+On June 25 (12), the Church honors the memory of St. Onuphrius the Great. The saint was born in 320 and went to the Lord after 400. In the person of Onuphrius, the Church honors one of the greatest hermits of Christian antiquity, an ascetic who lived in the Egyptian desert for about 70 years. Evidence of the special veneration of Onuphrius in the Ancient Church is the fact that he became one of the very few saints who went down in history with the name “Great”.
+
+The life of Onuphrius was recorded by another great holy ascetic, Abba Paphnutius. According to him, Onuphrius was the son of one of the Egyptian princes, but, being expelled from home, he found refuge in one of the monasteries near the Egyptian Hermopolis, then wandered Cappadocia and Palestine, after which he lived as a hermit.
+
+A feature of Onuphrius's asceticism was his complete separation from people and the absence of ordinary human food. Over time, the saint’s clothes decayed, and he became a true and living personification of those whom, in the words of the New Testament Epistle to the Hebrews, “the whole world was not worthy, who wandered in the deserts and mountains, in the caves and caves of the earth” (Heb. 11:38).
+
+In such a particular feat of Onuphrius, a deep theological dialectic is revealed. Refusing to stay with people, deprived of all protection and even clothing, he became like the birds of the air and the beasts of the earth, and experienced kenosis, that is, in theological language, voluntary exhaustion and a kind of dehumanization. In return, God, by the power of his grace, granted him a new, angelic dignity. After all, according to life, food was brought to the ascetic when he was in need by angels.
+
+The history of the veneration of Saint Onuphrius contains remarkable details. When Duke Henry the Lion (1129–1195) founded Bavarian Munich in 1158, the head of the saint was laid at the foundation of the city. A huge image of St. Onuphrius still adorns one of the central squares of the Bavarian capital. The monk is the heavenly patron of Munich. The famous Yableczna monastery in Poland, founded at the end of the 15th century, is dedicated to St. Onuphrius. Named so because of the miraculous appearance of the icon of the saint, the monastery is the main monastery of the Polish Autocephalous Orthodox Church.

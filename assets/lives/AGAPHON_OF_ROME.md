@@ -1,0 +1,13 @@
+# AGAPHON OF ROME
+
+Saint Agathon (577–681) was the bishop of Rome, as the ancient Orthodox popes of this Church preferred to call themselves in those days, avoiding additional titles. His ministry was brief and lasted only three years. However, during this very short period, even for those times, Agathon managed to do quite a lot for the good of the Church and people.
+
+Thus, thanks to the efforts of Agathon, the VI Ecumenical Council took place in 680–681. It was there that the interrupted communion between the Churches of Rome and Constantinople was restored. The heretical teaching of the Monothelites, which denied human action and the will of the Lord Jesus Christ, was condemned there. To make the Council possible, Saint Agathon first held a council of bishops of the Western Church, at which the Orthodox teaching on this complex subject was precisely formulated. In their teaching about the fullness of the human will in Christ, the Fathers followed the dogmatic axiom: “What was not accepted by the Redeemer could not be healed.”
+
+Agathon was especially concerned about the synodal principle in the life of the Church, that is, about conferring with the brethren in everything. Thus, at other councils of that time, the episcopal dignity of one persecuted English bishop was returned, and the non-canonical autocephaly of the Ravenna Church, which was “granted” to it by the Emperor of Constantinople, was abolished. Agathon's authority was so great that the bishop of Ravenna of that time himself asked him for this canonical abolition. It was a remarkable 
+ and rare
+  combination of the ancient philosophical and practical principle of power and authority.
+
+Agathon, whose name is translated from Greek as “good,” came from Sicily, where the influence of Greek Christianity in ancient times was especially strong. Unlike most Roman bishops of that time, who were elected from priests, Agathon was a monk before his installation. He was very old.
+
+It is obvious that a life spent in asceticism and monastic service gave his character a special friendliness and meekness. This, undoubtedly, was a special divine providence. After all, during Agathon’s service at the head of the Roman Church there was a devastating epidemic. Children were buried with their parents; siblings were often buried in the same coffin. To alleviate the suffering of his flock, Agathon obtained from the emperor the abolition of the tax on the installation of a bishop, which he imposed on the Roman Christians. “My unproud God,” the great mystic Simeon the New Theologian (949-1022) called the Lord. Agathon's life lived up to his name. He was the good shepherd of Christ the Lover of Mankind.

@@ -1,0 +1,17 @@
+# MARTYR AUTONOMUS
+
+On September 25, the Orthodox Churches of the Julian calendar honor the memory of St. Autonomus of Italy. The saint was a bishop and preacher who suffered for Christ during the persecution of the Roman emperor Diocletian (294-305).
+
+The life of Saint Autonomus was recorded in the era of Emperor Justin (518-527). There is little information about the saint. We do not even know the approximate date of his suffering. Moreover, his very name, which literally means "independent and independent", is associated with his special ministry.
+
+The Autonomus was an itinerant bishop. This rare ministry in the Ancient Church continued the practice of those times when the Apostles, and later their disciples, passed from village to village, founded communities everywhere, but did not stay in any particular place for a long time. The Church looked forward to the imminent coming of Christ. The apostles hastened to go around “all the cities before the Lord returns” (cf. Matt. 10:23).
+
+According to his life, with the beginning of the Great Persecution of Diocletian, Autonomus, following the commandment of the Apostle Paul (2 Tim. 4.5), increased his work as an evangelist even more. From Italy, where he had previously been, he went to Bithynia. In the capital of this historical region, Nicomedia, the persecution was especially rampant at that time.
+
+Preaching in small villages, Autonomus converted many to the faith. In one of these places, he, together with the inhabitants converted to Christianity by him, built a secret church and set off on a further missionary journey. During his absence, driven by zeal for the One God, his disciples brought down the idols in the temple. The enraged pagans remembered this. They ambushed the saint and killed him during the celebration of the Liturgy. They stained the altar with his martyr's blood.
+
+The ancient Church did not allow Christians to provoke pagans, or to seek martyrdom themselves. From the point of view of the sacred canons, the new converts did wrong. Saint Autonomus converted many people to the faith. Like the Lord Jesus in the Gospel, “he gave his life for his friends”, for those whom he converted, whom he brought out of darkness into light (John 15:13). In fact, the Autonomus suffered through the fault of those who made a mistake. It was a special crown of very few martyrs. For these words originally refer exclusively to the Last Supper.
+
+When the persecution of Christians ceased, under Constantine the Great (+337), a church was built at the resting place of the saint. In the life of the bishop and miracle worker Theodore of Sykeon (+613), a monastery named after him is mentioned. Finally, the ancient historian Theophylact (580-630), writes that shortly before his death, the emperor Mauritius (582-602), who was formerly revered as a saint for his piety and death at the hands of a usurper, found temporary refuge from murderers in the church of St. Autonomus, on the coast in Bithynia.
+
+This wonderful communion of saints, in the hospitality of honoring the martyr Autonomus, teaches us to remember the forgotten saints of God. Honoring the pilgrim bishop, who had no place to lay his head (Mt. 8:20), and, like the biblical prophet, was killed "before the altar" (cf. Mt. 23:35), we ask God for the gift of remaining faithful to Him even unto death. For in this gift of perseverance in goodness, as the Bible and the Fathers of the Church teach us, there is a greatest grace.

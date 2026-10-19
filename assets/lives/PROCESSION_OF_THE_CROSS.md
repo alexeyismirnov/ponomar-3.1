@@ -1,0 +1,11 @@
+# PROCESSION OF THE LIFE-GIVING CROSS OF THE LORD
+
+The Feast of the Procession of the Honorable Wood of the Life-Giving Cross was originally one of the events in the life of the Church of Constantinople. By the predestination of God, it overcame the boundaries of its historical origin and became one of the universal Orthodox celebrations, when the Holy Cross of the Lord Jesus is commemorated during the liturgical service.
+
+It is known that initially on this day a special religious procession was held in Constantinople with a particle of the Holy Cross. Then the Church prayed that during this especially hot period of the year for the Byzantine capital, the Lord would preserve the city from diseases and epidemics. Subsequently, already in the Russian Church, it was on this day that the Baptism of Rus' was remembered. The water was blessed and a prayer of thanksgiving was performed.
+
+Subsequently, this historical holiday began to acquire theological  significance. One of the important elements of veneration of the Holy Cross in Orthodoxy is turning to it in prayer as an individual. This happens because the Cross of the Lord is an
+  
+ “instrument” of our salvation. Moreover, the Cross is inseparable from the One Crucified on it. Finally, the Cross is actually one of the names of the Lord Jesus. Therefore, we turn to him in chants and prayers, so that God will preserve us from evil, disasters and temptations. The faith of the Church and the experience of the saints suggests that the Cross protects from evil people and demons, it preserves created nature and is beneficial for all creation.
+
+“Behold, I stand at the door and knock: if anyone hears My voice and opens the door, I will come in to him and will sup with him, and he with Me,” says the Lord Jesus in His Apocalypse (Rev. 3:20). Perhaps these words best express the very essence of this summer celebration. The very word “procession” in the name of the holiday means “wearing out.” Thus, the name of the celebration emphasizes that the Holy Cross is not simply carried out in a liturgical procession, and does not remain in the church for the worship of believers, but He Himself comes to people, to the world, to all creation to bestow blessings.

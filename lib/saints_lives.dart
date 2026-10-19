@@ -10,7 +10,8 @@ import 'custom_list_tile.dart';
 import 'globals.dart';
 import 'church_day.dart';
 import 'church_calendar.dart';
-import 'epub_reader.dart';
+import 'book_cell.dart';
+import 'day_scope.dart';
 
 class SaintsCalendar {
   int year;
@@ -111,11 +112,14 @@ class SaintsLivesView extends StatelessWidget {
     List<Widget> res = [];
 
     for (var d in days) {
+      final title = d.comment!;
+      final reading = d.reading!;
       res.add(CustomListTile(
           padding: 10,
-          title: d.comment!,
+          title: title,
           subtitle: 'lives_of_saints'.tr(),
-          onTap: () => openEpubAsset(d.reading!)));
+          onTap: () => openReading(context,
+              title: title, builder: () => BookCellMarkdown(reading))));
     }
 
     return Column(children: res + [const SizedBox(height: 5)]);

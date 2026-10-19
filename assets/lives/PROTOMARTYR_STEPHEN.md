@@ -1,0 +1,13 @@
+# PROTOMARTYR STEPHEN
+
+The memory of the holy first martyr Stephen on the third day after the Nativity of Christ is connected with the tradition of the Ancient Church of remembering the great biblical saints who were closest to the Lord and beloved by the people of God on Christmas days.
+
+In many ancient menologies, the celebration in honor of Stephen was already on the second day of the holiday, that is, December 26 (January 8). However, according to the tradition of the Church of Constantinople, on the second day of Christmas a solemn liturgy was celebrated in honor of the Mother of God, which the patriarch, together with the clergy, served in the temple dedicated to the Blessed Virgin in Blachernae - a place that was the spiritual heart of the Byzantine capital, dedicated to Mary.
+
+Due to historical continuity, in our liturgical calendar this day is called the “Synaxis of the Virgin Mary,” that is, literally, a special liturgical service in Her honor. Thus, Stephen's memory in Orthodoxy is celebrated on the third day after Christmas.
+
+The Church calls Stephen the “protomartyr.” This designation is due not only to the fact that, according to the Book of Acts, he was the first to suffer for his confession of faith in Christ in Jerusalem, but also to the fact that the image of his confession became the prototype of all subsequent martyrdom. Half of the sixth chapter (6:8-15) and the entire seventh chapter (7:1-60) of the Book of Acts are dedicated to a description of the deeds and signs of Stephen, his trial and his preaching, which in itself speaks of the importance that was attached to him by the Apostles who stood at the origins of this book.
+
+At the same time, in its content, the trial of Stephen consistently reproduces the trial of the Lord Himself described in the Gospel. This means that in the understanding of the authors of the Scripture, Stephen, and after him all those who have to suffer for faith in the One God (Rev. 6:11), become brothers of Christ, having fully drunk the Cup of His sorrow (cf. Matthew 20:23). “And reverent men buried Stephen and made great mourning for him” (Acts 8:2).
+
+Finally, the very name of Stephen, translated from Greek meaning “crown,” became in the consciousness of the early Church an indication of the glory in which the faithful followers of Christ would be clothed in the Kingdom of the Father. Thus was born the most important component of that amazing mysterious semantics, which gradually over many centuries was embodied in the life of the Church, in many great and small images, in the final humility of the funeral service and the apocalyptic symbolism of the Orthodox wedding, all great and small things.

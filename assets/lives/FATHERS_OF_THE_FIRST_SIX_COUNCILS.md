@@ -1,0 +1,9 @@
+# FATHERS OF THE FIRST SIX COUNCILS
+
+On July 16 (29) the Church honors the memory of the Fathers of the First Six Ecumenical Councils. The first Council in the city of Nicaea was held in 325, the Sixth in Constantinople - in 680. The celebration in honor of the Ecumenical Councils is an amazing feature of the liturgical year in Orthodoxy. It is important for us to remember that the first and last of these six great events in the history of the Church were marked by revolutionary turning points.
+
+The Council of Nicaea became a sign of the adoption by Emperor Constantine the Great of Christianity as a new confession for the entire Roman Empire. For contemporaries, it was obvious that a new era was approaching, in which the whole world was to hear the preaching of Orthodoxy. The Second Coming of Christ, the expectation of which the first Christians lived in persecution, was replaced by the expectation that all nations would soon come to Christ.
+
+The Council of Constantinople was convened at a time when the Constantine Revolution had come to an end in a significant part of the globe. The fact is that by 680 the Arab troops conquered Palestine, Syria and Egypt, the dominion of Islamic rulers was soon to spread to Carthage and even Spain. The age-old enemy of Byzantium - the Iranian Empire - was also defeated.
+
+It became obvious that the path of the entire universe to faith in the Lord Jesus would be unexpectedly thorny. Or, better, in the words of the title of a book by the recently deceased writer Milan Kundera (1929–2023), it turned out that “life is not here.”  The contemporary is out of time. The change that was taking place then was impossible even for the fathers to comprehend. Therefore, the early Christian thirst for the return of the Lord, which had previously given way to evangelization of the entire world, was not returned by the Church.

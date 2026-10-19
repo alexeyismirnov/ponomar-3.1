@@ -1,0 +1,13 @@
+# EPIPHANIUS OF CYPRUS
+
+It is known that the title of “Patriarch” for the heads of the most important Ancient Churches on the territory of the Roman Empire was first introduced at the IV Ecumenical Council in 451. But regardless of any official designation, the true patriarch among the Church Fathers of that golden age of patristic writing, in terms of authority and experience, was St. Epiphanius of Cyprus (315-403).
+
+The saint came from Palestine and turned to Christ from Judaism. In his homeland, he became famous for founding a monastery near his birthplace. Elected bishop of Salamis, another name for the city of Constantia, near modern Famagusta, he served as bishop for a very long time at that time, 36 years. By an amazing coincidence, Epiphanius’s younger contemporary, Augustine of Hippo (354–430) served God in the bishopric for the same amount of time. They never saw each other, since Augustine the bishop never left Africa, and traveled on Church affairs on a donkey only through the territory of modern Tunisia and Algeria. But Augustine’s senior friend and correspondent interlocutor Jerome (347–420) communicated with Epiphanius and considered himself his student. This is literally the Communication of the Fathers and the Communion of Saints.
+
+The saint consistently defended Nicene Orthodoxy, and throughout his life he opposed heretics. He made a huge number of missionary and pastoral journeys. He even died on May 12 (25) on his way home from Constantinople on this day in 403 on a ship. Epiphanius was a genuine, sincere and biblically righteous man.
+
+In his desire to defend Orthodox teaching, he often exaggerated. Hence his conflict with John Chrysostom (349-407), as well as criticism of sacred images, which then, centuries later, the iconoclasts tried to use. The main works of Epiphanius were a lengthy statement of faith called “The Anchor”, the work “Against Heresies”, as well as a unique phenomenon at that time, a special biblical dictionary.
+
+Nowadays in Cyprus, Saint Epiphanius is venerated as a truly national saint. At that time, the newly founded Church of Constantinople sought to subjugate other local churches. Epiphanius opposed this trend, defending the identity of other churches, most notably the Church of Cyprus.
+
+On the day of remembrance of Epiphanius, we are called to know and read the ancient Holy Fathers, learn from them love for Scripture and Orthodoxy, and constantly strive to preach the word of God. According to legend, Epiphanius of Cyprus carefully simplified the language of his works so that the word of the sermon would be accessible and understandable to everyone. The lack of vanity of the saints in everything, even in mission, is very instructive.
